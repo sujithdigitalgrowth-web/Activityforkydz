@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { products, getBestSellers } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import HeroCarousel from "@/components/HeroCarousel";
@@ -5,12 +6,26 @@ import CategoryNav from "@/components/CategoryNav";
 import BestSellers from "@/components/BestSellers";
 import Faq from "@/components/Faq";
 import { generalFaq } from "@/lib/faq";
+import { faqJsonLd } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  // Absolute string, not a template-relative one: Next.js doesn't apply the
+  // root layout's title template to app/page.tsx since they're the same segment.
+  title: "Printable Coloring Pages & Activity Packs for Kids | activityforKydz",
+  description:
+    "Buy printable PDF coloring pages and learning activity packs for kids — animal & bird coloring pages, numbers practice, Ganesh Chaturthi and festival colouring, and more. Instant download, print at home, no app needed.",
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   const bestSellers = getBestSellers(3);
 
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(generalFaq)) }}
+      />
       <section className="max-w-5xl mx-auto px-6 pt-14 pb-8">
         <div className="max-w-2xl">
           <p className="text-orange-600 font-semibold mb-3">Hi, we&apos;re activityforKydz 👋</p>

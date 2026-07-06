@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, products } from "@/lib/products";
 import BuyBox from "@/components/BuyBox";
@@ -5,9 +7,30 @@ import ProductVisual from "@/components/ProductVisual";
 import SocialProof from "@/components/SocialProof";
 import Faq from "@/components/Faq";
 import { generalFaq } from "@/lib/faq";
+import { breadcrumbJsonLd, faqJsonLd, getBaseUrl, productJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
+  if (!product) return {};
+
+  const title = `${product.title} — Printable PDF (${product.pageCount} Pages)`;
+  const description = `${product.tagline}. ${product.pageCount} printable pages for ages ${product.ageRange}, instant PDF download for ₹${product.price}. No app needed — print at home.`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/products/${product.slug}` },
+    openGraph: { title, description },
+  };
 }
 
 export default async function ProductPage({
@@ -19,8 +42,31 @@ export default async function ProductPage({
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
+  const baseUrl = getBaseUrl();
+  const jsonLd = [
+    productJsonLd(product),
+    breadcrumbJsonLd([
+      { name: "Home", url: baseUrl },
+      { name: product.title, url: `${baseUrl}/products/${product.slug}` },
+    ]),
+    faqJsonLd(generalFaq),
+  ];
+
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <nav className="text-sm text-zinc-500 mb-4">
+        <Link href="/" className="hover:text-orange-600">
+          Home
+        </Link>
+        <span className="mx-2">/</span>
+        <span className="text-zinc-700">{product.title}</span>
+      </nav>
+
       <ProductVisual
         product={product}
         className="rounded-2xl h-40 sm:h-56 w-full mb-8"

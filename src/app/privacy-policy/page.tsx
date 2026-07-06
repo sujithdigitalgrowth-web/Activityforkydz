@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "How activityforKydz collects and uses your information when you buy a printable PDF activity pack.",
+  alternates: { canonical: "/privacy-policy" },
+};
 
 export default function PrivacyPolicyPage() {
   return (

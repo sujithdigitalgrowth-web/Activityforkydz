@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Refund & Cancellation Policy",
+  description: "Refund and cancellation policy for digital PDF downloads purchased from activityforKydz.",
+  alternates: { canonical: "/refund-policy" },
+};
 
 export default function RefundPolicyPage() {
   return (

@@ -76,3 +76,39 @@ don't have a photo for yet — it just falls back to the emoji placeholder.
 Push to a GitHub repo and import it in Vercel (free tier is enough at this scale).
 Set all the `.env.example` variables as Vercel project environment variables, then
 point the Razorpay webhook at the deployed URL.
+
+**Important for SEO**: set `NEXT_PUBLIC_SITE_URL` in Vercel's project environment
+variables to your real domain (e.g. `https://activityforkydz.com`), not the
+`.vercel.app` one. It drives the sitemap, robots.txt, canonical URLs, and Open
+Graph tags — if it's wrong, Google will index the wrong URLs.
+
+## SEO
+
+What's already in place:
+
+- Per-page `<title>`/description, canonical URLs, and Open Graph tags for every
+  route (`src/app/**/page.tsx`), targeting searches like "printable coloring
+  pages for kids", "Ganesh Chaturthi coloring pages", and "activity pack for
+  kids pdf".
+- Auto-generated `/sitemap.xml` and `/robots.txt` (`src/app/sitemap.ts`,
+  `src/app/robots.ts`) that stay in sync with `products.ts` automatically —
+  add a product there and it's in the sitemap on the next deploy.
+- Structured data (JSON-LD): `Organization`/`WebSite` sitewide, `Product` +
+  `BreadcrumbList` + `FAQPage` on every product page (`src/lib/seo.ts`).
+- Auto-generated Open Graph share images (no image upload needed) — a branded
+  default for the homepage and a per-product one showing its emoji, title and
+  price, so links shared in WhatsApp/social show a proper preview card
+  (`src/app/opengraph-image.tsx`, `src/app/products/[slug]/opengraph-image.tsx`).
+
+**Deliberately left out**: `Product` structured data does not include
+`aggregateRating`/`review` fields, because the `rating`/`purchaseCount` values
+in `products.ts` are still placeholders. Marking up fabricated reviews in
+structured data (as opposed to just showing them in the UI) is something
+Google explicitly treats as spam and can trigger a manual action on the whole
+site. Add real rating data to `productJsonLd()` in `src/lib/seo.ts` once you
+have actual reviews — not before.
+
+**Next steps once you have a live domain**: submit the sitemap in
+[Google Search Console](https://search.google.com/search-console) and
+[Bing Webmaster Tools](https://www.bing.com/webmasters), and request indexing
+for the homepage and a couple of product pages to speed up the first crawl.

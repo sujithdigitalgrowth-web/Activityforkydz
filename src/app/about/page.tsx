@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "activityforKydz makes printable PDF coloring and activity packs for kids, so screen time can turn into paper, crayons and a quiet hour.",
+  alternates: { canonical: "/about" },
+};
 
 export default function AboutPage() {
   return (

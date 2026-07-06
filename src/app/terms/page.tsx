@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions",
+  description: "Terms and conditions for purchasing printable PDF activity packs from activityforKydz.",
+  alternates: { canonical: "/terms" },
+};
 
 export default function TermsPage() {
   return (
