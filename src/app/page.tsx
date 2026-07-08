@@ -26,24 +26,11 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(generalFaq)) }}
       />
-      <section className="max-w-5xl mx-auto px-6 pt-14 pb-8">
-        <div className="max-w-2xl">
-          <p className="text-orange-600 font-semibold mb-3">Hi, we&apos;re activityforKydz 👋</p>
-          <h1 className="font-heading text-4xl sm:text-5xl font-semibold leading-tight text-zinc-900">
-            Printable activity packs, made so your kid looks up from a screen — not into one.
-          </h1>
-          <p className="mt-5 text-lg text-zinc-600 leading-relaxed">
-            We make simple, print-at-home PDF packs — coloring, tracing and learning pages
-            about the things kids already love, from animals to numbers to festivals.
-            Buy one, and it lands in your email in minutes. Print it, hand it over, done.
-          </p>
-        </div>
-      </section>
+      <h1 className="sr-only">
+        Printable Coloring Pages &amp; Activity Packs for Kids | activityforKydz
+      </h1>
 
-      <section className="max-w-5xl mx-auto px-6 pb-10">
-        <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-4">
-          Swipe through our packs
-        </h2>
+      <section className="max-w-5xl mx-auto px-6 pt-6 pb-10">
         <HeroCarousel products={products} />
       </section>
 

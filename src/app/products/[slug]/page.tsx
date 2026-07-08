@@ -69,8 +69,8 @@ export default async function ProductPage({
 
       <ProductVisual
         product={product}
-        className="rounded-2xl h-40 sm:h-56 w-full mb-8"
-        emojiClassName="text-8xl"
+        className="rounded-2xl aspect-[16/9] w-full mb-8"
+        emojiClassName="text-8xl sm:text-9xl"
       />
 
       <div className="grid lg:grid-cols-3 gap-10">

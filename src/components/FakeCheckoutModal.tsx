@@ -14,13 +14,17 @@ const METHODS = [
 type Step = "method" | "connecting" | "otp" | "verifying" | "success";
 
 export default function FakeCheckoutModal({
-  product,
+  items,
+  total,
   email,
   onClose,
+  onPaymentSuccess,
 }: {
-  product: Product;
+  items: Product[];
+  total: number;
   email: string;
   onClose: () => void;
+  onPaymentSuccess?: () => void;
 }) {
   const [step, setStep] = useState<Step>("method");
   const [phone, setPhone] = useState("");
@@ -29,6 +33,8 @@ export default function FakeCheckoutModal({
   const [otpError, setOtpError] = useState("");
 
   const phoneValid = /^[6-9]\d{9}$/.test(phone);
+  const summaryLabel =
+    items.length === 1 ? items[0].title : `${items.length} activity packs`;
 
   function proceedToPay() {
     if (!phoneValid || !method) return;
@@ -40,7 +46,10 @@ export default function FakeCheckoutModal({
     if (otp === DEMO_OTP) {
       setOtpError("");
       setStep("verifying");
-      setTimeout(() => setStep("success"), 900);
+      setTimeout(() => {
+        setStep("success");
+        onPaymentSuccess?.();
+      }, 900);
     } else {
       setOtpError("Incorrect OTP. Please try again.");
     }
@@ -54,7 +63,7 @@ export default function FakeCheckoutModal({
         <div className="bg-zinc-900 text-white px-5 py-4 flex items-center justify-between">
           <div>
             <p className="font-heading font-semibold">activityforKydz Checkout</p>
-            <p className="text-xs text-zinc-400">₹{product.price} · {product.title}</p>
+            <p className="text-xs text-zinc-400">₹{total} · {summaryLabel}</p>
           </div>
           <span className="text-[10px] uppercase tracking-wide bg-yellow-400 text-zinc-900 font-bold px-2 py-1 rounded">
             Test mode
@@ -103,7 +112,7 @@ export default function FakeCheckoutModal({
                 disabled={!phoneValid || !method}
                 className="w-full rounded-full bg-orange-500 hover:bg-orange-600 disabled:opacity-40 text-white font-semibold py-3 transition-colors"
               >
-                Pay ₹{product.price}
+                Pay ₹{total}
               </button>
               <button
                 onClick={onClose}
@@ -172,22 +181,28 @@ export default function FakeCheckoutModal({
                 Payment successful!
               </p>
               <p className="text-sm text-zinc-600 mt-1">
-                ₹{product.price} paid via {methodInfo?.label}
+                ₹{total} paid via {methodInfo?.label}
               </p>
               <p className="text-sm text-zinc-700 mt-4">
-                Your PDF has been delivered to <strong>{email}</strong>
+                Delivered to <strong>{email}</strong>
               </p>
-              <a
-                href={`/products/${product.slug}.pdf`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-block w-full rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 transition-colors"
-              >
-                Download your PDF
-              </a>
+              <div className="mt-5 space-y-2 text-left">
+                {items.map((item) => (
+                  <a
+                    key={item.slug}
+                    href={`/products/${item.slug}.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between rounded-lg bg-emerald-50 border border-emerald-200 px-4 py-3 text-sm font-semibold text-emerald-800 hover:bg-emerald-100 transition-colors"
+                  >
+                    <span className="truncate mr-2">{item.title}</span>
+                    <span className="shrink-0">Download →</span>
+                  </a>
+                ))}
+              </div>
               <button
                 onClick={onClose}
-                className="w-full text-center text-sm text-zinc-500 mt-3 hover:text-zinc-700"
+                className="w-full text-center text-sm text-zinc-500 mt-4 hover:text-zinc-700"
               >
                 Close
               </button>

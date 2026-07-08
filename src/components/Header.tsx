@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CartButton from "./CartButton";
 
 export default function Header() {
   return (
@@ -7,12 +8,15 @@ export default function Header() {
         <Link href="/" className="font-heading text-xl font-semibold text-orange-600">
           activityfor<span className="text-zinc-800">Kydz</span>
         </Link>
-        <Link
-          href="/#packs"
-          className="text-sm font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
-        >
-          Browse packs
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/#packs"
+            className="text-sm font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
+          >
+            Browse packs
+          </Link>
+          <CartButton />
+        </div>
       </div>
     </header>
   );

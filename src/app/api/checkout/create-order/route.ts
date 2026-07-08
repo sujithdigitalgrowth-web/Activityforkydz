@@ -1,25 +1,29 @@
 import { NextResponse } from "next/server";
 import { getProductBySlug } from "@/lib/products";
 import { getRazorpay } from "@/lib/razorpay";
+import { encodeSlugsToNotes } from "@/lib/cart-notes";
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
-  const slug = body?.slug as string | undefined;
+  const slugs = body?.slugs as string[] | undefined;
   const email = body?.email as string | undefined;
 
-  if (!slug || !email || !/^\S+@\S+\.\S+$/.test(email)) {
-    return NextResponse.json({ error: "A valid product and email are required" }, { status: 400 });
+  if (!Array.isArray(slugs) || slugs.length === 0 || !email || !/^\S+@\S+\.\S+$/.test(email)) {
+    return NextResponse.json({ error: "A valid cart and email are required" }, { status: 400 });
   }
 
-  const product = getProductBySlug(slug);
-  if (!product) {
-    return NextResponse.json({ error: "Product not found" }, { status: 404 });
+  const uniqueSlugs = [...new Set(slugs)];
+  const products = uniqueSlugs.map((slug) => getProductBySlug(slug));
+  if (products.some((p) => !p)) {
+    return NextResponse.json({ error: "One or more products were not found" }, { status: 404 });
   }
+
+  const amount = products.reduce((sum, p) => sum + p!.price, 0) * 100; // paise
 
   const order = await getRazorpay().orders.create({
-    amount: product.price * 100, // paise
+    amount,
     currency: "INR",
-    notes: { slug, email },
+    notes: { email, ...encodeSlugsToNotes(uniqueSlugs) },
   });
 
   return NextResponse.json({
@@ -27,6 +31,6 @@ export async function POST(req: Request) {
     amount: order.amount,
     currency: order.currency,
     keyId: process.env.RAZORPAY_KEY_ID,
-    product: { title: product.title, slug: product.slug },
+    products: products.map((p) => ({ title: p!.title, slug: p!.slug })),
   });
 }
