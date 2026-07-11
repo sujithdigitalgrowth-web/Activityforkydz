@@ -19,6 +19,20 @@ export type Product = {
   description: string;
   whatsInside: string[];
   whyItMatters: string[];
+  // Extended SEO body copy for the product page, shown below the fold
+  // content and above the FAQ. Leave unset until a pack's copy is finalized
+  // — do not fabricate this for packs that don't have it yet.
+  longDescription?: string;
+  // Slugs of thematically related packs to show in "You might also like".
+  // Coming-soon targets are filtered out automatically at render time, so
+  // this can be set ahead of a pack going live.
+  relatedSlugs?: string[];
+  // Overrides for the page <title> (without the " | activityforKydz" suffix
+  // — the root layout's title template adds that) and meta description.
+  // Falls back to the generated title/description in generateMetadata when
+  // unset.
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export const products: Product[] = [
@@ -26,9 +40,9 @@ export const products: Product[] = [
     slug: "animal-friends",
     title: "Animal Friends Coloring & Learning Pack",
     categoryLabel: "Animal Friends",
-    tagline: "100+ pages of lions, pandas, elephants and every animal kids ask about",
+    tagline: "50 pages of lions, pandas, elephants and every animal kids ask about",
     price: 79,
-    pageCount: 105,
+    pageCount: 50,
     ageRange: "3-8 years",
     accent: "from-amber-100 to-orange-50",
     emoji: "🦁",
@@ -37,7 +51,7 @@ export const products: Product[] = [
     description:
       "A big, friendly collection of animals from the jungle, the farm, the ocean and the sky — each one drawn simply enough for small hands to color in, with a fun fact underneath to read together.",
     whatsInside: [
-      "105 pages covering 60+ animals across land, sea and sky",
+      "50 pages covering 50+ animals across land, sea and sky",
       "Simple, bold outlines sized for crayons and thick pencils",
       "One fun animal fact per page for read-aloud time",
       "A 4-page 'spot the animal' game at the end",
@@ -47,6 +61,12 @@ export const products: Product[] = [
       "Introduces animal names and habitats in a low-pressure way",
       "Gives you a ready answer for 'I'm bored' without opening a screen",
     ],
+    longDescription:
+      "Give your child a screen-free adventure with the Animal Friends Coloring & Learning Pack — 50 printable pages featuring lions, elephants, pandas, and every animal kids love to ask about. Each page pairs a simple, bold illustration with the animal's name in English, making it a gentle way to build vocabulary while having fun with crayons. Perfect for toddlers and early learners aged 3–8, this printable animal coloring pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Parents love that it keeps kids engaged for hours without a screen in sight. Whether it's a quiet afternoon at home or a long car ride, these 50 animal coloring pages for kids turn learning into playtime. Download once, print as many times as you like.",
+    relatedSlugs: ["dinosaur-discovery", "birds-of-the-world"],
+    seoTitle: "Animal Friends Coloring & Learning Pack — Printable PDF for Kids",
+    seoDescription:
+      "50 printable animal coloring pages for kids ages 3-8. Instant PDF download, print at home. Lions, elephants, pandas and more.",
   },
   {
     slug: "birds-of-the-world",
@@ -228,6 +248,12 @@ export const products: Product[] = [
       "Short enough to do one letter a day without it feeling like homework",
       "Good first step before proper handwriting practice",
     ],
+    longDescription:
+      "One letter, one picture, one word — this 52-page alphabet coloring pack takes kids on a simple, screen-free journey from A to Z. Designed for toddlers and early learners aged 3–6, each page pairs a big, friendly letter with an easy illustration and word, helping build early reading skills while your child colors. This printable alphabet worksheet pack is a favorite for parents looking for a gentle introduction to letters before kindergarten, or extra practice alongside preschool. Delivered instantly as a PDF straight to your email, there's no app to install — just print at home or at any print shop and start the alphabet adventure. A lovely first step into reading, one letter at a time.",
+    relatedSlugs: ["numbers-1-to-100"],
+    seoTitle: "Alphabet Adventures A-Z Pack — Printable Alphabet Coloring for Kids",
+    seoDescription:
+      "52-page printable alphabet coloring pack for kids ages 3-6. One letter, one picture, one word. Instant PDF download.",
   },
   {
     slug: "vehicles-and-machines",

@@ -23,8 +23,10 @@ export async function generateMetadata({
   const product = getProductBySlug(slug);
   if (!product) return {};
 
-  const title = `${product.title} — Printable PDF (${product.pageCount} Pages)`;
-  const description = `${product.tagline}. ${product.pageCount} printable pages for ages ${product.ageRange}, instant PDF download for ₹${product.price}. No app needed — print at home.`;
+  const title = product.seoTitle ?? `${product.title} — Printable PDF (${product.pageCount} Pages)`;
+  const description =
+    product.seoDescription ??
+    `${product.tagline}. ${product.pageCount} printable pages for ages ${product.ageRange}, instant PDF download for ₹${product.price}. No app needed — print at home.`;
 
   return {
     title,
@@ -42,6 +44,10 @@ export default async function ProductPage({
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) notFound();
+
+  const relatedProducts = (product.relatedSlugs ?? [])
+    .map((s) => getProductBySlug(s))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p) && !p?.comingSoon);
 
   const baseUrl = getBaseUrl();
   const jsonLd = [
@@ -141,12 +147,41 @@ export default async function ProductPage({
             </ol>
           </section>
 
+          {product.longDescription && (
+            <section className="mt-8">
+              <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
+                More about this pack
+              </h2>
+              <p className="text-zinc-700 leading-relaxed">{product.longDescription}</p>
+            </section>
+          )}
+
           <section className="mt-8">
             <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
               Common questions
             </h2>
             <Faq items={generalFaq} />
           </section>
+
+          {relatedProducts.length > 0 && (
+            <section className="mt-8">
+              <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
+                You might also like
+              </h2>
+              <ul className="space-y-2">
+                {relatedProducts.map((related) => (
+                  <li key={related.slug}>
+                    <Link
+                      href={`/products/${related.slug}`}
+                      className="text-orange-600 font-medium hover:underline"
+                    >
+                      {related.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </div>
 
         <div className="lg:col-span-1">

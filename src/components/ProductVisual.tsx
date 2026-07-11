@@ -21,7 +21,7 @@ export default function ProductVisual({
       <div className={`relative overflow-hidden ${className}`}>
         <Image
           src={src}
-          alt={product.title}
+          alt={`${product.title} — ${product.tagline}`}
           fill
           sizes="(max-width: 768px) 90vw, 400px"
           className="object-cover"
