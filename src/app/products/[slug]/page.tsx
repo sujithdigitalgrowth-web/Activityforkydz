@@ -6,6 +6,7 @@ import BuyBox from "@/components/BuyBox";
 import ProductVisual from "@/components/ProductVisual";
 import SocialProof from "@/components/SocialProof";
 import Faq from "@/components/Faq";
+import ViewItemTracker from "@/components/ViewItemTracker";
 import { generalFaq } from "@/lib/faq";
 import { breadcrumbJsonLd, faqJsonLd, getBaseUrl, productJsonLd } from "@/lib/seo";
 
@@ -58,6 +59,7 @@ export default async function ProductPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <ViewItemTracker product={product} />
 
       <nav className="text-sm text-zinc-500 mb-4">
         <Link href="/" className="hover:text-orange-600">

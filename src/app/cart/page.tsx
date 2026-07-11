@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { getProductBySlug } from "@/lib/products";
 import ProductVisual from "@/components/ProductVisual";
+import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 
 export default function CartPage() {
   const { slugs, removeItem } = useCart();
@@ -11,6 +13,26 @@ export default function CartPage() {
     .map((slug) => getProductBySlug(slug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
   const subtotal = items.reduce((sum, p) => sum + p.price, 0);
+
+  // useCart() is backed by useSyncExternalStore, which renders an empty
+  // array on the very first client commit of a hard page load (to match
+  // SSR) before switching to the real localStorage-backed cart. Depending
+  // on `items` (instead of a one-time `[]`) plus a ref guard means this
+  // fires once, on whichever render actually has real data.
+  const hasTrackedViewCart = useRef(false);
+  useEffect(() => {
+    if (hasTrackedViewCart.current || items.length === 0) return;
+    hasTrackedViewCart.current = true;
+    pushDataLayer({
+      event: "view_cart",
+      ecommerce: {
+        currency: "INR",
+        value: subtotal,
+        items: toDataLayerItems(items),
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items]);
 
   if (items.length === 0) {
     return (

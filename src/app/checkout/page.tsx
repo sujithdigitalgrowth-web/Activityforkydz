@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { getProductBySlug, type Product } from "@/lib/products";
 import ProductVisual from "@/components/ProductVisual";
 import FakeCheckoutModal from "@/components/FakeCheckoutModal";
+import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 
 declare global {
   interface Window {
@@ -35,6 +36,38 @@ export default function CheckoutPage() {
   // once payment succeeds (the live cart empties, but the modal/success screen
   // still need to show what was just bought).
   const [checkoutItems, setCheckoutItems] = useState<Product[]>([]);
+  const [orderId, setOrderId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (items.length === 0) return;
+    pushDataLayer({
+      event: "begin_checkout",
+      ecommerce: {
+        currency: "INR",
+        value: subtotal,
+        items: toDataLayerItems(items),
+      },
+    });
+    // Fire once when the checkout page loads (covers "Proceed to checkout",
+    // "Buy now" and "Pay now" — they all land here), not on every re-render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (status !== "success" || !orderId || checkoutItems.length === 0) return;
+    const flagKey = `ga_purchase_tracked_${orderId}`;
+    if (sessionStorage.getItem(flagKey)) return;
+    sessionStorage.setItem(flagKey, "1");
+    pushDataLayer({
+      event: "purchase",
+      ecommerce: {
+        transaction_id: orderId,
+        currency: "INR",
+        value: checkoutItems.reduce((sum, p) => sum + p.price, 0),
+        items: toDataLayerItems(checkoutItems),
+      },
+    });
+  }, [status, orderId, checkoutItems]);
 
   function validateEmail(): boolean {
     if (!/^\S+@\S+\.\S+$/.test(email)) {
@@ -50,7 +83,17 @@ export default function CheckoutPage() {
     const snapshot = items;
     setCheckoutItems(snapshot);
 
+    pushDataLayer({
+      event: "add_payment_info",
+      ecommerce: {
+        currency: "INR",
+        value: snapshot.reduce((sum, p) => sum + p.price, 0),
+        items: toDataLayerItems(snapshot),
+      },
+    });
+
     if (USE_MOCK_PAYMENTS) {
+      setOrderId(`mock_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`);
       setErrorMessage("");
       setShowMockCheckout(true);
       return;
@@ -72,6 +115,8 @@ export default function CheckoutPage() {
         setStatus("error");
         return;
       }
+
+      setOrderId(data.orderId);
 
       const razorpay = new window.Razorpay({
         key: data.keyId,

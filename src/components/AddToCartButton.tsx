@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import type { Product } from "@/lib/products";
+import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 
 export default function AddToCartButton({
   product,
@@ -33,6 +34,14 @@ export default function AddToCartButton({
         e.preventDefault();
         e.stopPropagation();
         addItem(product.slug);
+        pushDataLayer({
+          event: "add_to_cart",
+          ecommerce: {
+            currency: "INR",
+            value: product.price,
+            items: toDataLayerItems([product]),
+          },
+        });
       }}
       className={`inline-flex items-center justify-center gap-1.5 rounded-full font-semibold transition-colors bg-orange-500 text-white hover:bg-orange-600 ${className}`}
     >
