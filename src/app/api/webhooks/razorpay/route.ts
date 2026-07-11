@@ -4,6 +4,7 @@ import { getProductBySlug } from "@/lib/products";
 import { signDownload } from "@/lib/download-token";
 import { sendDownloadEmail } from "@/lib/email";
 import { decodeSlugsFromNotes } from "@/lib/cart-notes";
+import { getBaseUrl } from "@/lib/seo";
 
 function isValidSignature(rawBody: string, signature: string, secret: string): boolean {
   const expected = createHmac("sha256", secret).update(rawBody).digest("hex");
@@ -37,7 +38,7 @@ export async function POST(req: Request) {
     const slugs = decodeSlugsFromNotes(notes);
 
     if (email && orderId && slugs.length > 0) {
-      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+      const siteUrl = getBaseUrl();
 
       const items = slugs
         .map((slug) => getProductBySlug(slug))

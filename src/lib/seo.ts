@@ -2,8 +2,16 @@ import { site } from "./site";
 import type { Product } from "./products";
 import type { FaqItem } from "./faq";
 
+// NEXT_PUBLIC_SITE_URL should be set in the hosting platform's environment
+// variables (e.g. Vercel project settings) to the real production domain.
+// If it's ever missing from a production build, fall back to the known
+// production domain instead of localhost — a silent localhost fallback in
+// prod breaks canonical URLs, the sitemap, robots.txt, and OG tags.
 export function getBaseUrl(): string {
-  return process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  return process.env.NODE_ENV === "production"
+    ? "https://www.activityforkydz.com"
+    : "http://localhost:3000";
 }
 
 export function organizationJsonLd() {
@@ -31,6 +39,14 @@ export function websiteJsonLd() {
 // counts in the catalog are still placeholders. Marking up fabricated reviews
 // in structured data risks a Google "spammy structured markup" manual action —
 // add aggregateRating back in only once these numbers are real.
+//
+// Also deliberately excludes shippingDetails (these are instant digital
+// downloads, nothing ships) and hasMerchantReturnPolicy: the real refund
+// policy (see refund-policy/page.tsx) only covers non-delivery, a corrupted
+// file, or double-charging within 7 days — schema.org's return-policy
+// categories don't have a value for that, and forcing it into
+// MerchantReturnFiniteReturnWindow would misrepresent it as "return for any
+// reason within 7 days." Same reasoning as the aggregateRating omission above.
 export function productJsonLd(product: Product) {
   const baseUrl = getBaseUrl();
   return {
@@ -40,6 +56,7 @@ export function productJsonLd(product: Product) {
     description: product.description,
     image: product.image ? `${baseUrl}${product.image}` : undefined,
     category: "Printable kids activity PDF",
+    brand: { "@type": "Brand", name: site.name },
     offers: {
       "@type": "Offer",
       price: product.price,
