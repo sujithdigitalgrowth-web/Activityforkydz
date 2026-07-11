@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Fredoka, Nunito } from "next/font/google";
 import Script from "next/script";
+import { GoogleTagManager } from "@next/third-parties/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getBaseUrl, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
+
+const GTM_ID = "GTM-PM83SS7V";
 
 const heading = Fredoka({
   variable: "--font-heading",
@@ -53,7 +56,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${heading.variable} ${body.variable} h-full`}>
+      <GoogleTagManager gtmId={GTM_ID} />
       <body className="min-h-full flex flex-col bg-[#fffaf3] text-[#2d2a26] antialiased">
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
