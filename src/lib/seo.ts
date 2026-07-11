@@ -1,6 +1,7 @@
 import { site } from "./site";
 import type { Product } from "./products";
 import type { FaqItem } from "./faq";
+import type { BlogPost } from "./posts";
 
 // NEXT_PUBLIC_SITE_URL should be set in the hosting platform's environment
 // variables (e.g. Vercel project settings) to the real production domain.
@@ -77,6 +78,20 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
       name: item.name,
       item: item.url,
     })),
+  };
+}
+
+export function blogPostingJsonLd(post: BlogPost) {
+  const baseUrl = getBaseUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.seoDescription,
+    datePublished: post.publishedDate,
+    url: `${baseUrl}/blog/${post.slug}`,
+    author: { "@type": "Organization", name: site.name },
+    publisher: { "@type": "Organization", name: site.name },
   };
 }
 

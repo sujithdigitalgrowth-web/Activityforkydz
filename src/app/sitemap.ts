@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { products } from "@/lib/products";
+import { getAllPosts } from "@/lib/posts";
 import { getBaseUrl } from "@/lib/seo";
 
 // lastModified is deliberately omitted: we have no real per-page "last
@@ -14,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "", priority: 1, changeFrequency: "weekly" as const },
     { path: "/about", priority: 0.5, changeFrequency: "monthly" as const },
     { path: "/contact", priority: 0.5, changeFrequency: "monthly" as const },
+    { path: "/blog", priority: 0.6, changeFrequency: "weekly" as const },
     { path: "/privacy-policy", priority: 0.3, changeFrequency: "yearly" as const },
     { path: "/terms", priority: 0.3, changeFrequency: "yearly" as const },
     { path: "/refund-policy", priority: 0.3, changeFrequency: "yearly" as const },
@@ -29,5 +31,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
   }));
 
-  return [...staticRoutes, ...productRoutes];
+  // Blog posts have a real publishedDate, unlike the pages above — so a
+  // lastModified value here is honest, not a fabricated build timestamp.
+  const postRoutes = getAllPosts().map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.publishedDate),
+    priority: 0.6,
+    changeFrequency: "monthly" as const,
+  }));
+
+  return [...staticRoutes, ...productRoutes, ...postRoutes];
 }
