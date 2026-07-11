@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
 
@@ -6,7 +7,16 @@ export default function Footer() {
     <footer className="border-t border-orange-100 mt-16 bg-white">
       <div className="max-w-5xl mx-auto px-6 py-10 grid sm:grid-cols-3 gap-8 text-sm">
         <div>
-          <p className="font-heading font-semibold text-zinc-900 mb-2">{site.name}</p>
+          <div className="flex items-center gap-2 mb-2">
+            <Image
+              src="/logo/111.png"
+              alt="activityforKydz logo"
+              width={32}
+              height={32}
+              className="h-8 w-8 object-contain"
+            />
+            <p className="font-heading font-semibold text-zinc-900">{site.name}</p>
+          </div>
           <p className="text-zinc-600">
             Printable, screen-free activity packs for kids. Delivered by email, made for
             print.
