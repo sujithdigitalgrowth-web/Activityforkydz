@@ -22,12 +22,14 @@ export default function BuyBox({ product }: { product: Product }) {
       </div>
 
       <div className="space-y-2">
-        <button
-          onClick={buyNow}
-          className="w-full rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 transition-colors"
-        >
-          Buy now — ₹{product.price}
-        </button>
+        {!product.comingSoon && (
+          <button
+            onClick={buyNow}
+            className="w-full rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 transition-colors"
+          >
+            Buy now — ₹{product.price}
+          </button>
+        )}
         <AddToCartButton product={product} className="w-full py-3" />
       </div>
 

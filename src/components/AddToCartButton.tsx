@@ -15,6 +15,16 @@ export default function AddToCartButton({
   const { isInCart, addItem } = useCart();
   const inCart = isInCart(product.slug);
 
+  if (product.comingSoon) {
+    return (
+      <span
+        className={`inline-flex items-center justify-center gap-1.5 rounded-full font-semibold bg-zinc-100 text-zinc-400 cursor-not-allowed ${className}`}
+      >
+        Coming soon
+      </span>
+    );
+  }
+
   if (inCart) {
     return (
       <Link
