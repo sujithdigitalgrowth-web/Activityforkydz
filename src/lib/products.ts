@@ -1,13 +1,18 @@
 export type Product = {
   slug: string;
   title: string;
+  categoryLabel: string; // short name for the category strip tile (title is too long to fit)
   tagline: string;
   price: number; // INR, whole rupees
   pageCount: number;
   ageRange: string;
   accent: string; // tailwind color pair for the card
   emoji: string;
-  image?: string; // optional real cover image path (e.g. "/products/animal-friends-cover.jpg"); falls back to emoji + gradient when unset
+  // Optional override for the cover image path. Leave unset — ProductVisual
+  // automatically looks for /public/categories/<slug>.jpg and falls back to
+  // the emoji + gradient below if that file doesn't exist yet. See
+  // public/categories/README.md.
+  image?: string;
   rating: number; // out of 5. Placeholder for now — replace with real average once you have reviews.
   purchaseCount: number; // placeholder for now — replace with real order counts once you have them
   description: string;
@@ -19,6 +24,7 @@ export const products: Product[] = [
   {
     slug: "animal-friends",
     title: "Animal Friends Coloring & Learning Pack",
+    categoryLabel: "Animal Friends",
     tagline: "100+ pages of lions, pandas, elephants and every animal kids ask about",
     price: 79,
     pageCount: 105,
@@ -44,6 +50,7 @@ export const products: Product[] = [
   {
     slug: "birds-of-the-world",
     title: "Birds of the World Coloring Pack",
+    categoryLabel: "Birds of the World",
     tagline: "Peacocks, parrots, owls and more, with names in English",
     price: 69,
     pageCount: 60,
@@ -68,6 +75,7 @@ export const products: Product[] = [
   {
     slug: "flower-garden",
     title: "Flower Garden Coloring & Learning Pack",
+    categoryLabel: "Flower Garden",
     tagline: "Roses, sunflowers, marigolds and the names of every flower in the garden",
     price: 59,
     pageCount: 50,
@@ -92,6 +100,7 @@ export const products: Product[] = [
   {
     slug: "numbers-1-to-100",
     title: "Numbers 1-100 Practice & Coloring Pack",
+    categoryLabel: "Numbers 1-100",
     tagline: "Trace, count and color your way from 1 to 100",
     price: 89,
     pageCount: 110,
@@ -116,6 +125,7 @@ export const products: Product[] = [
   {
     slug: "nature-and-seasons",
     title: "Nature & Seasons Coloring Pack",
+    categoryLabel: "Nature & Seasons",
     tagline: "Rain, snow, autumn leaves and summer suns — coloring pages for every season",
     price: 69,
     pageCount: 55,
@@ -140,6 +150,7 @@ export const products: Product[] = [
   {
     slug: "space-explorers",
     title: "Space Explorers Coloring Pack",
+    categoryLabel: "Space Explorers",
     tagline: "Rockets, planets, astronauts and the moon",
     price: 79,
     pageCount: 65,
@@ -164,6 +175,7 @@ export const products: Product[] = [
   {
     slug: "hindu-festivals",
     title: "Hindu Festivals Activity Pack",
+    categoryLabel: "Hindu Festivals",
     tagline: "Diwali diyas, Holi colors, Ganesh Chaturthi and more, explained simply",
     price: 79,
     pageCount: 60,
@@ -188,6 +200,7 @@ export const products: Product[] = [
   {
     slug: "alphabet-adventures",
     title: "Alphabet Adventures A-Z Pack",
+    categoryLabel: "Alphabet A-Z",
     tagline: "One letter, one picture, one word per page from A to Z",
     price: 69,
     pageCount: 52,
@@ -212,6 +225,7 @@ export const products: Product[] = [
   {
     slug: "vehicles-and-machines",
     title: "Vehicles & Machines Coloring Pack",
+    categoryLabel: "Vehicles & Machines",
     tagline: "Cars, trains, planes, tractors and every vehicle a kid points at",
     price: 69,
     pageCount: 58,
@@ -236,6 +250,7 @@ export const products: Product[] = [
   {
     slug: "dinosaur-discovery",
     title: "Dinosaur Discovery Pack",
+    categoryLabel: "Dinosaur Discovery",
     tagline: "T-Rex, Triceratops and 20+ more, with simple facts for each",
     price: 79,
     pageCount: 62,

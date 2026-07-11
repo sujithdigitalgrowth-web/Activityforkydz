@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import type { Product } from "@/lib/products";
 
@@ -10,15 +13,19 @@ export default function ProductVisual({
   className?: string;
   emojiClassName?: string;
 }) {
-  if (product.image) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const src = product.image ?? `/categories/${product.slug}.jpg`;
+
+  if (!imageFailed) {
     return (
       <div className={`relative overflow-hidden ${className}`}>
         <Image
-          src={product.image}
+          src={src}
           alt={product.title}
           fill
           sizes="(max-width: 768px) 90vw, 400px"
           className="object-cover"
+          onError={() => setImageFailed(true)}
         />
       </div>
     );

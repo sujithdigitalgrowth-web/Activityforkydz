@@ -16,16 +16,16 @@ export default function Header() {
             priority
           />
         </Link>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           <Link
             href="/"
-            className="text-sm font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
+            className="whitespace-nowrap text-sm font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
           >
             Home
           </Link>
           <Link
             href="/#packs"
-            className="text-sm font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
+            className="whitespace-nowrap text-sm font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
           >
             Browse packs
           </Link>

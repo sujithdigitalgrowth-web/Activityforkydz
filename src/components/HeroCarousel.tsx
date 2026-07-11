@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/products";
 import ProductVisual from "./ProductVisual";
@@ -8,6 +8,7 @@ import AddToCartButton from "./AddToCartButton";
 
 export default function HeroCarousel({ products }: { products: Product[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   function scrollByAmount(direction: 1 | -1) {
     const el = trackRef.current;
@@ -15,10 +16,17 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
     el.scrollBy({ left: direction * el.clientWidth * 0.92, behavior: "smooth" });
   }
 
+  function handleScroll() {
+    const el = trackRef.current;
+    if (!el || el.clientWidth === 0) return;
+    setActiveIndex(Math.round(el.scrollLeft / el.clientWidth));
+  }
+
   return (
     <div className="relative">
       <div
         ref={trackRef}
+        onScroll={handleScroll}
         className="flex items-stretch gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
         {products.map((product) => (
@@ -61,10 +69,12 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
       </div>
 
       <div className="flex justify-center gap-1.5 mt-3">
-        {products.map((product) => (
+        {products.map((product, i) => (
           <span
             key={product.slug}
-            className="h-1.5 w-1.5 rounded-full bg-orange-300"
+            className={`h-1.5 rounded-full transition-all ${
+              i === activeIndex ? "w-4 bg-orange-500" : "w-1.5 bg-orange-300"
+            }`}
             aria-hidden="true"
           />
         ))}

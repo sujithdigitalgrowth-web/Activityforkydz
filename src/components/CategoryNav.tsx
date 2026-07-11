@@ -17,7 +17,7 @@ export default function CategoryNav({ products }: { products: Product[] }) {
             emojiClassName="text-5xl"
           />
           <span className="px-2 py-2 text-xs font-semibold text-zinc-700 text-center group-hover:text-orange-700 transition-colors">
-            {product.title.split(" ").slice(0, 2).join(" ")}
+            {product.categoryLabel}
           </span>
         </Link>
       ))}
