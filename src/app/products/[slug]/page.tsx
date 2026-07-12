@@ -75,120 +75,114 @@ export default async function ProductPage({
         <span className="text-zinc-700">{product.title}</span>
       </nav>
 
-      <ProductVisual
-        product={product}
-        className="rounded-2xl aspect-[16/9] w-full mb-8"
-        emojiClassName="text-8xl sm:text-9xl"
-      />
-
-      <div className="grid lg:grid-cols-3 gap-10">
-        <div className="lg:col-span-2">
-          <h1 className="font-heading text-3xl font-semibold text-zinc-900">{product.title}</h1>
-          <p className="text-lg text-zinc-600 mt-2">{product.tagline}</p>
-          <div className="mt-3">
-            <SocialProof product={product} />
-          </div>
-
-          <div className="flex flex-wrap gap-3 mt-4 text-sm">
-            <span className="rounded-full bg-orange-100 text-orange-700 px-3 py-1 font-medium">
-              {product.pageCount} pages
-            </span>
-            <span className="rounded-full bg-orange-100 text-orange-700 px-3 py-1 font-medium">
-              Ages {product.ageRange}
-            </span>
-            <span className="rounded-full bg-orange-100 text-orange-700 px-3 py-1 font-medium">
-              Instant PDF download
-            </span>
-          </div>
-
-          <section className="mt-8">
-            <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-2">
-              About this pack
-            </h2>
-            <p className="text-zinc-700 leading-relaxed">{product.description}</p>
-          </section>
-
-          <section className="mt-8">
-            <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
-              What&apos;s inside
-            </h2>
-            <ul className="space-y-2">
-              {product.whatsInside.map((item) => (
-                <li key={item} className="flex gap-2 text-zinc-700">
-                  <span className="text-orange-500">✓</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="mt-8">
-            <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
-              Why it&apos;s worth printing
-            </h2>
-            <ul className="space-y-2">
-              {product.whyItMatters.map((item) => (
-                <li key={item} className="flex gap-2 text-zinc-700">
-                  <span className="text-orange-500">✓</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="mt-8">
-            <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
-              How delivery works
-            </h2>
-            <ol className="space-y-2 text-zinc-700 list-decimal list-inside">
-              <li>Pay securely with UPI, card or netbanking via Razorpay.</li>
-              <li>We email your download link within a minute of payment.</li>
-              <li>Open it on any device, print at home, and you&apos;re set.</li>
-            </ol>
-          </section>
-
-          {product.longDescription && (
-            <section className="mt-8">
-              <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
-                More about this pack
-              </h2>
-              <p className="text-zinc-700 leading-relaxed">{product.longDescription}</p>
-            </section>
-          )}
-
-          <section className="mt-8">
-            <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
-              Common questions
-            </h2>
-            <Faq items={generalFaq} />
-          </section>
-
-          {relatedProducts.length > 0 && (
-            <section className="mt-8">
-              <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
-                You might also like
-              </h2>
-              <ul className="space-y-2">
-                {relatedProducts.map((related) => (
-                  <li key={related.slug}>
-                    <Link
-                      href={`/products/${related.slug}`}
-                      className="text-orange-600 font-medium hover:underline"
-                    >
-                      {related.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-        </div>
-
+      <div className="grid lg:grid-cols-4 gap-6 lg:gap-8 mb-8">
+        <ProductVisual
+          product={product}
+          className="rounded-2xl aspect-[4/3] w-full lg:col-span-3"
+          emojiClassName="text-7xl"
+        />
         <div className="lg:col-span-1">
-          <div className="sticky top-24 space-y-4">
+          <div className="lg:sticky lg:top-24">
             <BuyBox product={product} />
           </div>
         </div>
+      </div>
+
+      <div className="max-w-3xl">
+        <h1 className="font-heading text-3xl font-semibold text-zinc-900">{product.title}</h1>
+        <p className="text-lg text-zinc-600 mt-2">{product.tagline}</p>
+        <div className="mt-3">
+          <SocialProof product={product} />
+        </div>
+
+        <div className="flex flex-wrap gap-3 mt-4 text-sm">
+          <span className="rounded-full bg-orange-100 text-orange-700 px-3 py-1 font-medium">
+            {product.pageCount} pages
+          </span>
+          <span className="rounded-full bg-orange-100 text-orange-700 px-3 py-1 font-medium">
+            Ages {product.ageRange}
+          </span>
+          <span className="rounded-full bg-orange-100 text-orange-700 px-3 py-1 font-medium">
+            Instant PDF download
+          </span>
+        </div>
+
+        <p className="text-zinc-700 leading-relaxed mt-6">{product.description}</p>
+
+        <section className="mt-8">
+          <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
+            What&apos;s inside
+          </h2>
+          <ul className="space-y-2">
+            {product.whatsInside.map((item) => (
+              <li key={item} className="flex gap-2 text-zinc-700">
+                <span className="text-orange-500">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-8">
+          <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
+            Why it&apos;s worth printing
+          </h2>
+          <ul className="space-y-2">
+            {product.whyItMatters.map((item) => (
+              <li key={item} className="flex gap-2 text-zinc-700">
+                <span className="text-orange-500">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-8">
+          <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
+            How delivery works
+          </h2>
+          <ol className="space-y-2 text-zinc-700 list-decimal list-inside">
+            <li>Pay securely with UPI, card or netbanking via Razorpay.</li>
+            <li>We email your download link within a minute of payment.</li>
+            <li>Open it on any device, print at home, and you&apos;re set.</li>
+          </ol>
+        </section>
+
+        {product.longDescription && (
+          <section className="mt-8">
+            <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
+              More about this pack
+            </h2>
+            <p className="text-zinc-700 leading-relaxed">{product.longDescription}</p>
+          </section>
+        )}
+
+        <section className="mt-8">
+          <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
+            Common questions
+          </h2>
+          <Faq items={generalFaq} />
+        </section>
+
+        {relatedProducts.length > 0 && (
+          <section className="mt-8">
+            <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
+              You might also like
+            </h2>
+            <ul className="space-y-2">
+              {relatedProducts.map((related) => (
+                <li key={related.slug}>
+                  <Link
+                    href={`/products/${related.slug}`}
+                    className="text-orange-600 font-medium hover:underline"
+                  >
+                    {related.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
     </div>
   );

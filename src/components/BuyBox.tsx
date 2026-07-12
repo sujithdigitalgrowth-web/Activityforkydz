@@ -15,10 +15,10 @@ export default function BuyBox({ product }: { product: Product }) {
   }
 
   return (
-    <div className="rounded-2xl bg-white border border-orange-100 shadow-sm p-6">
-      <div className="flex items-baseline justify-between mb-4">
+    <div className="rounded-2xl bg-white border border-orange-100 shadow-sm p-5">
+      <div className="mb-4">
         <span className="text-3xl font-bold text-zinc-900">₹{product.price}</span>
-        <span className="text-sm text-zinc-500">{product.pageCount} pages · instant download</span>
+        <p className="text-sm text-zinc-500 mt-0.5">{product.pageCount} pages · instant download</p>
       </div>
 
       <div className="space-y-2">
@@ -33,18 +33,18 @@ export default function BuyBox({ product }: { product: Product }) {
         <AddToCartButton product={product} className="w-full py-3" />
       </div>
 
-      <div className="mt-4 flex items-center justify-center gap-x-4 gap-y-1 flex-wrap text-xs text-zinc-600">
-        <span className="flex items-center gap-1">
+      <div className="mt-4 space-y-1.5 text-xs text-zinc-600">
+        <p className="flex items-start gap-1.5">
           <span aria-hidden="true">🔒</span> Secure checkout
-        </span>
-        <span className="flex items-center gap-1">
+        </p>
+        <p className="flex items-start gap-1.5">
           <span aria-hidden="true">⚡</span> Instant delivery
-        </span>
-        <span className="flex items-center gap-1">
+        </p>
+        <p className="flex items-start gap-1.5">
           <span aria-hidden="true">💬</span> Real support if anything goes wrong
-        </span>
+        </p>
       </div>
-      <p className="text-xs text-zinc-400 mt-2 text-center">
+      <p className="text-xs text-zinc-400 mt-3 pt-3 border-t border-zinc-100">
         Pay via UPI, cards or netbanking. No app or account needed.
       </p>
     </div>
