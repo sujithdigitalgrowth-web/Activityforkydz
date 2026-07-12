@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { getProductBySlug, type Product } from "@/lib/products";
 import ProductVisual from "@/components/ProductVisual";
+import CartAddOns from "@/components/CartAddOns";
 import FakeCheckoutModal from "@/components/FakeCheckoutModal";
 import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 
@@ -187,8 +188,8 @@ export default function CheckoutPage() {
       <div className="max-w-4xl mx-auto px-6 py-10">
         <h1 className="font-heading text-2xl font-semibold text-zinc-900 mb-6">Checkout</h1>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
+        <div className="grid md:grid-cols-5 gap-6 md:gap-8">
+          <div className="md:col-span-3">
             <h2 className="font-heading text-lg font-semibold text-zinc-900 mb-3">
               Order summary
             </h2>
@@ -213,12 +214,16 @@ export default function CheckoutPage() {
                 </div>
               ))}
             </div>
+
+            <div className="mt-4 md:mt-6">
+              <CartAddOns />
+            </div>
           </div>
 
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 rounded-2xl bg-white border border-orange-100 shadow-sm p-6">
-              <div className="flex items-baseline justify-between mb-4">
-                <span className="text-3xl font-bold text-zinc-900">₹{subtotal}</span>
+          <div className="md:col-span-2">
+            <div className="md:sticky md:top-24 rounded-2xl bg-white border border-orange-100 shadow-sm p-4 sm:p-5">
+              <div className="flex items-baseline justify-between mb-3">
+                <span className="text-2xl font-bold text-zinc-900">₹{subtotal}</span>
                 <span className="text-sm text-zinc-500">
                   {items.length} pack{items.length === 1 ? "" : "s"}
                 </span>
@@ -240,12 +245,12 @@ export default function CheckoutPage() {
               <button
                 onClick={handlePay}
                 disabled={status === "processing"}
-                className="w-full rounded-full bg-orange-500 hover:bg-orange-600 disabled:opacity-60 text-white font-semibold py-3 transition-colors"
+                className="w-full rounded-full bg-orange-500 hover:bg-orange-600 disabled:opacity-60 text-white font-semibold py-2.5 transition-colors"
               >
                 {status === "processing" ? "Opening payment..." : `Pay ₹${subtotal}`}
               </button>
 
-              <div className="mt-4 flex items-center justify-center gap-x-4 gap-y-1 flex-wrap text-xs text-zinc-600">
+              <div className="mt-3 flex items-center justify-center gap-x-3 gap-y-1 flex-wrap text-xs text-zinc-600">
                 <span className="flex items-center gap-1">
                   <span aria-hidden="true">🔒</span> Secure checkout
                 </span>
@@ -253,7 +258,7 @@ export default function CheckoutPage() {
                   <span aria-hidden="true">⚡</span> Instant delivery
                 </span>
               </div>
-              <p className="text-xs text-zinc-400 mt-2 text-center">
+              <p className="text-xs text-zinc-400 mt-1.5 text-center">
                 Pay via {USE_MOCK_PAYMENTS ? "UPI (PhonePe, Google Pay, Paytm)" : "UPI, cards or netbanking"}.
                 No app or account needed.
               </p>

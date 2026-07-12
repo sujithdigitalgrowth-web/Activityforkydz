@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { getProductBySlug } from "@/lib/products";
 import ProductVisual from "@/components/ProductVisual";
+import CartAddOns from "@/components/CartAddOns";
 import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 
 export default function CartPage() {
@@ -60,8 +61,8 @@ export default function CartPage() {
         Your cart ({items.length})
       </h1>
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-4">
+      <div className="grid md:grid-cols-5 gap-6 md:gap-8">
+        <div className="md:col-span-3 space-y-4">
           {items.map((product) => (
             <div
               key={product.slug}
@@ -93,26 +94,28 @@ export default function CartPage() {
               </div>
             </div>
           ))}
+
+          <CartAddOns />
         </div>
 
-        <div className="lg:col-span-1">
-          <div className="sticky top-24 rounded-2xl bg-white border border-orange-100 shadow-sm p-6">
+        <div className="md:col-span-2">
+          <div className="md:sticky md:top-24 rounded-2xl bg-white border border-orange-100 shadow-sm p-4 sm:p-5">
             <div className="flex items-baseline justify-between mb-1">
               <span className="text-zinc-600">Subtotal</span>
               <span className="text-2xl font-bold text-zinc-900">₹{subtotal}</span>
             </div>
-            <p className="text-xs text-zinc-500 mb-4">
+            <p className="text-xs text-zinc-500 mb-3">
               {items.length} pack{items.length === 1 ? "" : "s"} · instant PDF downloads
             </p>
             <Link
               href="/checkout"
-              className="block w-full text-center rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 transition-colors"
+              className="block w-full text-center rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 transition-colors"
             >
               Proceed to checkout
             </Link>
             <Link
               href="/#packs"
-              className="block w-full text-center text-sm text-zinc-500 hover:text-orange-600 mt-3 transition-colors"
+              className="block w-full text-center text-sm text-zinc-500 hover:text-orange-600 mt-2.5 transition-colors"
             >
               Continue shopping
             </Link>
