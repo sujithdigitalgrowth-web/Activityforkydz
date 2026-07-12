@@ -18,8 +18,8 @@ export default function AboutPage() {
       </p>
       <p>
         So we started making our own — simple, printable PDF packs about the things kids are
-        already curious about: animals, numbers, festivals, the solar system. Print it at home,
-        hand it over, and you&apos;ve bought yourself a genuinely quiet hour.
+        already curious about: animals, letters, numbers, the ocean, plants and more. Print it
+        at home, hand it over, and you&apos;ve bought yourself a genuinely quiet hour.
       </p>
       <p>
         We keep the catalog small on purpose. Every pack here is one we&apos;d actually print

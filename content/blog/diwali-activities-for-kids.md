@@ -28,7 +28,7 @@ Diwali is rooted in stories — Ram and Sita's return to Ayodhya, the victory of
 
 Diwali celebrations often involve a lot of adult conversation, relatives arriving, and general household chaos — which is exactly when having a quiet coloring activity on hand becomes a lifesaver. It gives kids something to do with their hands while everyone else is busy, without reaching for a screen.
 
-This is actually why we made our [Hindu Festivals Activity Pack](https://www.activityforkydz.com/products/hindu-festivals) — it's a printable pack that walks through Diwali diyas, Holi colors, and Ganesh Chaturthi, explained simply enough for young kids to follow along. It's the kind of thing you can print once, keep in a drawer, and pull out whenever there's a quiet moment to fill during the festival season.
+This is actually why we make [printable, screen-free activity packs](https://www.activityforkydz.com/#packs) — the kind of thing you can print once, keep in a drawer, and pull out whenever there's a quiet moment to fill during the festival season.
 
 ## 5. Let them help with the rangoli at the door
 
@@ -42,7 +42,7 @@ This one's less about craft and more about meaning: before lighting the main diy
 
 Diwali doesn't need elaborate, Pinterest-perfect activities to feel special for kids — some paint, a few clay diyas, and a story told well will do most of the work. The goal isn't to entertain them constantly, but to give them small, meaningful ways to feel like Diwali is something they're part of, not just something happening around them.
 
-If you're looking for something ready-made for those in-between moments — waiting for guests, a quiet afternoon before the celebrations start, or a rainy pre-Diwali day — our [Hindu Festivals Activity Pack](https://www.activityforkydz.com/products/hindu-festivals) is a simple, screen-free option that's already put together for you.
+If you're looking for something ready-made for those in-between moments — waiting for guests, a quiet afternoon before the celebrations start, or a rainy pre-Diwali day — [browse our activity packs](https://www.activityforkydz.com/#packs) for a simple, screen-free option that's already put together for you.
 
 ---
 

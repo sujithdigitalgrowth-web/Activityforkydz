@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   // root layout's title template to app/page.tsx since they're the same segment.
   title: "Printable Coloring Pages & Activity Packs for Kids | activityforKydz",
   description:
-    "Buy printable PDF coloring pages and learning activity packs for kids — animal & bird coloring pages, numbers practice, Ganesh Chaturthi and festival colouring, and more. Instant download, print at home, no app needed.",
+    "Buy printable PDF coloring pages and learning activity packs for kids — animals, alphabet A-Z, birds, numbers 1-100, ocean life, fruits & vegetables, matching games and puzzles. Instant download, print at home, no app needed.",
   alternates: { canonical: "/" },
 };
 

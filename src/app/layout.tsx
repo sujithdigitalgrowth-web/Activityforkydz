@@ -28,12 +28,13 @@ export const metadata: Metadata = {
     template: "%s | activityforKydz",
   },
   description:
-    "Printable PDF coloring pages and learning activity packs for kids — animals, birds, numbers, nature, Ganesh Chaturthi and other festival colouring, and more. Instant download, print at home, no app needed.",
+    "Printable PDF coloring pages and learning activity packs for kids — animals, alphabet, birds, numbers 1-100, ocean life, fruits & vegetables, matching games, puzzles and more. Instant download, print at home, no app needed.",
   keywords: [
     "printable coloring pages for kids",
     "activity pack for kids pdf",
     "kids colouring pages india",
-    "Ganesh Chaturthi coloring pages",
+    "alphabet coloring pages for kids",
+    "dot to dot printables for kids",
     "printable activity sheets for kids",
     "learning worksheets pdf download",
   ],

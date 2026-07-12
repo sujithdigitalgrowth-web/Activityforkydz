@@ -24,7 +24,7 @@ Kids engage with traditions more when they understand the "why," not just the "w
 
 Raksha Bandhan mornings tend to involve a lot of adult preparation — sweets, outfits, the actual ceremony — which leaves a natural gap for younger siblings or cousins who are waiting around with nothing to do. A quiet coloring activity themed around the festival fills that gap nicely, and keeps things calm before the main event.
 
-This is part of why we built our [Hindu Festivals Activity Pack](https://www.activityforkydz.com/products/hindu-festivals) — it's a printable pack that explains festivals like these simply, with an illustration to color alongside each one. It's the kind of thing you can keep on hand for exactly these in-between moments.
+This is part of why we make [printable, screen-free activity packs](https://www.activityforkydz.com/#packs) — the kind of thing you can keep on hand for exactly these in-between moments.
 
 ## 4. Let siblings write a small note to each other
 
@@ -38,7 +38,7 @@ If it's a family with only one child, or where siblings are very far apart in ag
 
 Raksha Bandhan doesn't need elaborate planning to feel meaningful for kids — a handmade rakhi, a simple explanation of what it means, and a few quiet minutes with a coloring activity while the adults get organized will do most of the work.
 
-If you're looking for something ready-made to fill those quieter moments, our [Hindu Festivals Activity Pack](https://www.activityforkydz.com/products/hindu-festivals) covers Raksha Bandhan alongside Diwali, Holi, and Ganesh Chaturthi — simple explanations, paired with coloring pages kids can enjoy on the day itself.
+If you're looking for something ready-made to fill those quieter moments, [browse our printable activity packs](https://www.activityforkydz.com/#packs) — simple, screen-free coloring and learning pages kids can enjoy on the day itself.
 
 ---
 
