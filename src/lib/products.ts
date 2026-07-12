@@ -13,6 +13,12 @@ export type Product = {
   // the emoji + gradient below if that file doesn't exist yet. See
   // public/categories/README.md.
   image?: string;
+  // Optional wide (16:9) banner image, used by the homepage hero carousel
+  // and the product detail page's main image. Leave unset — both fall back
+  // to the regular cover image (`image` above / public/categories/<slug>.jpg)
+  // when there's no dedicated banner. Drop new banners in
+  // public/banners/<slug>.jpg.
+  bannerImage?: string;
   rating: number; // out of 5. Placeholder for now — replace with real average once you have reviews.
   purchaseCount: number; // placeholder for now — replace with real order counts once you have them
   comingSoon?: boolean; // true until the real PDF is uploaded to public/products/<slug>.pdf
@@ -46,6 +52,7 @@ export const products: Product[] = [
     ageRange: "3-8 years",
     accent: "from-amber-100 to-orange-50",
     emoji: "🦁",
+    bannerImage: "/banners/animal-friends.jpg",
     rating: 4.8,
     purchaseCount: 3240,
     description:
@@ -73,11 +80,12 @@ export const products: Product[] = [
     title: "Alphabet Adventures A-Z Pack",
     categoryLabel: "Alphabet A-Z",
     tagline: "One letter, one picture, one word per page from A to Z",
-    price: 69,
+    price: 49,
     pageCount: 52,
     ageRange: "3-6 years",
     accent: "from-fuchsia-100 to-pink-50",
     emoji: "🔤",
+    bannerImage: "/banners/alphabet-adventures.jpg",
     rating: 4.6,
     purchaseCount: 1670,
     description:
@@ -197,35 +205,35 @@ export const products: Product[] = [
   },
   {
     slug: "fruits-and-vegetables",
-    title: "Fruits & Vegetables Coloring & Learning Pack",
-    categoryLabel: "Fruits & Vegetables",
-    tagline: "Apples, carrots, mangoes and more, with names to match",
+    title: "Fruits Coloring & Learning Pack",
+    categoryLabel: "Fruits",
+    tagline: "Apples, mangoes, bananas and more, with names to match",
     price: 59,
-    pageCount: 50,
+    pageCount: 51,
     ageRange: "3-7 years",
     accent: "from-orange-100 to-yellow-50",
     emoji: "🍎",
+    bannerImage: "/banners/fruits-and-vegetables.jpg",
     rating: 4.6,
     purchaseCount: 990,
-    comingSoon: true,
     description:
-      "A bright, everyday pack built around fruits and vegetables kids already see at home — good for coloring time that turns into a chat about what's for dinner.",
+      "A bright, everyday pack built around fruits kids already see at home — good for coloring time that turns into a chat about healthy snacks.",
     whatsInside: [
-      "50 pages of individual fruits and vegetables plus a 'fill your basket' scene",
-      "A simple fruit-vs-vegetable sorting activity page",
+      "51 pages of fruits from apples to dragon fruit, plus a 'fill your fruit basket' scene",
+      "A simple 'match the fruit to its tree' activity page",
       "Names in simple English under every picture",
     ],
     whyItMatters: [
-      "Builds early vocabulary around food kids already eat",
-      "An easy, low-pressure way to talk about healthy eating",
+      "Builds early vocabulary around fruits kids already eat",
+      "An easy, low-pressure way to talk about healthy snacking",
       "Pairs naturally with a trip to the kitchen or the market",
     ],
     longDescription:
-      "The Fruits & Vegetables Coloring & Learning Pack brings 50 printable pages of the foods kids already see every day — apples, carrots, mangoes, spinach and more — plus a 'fill your basket' scene and a simple fruit-vs-vegetable sorting activity. Each picture is labeled in simple English, turning coloring time into an easy vocabulary lesson about food. Designed for children aged 3–7, this printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. It's a gentle, low-pressure way to start conversations about healthy eating. Download once, print as many times as you like.",
+      "The Fruits Coloring & Learning Pack brings 51 printable pages of the fruits kids already see every day — apples, mangoes, bananas, strawberries and more — plus a 'fill your fruit basket' scene and a simple matching activity. Each picture is labeled in simple English, turning coloring time into an easy vocabulary lesson. Designed for children aged 3–7, this printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. It's a gentle, low-pressure way to start conversations about healthy snacking. Download once, print as many times as you like.",
     relatedSlugs: ["trees-and-plants", "matching-and-memory"],
-    seoTitle: "Fruits & Vegetables Coloring & Learning Pack — Printable PDF for Kids",
+    seoTitle: "Fruits Coloring & Learning Pack — Printable PDF for Kids",
     seoDescription:
-      "50-page printable fruits and vegetables coloring pack for kids ages 3-7. Learn everyday food names while coloring. Instant PDF download.",
+      "51-page printable fruits coloring pack for kids ages 3-7. Learn fruit names while coloring. Instant PDF download.",
   },
   {
     slug: "trees-and-plants",

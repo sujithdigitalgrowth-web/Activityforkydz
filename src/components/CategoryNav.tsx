@@ -15,6 +15,7 @@ export default function CategoryNav({ products }: { products: Product[] }) {
             product={product}
             className="aspect-square w-full"
             emojiClassName="text-5xl"
+            iconOnly
           />
           <span className="px-2 py-2 text-xs font-semibold text-zinc-700 text-center group-hover:text-orange-700 transition-colors">
             {product.categoryLabel}

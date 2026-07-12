@@ -37,8 +37,9 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
             <Link href={`/products/${product.slug}`} className="block">
               <ProductVisual
                 product={product}
-                className="aspect-[16/9] sm:aspect-[21/8] w-full"
+                className="aspect-[16/9] w-full"
                 emojiClassName="text-8xl sm:text-9xl"
+                srcOverride={product.bannerImage}
               />
             </Link>
             <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.88)_55%,rgba(0,0,0,0)_100%)] sm:bg-gradient-to-t sm:from-black/75 sm:via-black/15 sm:to-transparent pointer-events-none" />

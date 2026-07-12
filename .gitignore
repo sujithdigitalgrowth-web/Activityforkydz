@@ -42,3 +42,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw asset drop folders — source files get cropped/converted and placed in
+# public/banners/ and public/categories/ under the product slug; the
+# originals here are redundant duplicates, not needed in the deployed site
+/public/Main Banner Images/
+/public/Product Cover Images/

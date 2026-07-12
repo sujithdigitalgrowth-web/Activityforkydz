@@ -78,11 +78,12 @@ export default async function ProductPage({
       <div className="grid lg:grid-cols-4 gap-6 lg:gap-8 mb-8">
         <ProductVisual
           product={product}
-          className="rounded-2xl aspect-[4/3] w-full lg:col-span-3"
+          className="rounded-2xl aspect-[16/9] w-full lg:col-span-3"
           emojiClassName="text-7xl"
+          srcOverride={product.bannerImage}
         />
         <div className="lg:col-span-1">
-          <div className="lg:sticky lg:top-24">
+          <div className="lg:sticky lg:top-24 h-full">
             <BuyBox product={product} />
           </div>
         </div>
