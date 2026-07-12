@@ -6,7 +6,7 @@ import AddToCartButton from "./AddToCartButton";
 
 export default function BestSellers({ products }: { products: Product[] }) {
   return (
-    <div className="grid sm:grid-cols-3 gap-5 items-stretch">
+    <div className="grid gap-5 items-stretch [grid-template-columns:repeat(auto-fill,minmax(260px,320px))]">
       {products.map((product, i) => (
         <div
           key={product.slug}

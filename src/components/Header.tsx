@@ -5,27 +5,27 @@ import CartButton from "./CartButton";
 export default function Header() {
   return (
     <header className="border-b border-orange-100 bg-[#fffaf3]/90 backdrop-blur sticky top-0 z-10">
-      <div className="max-w-5xl mx-auto px-6 py-1 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-6 py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center">
           <Image
             src="/logo/111.png"
             alt="activityforKydz logo"
-            width={180}
-            height={180}
-            className="h-40 w-40 object-contain"
+            width={649}
+            height={386}
+            className="h-20 sm:h-24 w-auto"
             priority
           />
         </Link>
-        <div className="flex items-center gap-3 sm:gap-6">
+        <div className="flex items-center gap-5 sm:gap-8">
           <Link
             href="/"
-            className="whitespace-nowrap text-sm font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
+            className="whitespace-nowrap text-sm sm:text-base font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
           >
             Home
           </Link>
           <Link
             href="/#packs"
-            className="whitespace-nowrap text-sm font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
+            className="whitespace-nowrap text-sm sm:text-base font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
           >
             Browse packs
           </Link>

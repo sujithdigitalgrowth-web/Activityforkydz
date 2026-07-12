@@ -13,7 +13,7 @@ export default function BlogIndexPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10">
+    <div className="max-w-[1400px] mx-auto px-6 py-10">
       <h1 className="font-heading text-3xl font-semibold text-zinc-900">Blog</h1>
       <p className="text-lg text-zinc-600 mt-2">
         Screen-free activity ideas, festival guides, and printable inspiration for kids.

@@ -30,18 +30,18 @@ export default function Home() {
         Printable Coloring Pages &amp; Activity Packs for Kids | activityforKydz
       </h1>
 
-      <section className="max-w-5xl mx-auto px-6 pt-6 pb-10">
+      <section className="max-w-[1400px] mx-auto px-6 pt-6 pb-10">
         <HeroCarousel products={products} />
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 pb-10">
+      <section className="max-w-[1400px] mx-auto px-6 pb-10">
         <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-4">
           Jump straight to a category
         </h2>
         <CategoryNav products={products} />
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 pb-10">
+      <section className="max-w-[1400px] mx-auto px-6 pb-10">
         <div className="grid sm:grid-cols-3 gap-4 text-center">
           <div className="rounded-xl bg-white border border-orange-100 p-4">
             <p className="font-heading text-2xl font-semibold text-orange-600">₹49-99</p>
@@ -58,13 +58,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 py-10">
+      <section className="max-w-[1400px] mx-auto px-6 py-10">
         <h2 className="font-heading text-2xl font-semibold text-zinc-900 mb-1">Best sellers</h2>
         <p className="text-zinc-600 mb-6">The three packs families come back for the most.</p>
         <BestSellers products={bestSellers} />
       </section>
 
-      <section id="packs" className="max-w-5xl mx-auto px-6 py-10">
+      <section id="packs" className="max-w-[1400px] mx-auto px-6 py-10">
         <h2 className="font-heading text-2xl font-semibold text-zinc-900 mb-1">
           Our little collection
         </h2>
@@ -72,14 +72,14 @@ export default function Home() {
           We keep this list small on purpose — every pack here is one we&apos;d actually print
           for our own kids.
         </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {products.map((product) => (
             <ProductCard key={product.slug} product={product} />
           ))}
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 py-10">
+      <section className="max-w-[1400px] mx-auto px-6 py-10">
         <div className="rounded-2xl bg-orange-50 border border-orange-100 p-8 max-w-3xl">
           <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-2">
             Why printable, not another app?
@@ -93,7 +93,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 py-10">
+      <section className="max-w-[1400px] mx-auto px-6 py-10">
         <h2 className="font-heading text-2xl font-semibold text-zinc-900 mb-1">
           Common questions
         </h2>

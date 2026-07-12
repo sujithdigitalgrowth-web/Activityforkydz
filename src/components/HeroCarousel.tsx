@@ -32,7 +32,7 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
         {products.map((product) => (
           <div
             key={product.slug}
-            className="relative snap-center shrink-0 w-full sm:w-[90%] rounded-2xl overflow-hidden shadow-sm"
+            className="relative snap-center shrink-0 w-full rounded-2xl overflow-hidden shadow-sm"
           >
             <Link href={`/products/${product.slug}`} className="block">
               <ProductVisual
