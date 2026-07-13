@@ -15,18 +15,35 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-export default function SocialProof({ product }: { product: Product }) {
+export default function SocialProof({
+  product,
+  compact = false,
+}: {
+  product: Product;
+  // Tighter layout for dense grid cards: drops the "+ bought" count so the
+  // line never wraps inside a narrow 2-column card.
+  compact?: boolean;
+}) {
   return (
     <div
-      className="flex items-center gap-1.5 text-xs"
+      className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs"
       aria-label={`Rated ${product.rating} out of 5, ${product.purchaseCount.toLocaleString("en-IN")} bought`}
     >
       <Stars rating={product.rating} />
       <span className="text-zinc-600 font-medium">{product.rating.toFixed(1)}</span>
-      <span className="text-zinc-300">·</span>
-      <span className="text-emerald-700 font-medium">
-        {product.purchaseCount.toLocaleString("en-IN")}+ bought
-      </span>
+      {!compact && (
+        <>
+          <span className="text-zinc-300">·</span>
+          <span className="text-emerald-700 font-medium">
+            {product.purchaseCount.toLocaleString("en-IN")}+ bought
+          </span>
+        </>
+      )}
+      {compact && (
+        <span className="text-zinc-500 hidden sm:inline">
+          ({product.purchaseCount.toLocaleString("en-IN")}+)
+        </span>
+      )}
     </div>
   );
 }

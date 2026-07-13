@@ -6,39 +6,36 @@ import AddToCartButton from "./AddToCartButton";
 
 export default function BestSellers({ products }: { products: Product[] }) {
   return (
-    <div className="grid gap-5 items-stretch [grid-template-columns:repeat(auto-fill,minmax(260px,320px))]">
+    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5 items-stretch">
       {products.map((product, i) => (
         <div
           key={product.slug}
-          className="group relative flex flex-col rounded-2xl border border-orange-100 bg-white overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all"
+          className="group relative flex flex-col rounded-xl sm:rounded-2xl border border-orange-100 bg-white overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all"
         >
-          <span className="absolute top-3 left-3 z-10 rounded-full bg-zinc-900 text-white text-xs font-bold px-2.5 py-1">
+          <span className="absolute top-2 left-2 z-10 rounded-full bg-zinc-900 text-white text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:py-1">
             #{i + 1} best seller
           </span>
           <Link href={`/products/${product.slug}`} className="flex flex-col flex-1">
             <ProductVisual
               product={product}
               className="aspect-[4/3] w-full"
-              emojiClassName="text-7xl"
+              emojiClassName="text-5xl sm:text-7xl"
             />
-            <div className="p-4 flex flex-col flex-1">
-              <h3 className="font-heading font-semibold text-zinc-900 leading-snug line-clamp-2 min-h-[2.75rem]">
+            <div className="p-2.5 sm:p-4 flex flex-col flex-1">
+              <h3 className="font-heading font-semibold text-sm sm:text-base text-zinc-900 leading-snug line-clamp-2">
                 {product.title}
               </h3>
-              <p className="text-sm text-zinc-600 mt-1 line-clamp-2 min-h-[2.5rem]">
-                {product.tagline}
-              </p>
-              <div className="flex items-center justify-between mt-3">
-                <span className="font-bold text-orange-600">₹{product.price}</span>
-                <span className="text-xs text-zinc-500">{product.pageCount} pages</span>
+              <div className="flex items-center justify-between mt-1.5 sm:mt-3">
+                <span className="font-bold text-orange-600 text-sm sm:text-base">₹{product.price}</span>
+                <span className="text-[10px] sm:text-xs text-zinc-500">{product.pageCount} pages</span>
               </div>
-              <div className="mt-2">
-                <SocialProof product={product} />
+              <div className="mt-1 sm:mt-2">
+                <SocialProof product={product} compact />
               </div>
             </div>
           </Link>
-          <div className="px-4 pb-4">
-            <AddToCartButton product={product} className="w-full py-2.5 text-sm" />
+          <div className="px-2.5 pb-2.5 sm:px-4 sm:pb-4">
+            <AddToCartButton product={product} className="w-full py-2 text-xs sm:py-2.5 sm:text-sm" />
           </div>
         </div>
       ))}

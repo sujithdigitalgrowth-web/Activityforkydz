@@ -72,7 +72,7 @@ export default function Home() {
           We keep this list small on purpose — every pack here is one we&apos;d actually print
           for our own kids.
         </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-5">
           {products.map((product) => (
             <ProductCard key={product.slug} product={product} />
           ))}
