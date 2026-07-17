@@ -1,14 +1,15 @@
 # activityforKydz
 
 Printable PDF activity packs for kids (coloring, tracing, learning) with instant
-checkout via Razorpay and automatic email delivery of the download link.
+checkout via PayU and automatic email delivery of the download link.
 
 ## Stack
 
 - Next.js (App Router) + Tailwind CSS
-- Razorpay for payment (order creation + webhook-verified capture)
+- PayU hosted checkout for payment (redirect-based; request/response authenticated
+  with a SHA-512 hash, confirmed server-to-server via webhook)
 - Resend for transactional email
-- No database: download links are HMAC-signed and tied to a real Razorpay order id
+- No database: download links are HMAC-signed and tied to a real PayU transaction id
 
 ## Local setup
 
@@ -18,29 +19,43 @@ cp .env.example .env.local   # then fill in real values, see below
 npm run dev
 ```
 
-Open http://localhost:3000. Without real Razorpay/Resend keys the storefront and
+Open http://localhost:3000. Without real PayU/Resend keys the storefront and
 product pages work fully; only the actual "Buy now" payment step needs live keys.
 
 ## Getting the accounts you need
 
-1. **Razorpay** — sign up at razorpay.com, complete KYC, grab your test API keys
-   from Dashboard → Settings → API Keys. Use test mode until you're ready to go live.
+1. **PayU** — sign up at payu.in, complete KYC, grab your test merchant key/salt
+   from the PayU Dashboard → Settings. Use `PAYU_MODE=test` (test.payu.in) until
+   you're ready to go live, then switch to `PAYU_MODE=production`.
 2. **Resend** — sign up at resend.com, verify a sending domain (or use their
    default onboarding domain while testing), and create an API key.
 3. Generate a random `DOWNLOAD_SECRET`, e.g. `openssl rand -hex 32`.
 4. Fill all of the above into `.env.local` (see `.env.example` for the full list).
 
+## How the payment flow works
+
+PayU's hosted checkout is a plain HTML form POST, not a JS SDK modal:
+
+1. `/api/checkout/create-order` builds the transaction (txnid, amount, cart
+   slugs packed into `udf1`-`udf5`) and signs it with `sha512(key|txnid|amount|
+   productinfo|firstname|email|udf1..5||||||salt)`.
+2. The browser auto-submits a hidden form to PayU's hosted payment page.
+3. After payment, PayU POSTs the result back to `/api/payu/success` or
+   `/api/payu/failure`, which verify the reverse hash and redirect the browser
+   to `/checkout?payu_status=success|failed` to update the UI.
+
 ## Wiring the webhook (required for delivery to actually fire)
 
-Payment confirmation and email delivery are driven by Razorpay's webhook, not the
-browser, so it still works even if the customer closes the tab right after paying.
+Email delivery is driven by PayU's server-to-server webhook, not the browser
+redirect, so it still works even if the customer closes the tab right after
+paying.
 
 1. Deploy the app (e.g. to Vercel) or expose your local server with a tunnel
    (e.g. `ngrok http 3000`) to get a public HTTPS URL.
-2. In Razorpay Dashboard → Settings → Webhooks, add a webhook pointing to
-   `https://yourdomain.com/api/webhooks/razorpay`.
-3. Subscribe to the `payment.captured` event.
-4. Copy the webhook secret Razorpay gives you into `RAZORPAY_WEBHOOK_SECRET`.
+2. In PayU Dashboard → Settings → Webhooks, add a webhook pointing to
+   `https://yourdomain.com/api/webhooks/payu`.
+3. No separate webhook secret is needed — the payload is authenticated with
+   the same `PAYU_SALT` reverse-hash formula as the success/failure redirect.
 
 ## Content
 
@@ -75,7 +90,7 @@ don't have a photo for yet — it just falls back to the emoji placeholder.
 
 Push to a GitHub repo and import it in Vercel (free tier is enough at this scale).
 Set all the `.env.example` variables as Vercel project environment variables, then
-point the Razorpay webhook at the deployed URL.
+point the PayU webhook at the deployed URL.
 
 **Important for SEO**: set `NEXT_PUBLIC_SITE_URL` in Vercel's project environment
 variables to your real domain (e.g. `https://activityforkydz.com`), not the

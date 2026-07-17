@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { getProductBySlug, type Product } from "@/lib/products";
 import ProductVisual from "@/components/ProductVisual";
@@ -9,35 +10,61 @@ import CartAddOns from "@/components/CartAddOns";
 import FakeCheckoutModal from "@/components/FakeCheckoutModal";
 import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 
-declare global {
-  interface Window {
-    Razorpay: new (options: Record<string, unknown>) => {
-      open: () => void;
-    };
-  }
-}
-
-// Set NEXT_PUBLIC_MOCK_PAYMENTS=false once Razorpay keys are live to switch to real payments.
+// Set NEXT_PUBLIC_MOCK_PAYMENTS=false once PayU keys are live to switch to real payments.
 const USE_MOCK_PAYMENTS = process.env.NEXT_PUBLIC_MOCK_PAYMENTS !== "false";
 
 type Status = "idle" | "processing" | "success" | "error";
 
 export default function CheckoutPage() {
+  return (
+    <Suspense fallback={null}>
+      <CheckoutPageInner />
+    </Suspense>
+  );
+}
+
+function CheckoutPageInner() {
   const { slugs, clear } = useCart();
+  const searchParams = useSearchParams();
   const items = slugs
     .map((slug) => getProductBySlug(slug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
   const subtotal = items.reduce((sum, p) => sum + p.price, 0);
 
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<Status>("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+  // PayU is a redirect-based hosted checkout: the customer leaves this page
+  // entirely and comes back via a server-verified POST->redirect to
+  // /checkout?payu_status=... (see /api/payu/success and /api/payu/failure).
+  // The cart is still in localStorage at that point, so its contents (via
+  // `items`, computed above) are used as the snapshot of what was just
+  // bought — captured once via lazy useState initializers below.
+  const initialPayuStatus = searchParams.get("payu_status");
+
+  const [email, setEmail] = useState(() =>
+    initialPayuStatus === "success" ? searchParams.get("email") ?? "" : ""
+  );
+  const [phone, setPhone] = useState("");
+  const [status, setStatus] = useState<Status>(() =>
+    initialPayuStatus === "success" ? "success" : initialPayuStatus === "failed" ? "error" : "idle"
+  );
+  const [errorMessage, setErrorMessage] = useState(() =>
+    initialPayuStatus === "failed" ? "Payment failed or was cancelled. Please try again." : ""
+  );
   const [showMockCheckout, setShowMockCheckout] = useState(false);
   // Snapshot of what's being paid for, taken at "Pay" time so it survives clear()
   // once payment succeeds (the live cart empties, but the modal/success screen
   // still need to show what was just bought).
-  const [checkoutItems, setCheckoutItems] = useState<Product[]>([]);
-  const [orderId, setOrderId] = useState<string | null>(null);
+  const [checkoutItems, setCheckoutItems] = useState<Product[]>(() =>
+    initialPayuStatus === "success" ? items : []
+  );
+  const [orderId, setOrderId] = useState<string | null>(() =>
+    initialPayuStatus === "success" ? searchParams.get("txnid") : null
+  );
+
+  useEffect(() => {
+    if (initialPayuStatus === "success") clear();
+    // Only run once, on the redirect back from PayU.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (items.length === 0) return;
@@ -79,8 +106,18 @@ export default function CheckoutPage() {
     return true;
   }
 
+  function validatePhone(): boolean {
+    if (!/^\d{10}$/.test(phone.replace(/\D/g, "").slice(-10))) {
+      setErrorMessage("Please enter a valid 10-digit phone number — PayU requires it for payment.");
+      setStatus("error");
+      return false;
+    }
+    return true;
+  }
+
   async function handlePay() {
     if (!validateEmail()) return;
+    if (!USE_MOCK_PAYMENTS && !validatePhone()) return;
     const snapshot = items;
     setCheckoutItems(snapshot);
 
@@ -107,7 +144,7 @@ export default function CheckoutPage() {
       const res = await fetch("/api/checkout/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slugs: snapshot.map((p) => p.slug), email }),
+        body: JSON.stringify({ slugs: snapshot.map((p) => p.slug), email, phone }),
       });
       const data = await res.json();
 
@@ -117,28 +154,21 @@ export default function CheckoutPage() {
         return;
       }
 
-      setOrderId(data.orderId);
-
-      const razorpay = new window.Razorpay({
-        key: data.keyId,
-        amount: data.amount,
-        currency: data.currency,
-        order_id: data.orderId,
-        name: "activityforKydz",
-        description: snapshot.length === 1 ? snapshot[0].title : `${snapshot.length} activity packs`,
-        prefill: { email },
-        theme: { color: "#e2661f" },
-        handler: () => {
-          setStatus("success");
-          clear();
-        },
-        modal: {
-          ondismiss: () => {
-            setStatus((s) => (s === "success" ? s : "idle"));
-          },
-        },
-      });
-      razorpay.open();
+      // PayU's hosted checkout is a plain form POST redirect, not a JS SDK
+      // modal — the browser navigates away to PayU and comes back via
+      // /api/payu/success or /api/payu/failure.
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = data.action;
+      for (const [name, value] of Object.entries(data.fields as Record<string, string>)) {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = name;
+        input.value = value;
+        form.appendChild(input);
+      }
+      document.body.appendChild(form);
+      form.submit();
     } catch {
       setErrorMessage("Couldn't reach the payment server. Please try again.");
       setStatus("error");
@@ -239,6 +269,21 @@ export default function CheckoutPage() {
                 placeholder="you@example.com"
                 className="w-full rounded-lg border border-zinc-300 px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
+
+              {!USE_MOCK_PAYMENTS && (
+                <>
+                  <label className="block text-sm font-medium text-zinc-700 mb-1">
+                    Phone number (required by PayU)
+                  </label>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="9876543210"
+                    className="w-full rounded-lg border border-zinc-300 px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  />
+                </>
+              )}
 
               {status === "error" && <p className="text-sm text-red-600 mb-3">{errorMessage}</p>}
 

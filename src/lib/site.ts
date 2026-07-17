@@ -1,6 +1,6 @@
 // Central place for business details used across legal/support pages.
 // TODO: replace every placeholder below with your real details before going live —
-// Razorpay's KYC review and your Refund/Privacy pages both need the real ones.
+// PayU's KYC review and your Refund/Privacy pages both need the real ones.
 export const site = {
   name: "activityforKydz",
   supportEmail: "support@activityforkydz.com",
