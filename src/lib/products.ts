@@ -19,6 +19,13 @@ export type Product = {
   // when there's no dedicated banner. Drop new banners in
   // public/banners/<slug>.jpg.
   bannerImage?: string;
+  // Extra photos for the product page's thumbnail rail (shown to the left of
+  // the main image), on top of the cover/banner above. Leave unset — the
+  // product page then shows just the single main image with no thumbnail
+  // rail, same as before. Drop files in public/gallery/<slug>/<name>.jpg;
+  // until a file exists, that slot falls back to the emoji + color
+  // placeholder, same as the cover image does.
+  galleryImages?: { src: string; label: string }[];
   rating: number; // out of 5. Placeholder for now — replace with real average once you have reviews.
   purchaseCount: number; // placeholder for now — replace with real order counts once you have them
   comingSoon?: boolean; // true until the real PDF is uploaded to public/products/<slug>.pdf
@@ -53,6 +60,11 @@ export const products: Product[] = [
     accent: "from-amber-100 to-orange-50",
     emoji: "🦁",
     bannerImage: "/banners/animal-friends.jpg",
+    galleryImages: [
+      { src: "/gallery/animal-friends/colouring-pack.jpg", label: "A finished page — Duck" },
+      { src: "/gallery/animal-friends/sheep.jpg", label: "A look inside the pack — Sheep" },
+      { src: "/gallery/animal-friends/rabbit.jpg", label: "A look inside the pack — Rabbit" },
+    ],
     rating: 4.8,
     purchaseCount: 3240,
     description:
@@ -86,6 +98,11 @@ export const products: Product[] = [
     accent: "from-fuchsia-100 to-pink-50",
     emoji: "🔤",
     bannerImage: "/banners/alphabet-adventures.jpg",
+    galleryImages: [
+      { src: "/gallery/alphabet-adventures/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/alphabet-adventures/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/alphabet-adventures/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
     rating: 4.6,
     purchaseCount: 1670,
     description:
@@ -117,9 +134,14 @@ export const products: Product[] = [
     ageRange: "4-9 years",
     accent: "from-sky-100 to-blue-50",
     emoji: "🦜",
+    bannerImage: "/banners/birds-of-the-world.jpg",
+    galleryImages: [
+      { src: "/gallery/birds-of-the-world/colouring-pack.jpg", label: "A finished page — Bird of Paradise" },
+      { src: "/gallery/birds-of-the-world/pelican.jpg", label: "A look inside the pack — Pelican" },
+      { src: "/gallery/birds-of-the-world/rainbow-lorikeet.jpg", label: "A look inside the pack — Rainbow Lorikeet" },
+    ],
     rating: 4.6,
     purchaseCount: 1460,
-    comingSoon: true,
     description:
       "A quieter, prettier pack for kids who love birds — peacocks in full feather, tiny sparrows, owls at night — good for a calm afternoon at the table.",
     whatsInside: [
@@ -149,6 +171,11 @@ export const products: Product[] = [
     ageRange: "4-7 years",
     accent: "from-emerald-100 to-teal-50",
     emoji: "🔢",
+    galleryImages: [
+      { src: "/gallery/numbers-1-to-100/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/numbers-1-to-100/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/numbers-1-to-100/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
     rating: 4.9,
     purchaseCount: 3680,
     comingSoon: true,
@@ -181,6 +208,11 @@ export const products: Product[] = [
     ageRange: "3-8 years",
     accent: "from-cyan-100 to-sky-50",
     emoji: "🐠",
+    galleryImages: [
+      { src: "/gallery/oceans-and-sea-life/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/oceans-and-sea-life/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/oceans-and-sea-life/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
     rating: 4.7,
     purchaseCount: 1380,
     comingSoon: true,
@@ -214,6 +246,11 @@ export const products: Product[] = [
     accent: "from-orange-100 to-yellow-50",
     emoji: "🍎",
     bannerImage: "/banners/fruits-and-vegetables.jpg",
+    galleryImages: [
+      { src: "/gallery/fruits-and-vegetables/colouring-pack.jpg", label: "A finished page — Raspberry" },
+      { src: "/gallery/fruits-and-vegetables/pineapple.jpg", label: "A look inside the pack — Pineapple" },
+      { src: "/gallery/fruits-and-vegetables/grapes.jpg", label: "A look inside the pack — Grapes" },
+    ],
     rating: 4.6,
     purchaseCount: 990,
     description:
@@ -245,6 +282,11 @@ export const products: Product[] = [
     ageRange: "3-8 years",
     accent: "from-green-100 to-lime-50",
     emoji: "🌳",
+    galleryImages: [
+      { src: "/gallery/trees-and-plants/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/trees-and-plants/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/trees-and-plants/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
     rating: 4.5,
     purchaseCount: 860,
     comingSoon: true,
@@ -277,6 +319,11 @@ export const products: Product[] = [
     ageRange: "3-6 years",
     accent: "from-purple-100 to-violet-50",
     emoji: "🧠",
+    galleryImages: [
+      { src: "/gallery/matching-and-memory/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/matching-and-memory/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/matching-and-memory/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
     rating: 4.6,
     purchaseCount: 720,
     comingSoon: true,
@@ -309,6 +356,11 @@ export const products: Product[] = [
     ageRange: "4-9 years",
     accent: "from-slate-100 to-zinc-50",
     emoji: "🧩",
+    galleryImages: [
+      { src: "/gallery/puzzles-and-find-the-difference/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/puzzles-and-find-the-difference/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/puzzles-and-find-the-difference/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
     rating: 4.7,
     purchaseCount: 940,
     comingSoon: true,
@@ -341,6 +393,11 @@ export const products: Product[] = [
     ageRange: "4-9 years",
     accent: "from-red-100 to-rose-50",
     emoji: "✏️",
+    galleryImages: [
+      { src: "/gallery/dot-to-dot/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/dot-to-dot/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/dot-to-dot/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
     rating: 4.7,
     purchaseCount: 1050,
     comingSoon: true,

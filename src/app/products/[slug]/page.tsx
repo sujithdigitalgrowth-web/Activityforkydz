@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, products } from "@/lib/products";
 import BuyBox from "@/components/BuyBox";
-import ProductVisual from "@/components/ProductVisual";
+import ProductGallery from "@/components/ProductGallery";
 import SocialProof from "@/components/SocialProof";
 import Faq from "@/components/Faq";
 import ViewItemTracker from "@/components/ViewItemTracker";
@@ -76,12 +76,9 @@ export default async function ProductPage({
       </nav>
 
       <div className="grid lg:grid-cols-4 gap-6 lg:gap-8 mb-8">
-        <ProductVisual
-          product={product}
-          className="rounded-2xl aspect-[16/9] w-full lg:col-span-3"
-          emojiClassName="text-7xl"
-          srcOverride={product.bannerImage}
-        />
+        <div className="lg:col-span-3">
+          <ProductGallery product={product} mainClassName="rounded-2xl aspect-[16/9] w-full" />
+        </div>
         <div className="lg:col-span-1">
           <div className="lg:sticky lg:top-24 h-full">
             <BuyBox product={product} />
