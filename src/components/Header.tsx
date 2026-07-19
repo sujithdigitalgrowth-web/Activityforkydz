@@ -10,9 +10,9 @@ export default function Header() {
           <Image
             src="/logo/111.png"
             alt="activityforKydz logo"
-            width={649}
-            height={386}
-            className="h-20 sm:h-24 w-auto"
+            width={1600}
+            height={750}
+            className="h-12 sm:h-14 w-auto"
             priority
           />
         </Link>

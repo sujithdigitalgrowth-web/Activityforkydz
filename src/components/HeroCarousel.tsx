@@ -44,18 +44,7 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
             </Link>
             <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.88)_55%,rgba(0,0,0,0)_100%)] sm:bg-gradient-to-t sm:from-black/75 sm:via-black/15 sm:to-transparent pointer-events-none" />
             <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
-              <span className="inline-block rounded-full bg-white/90 text-orange-700 text-xs font-bold px-3 py-1 mb-2 sm:mb-3">
-                ₹{product.price} · {product.pageCount} pages
-              </span>
-              <Link href={`/products/${product.slug}`}>
-                <h2 className="font-heading text-xl sm:text-3xl font-bold text-white leading-snug drop-shadow-sm line-clamp-2 max-w-xl">
-                  {product.title}
-                </h2>
-              </Link>
-              <p className="text-white/85 text-sm sm:text-base mt-1 line-clamp-1 max-w-lg">
-                {product.tagline}
-              </p>
-              <div className="flex items-center gap-3 mt-4">
+              <div className="flex items-center gap-3">
                 <AddToCartButton product={product} className="px-5 py-2.5" />
                 <Link
                   href={`/products/${product.slug}`}

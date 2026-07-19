@@ -11,9 +11,9 @@ export default function Footer() {
             <Image
               src="/logo/111.png"
               alt="activityforKydz logo"
-              width={32}
-              height={32}
-              className="h-8 w-8 object-contain"
+              width={1600}
+              height={750}
+              className="h-8 w-auto object-contain"
             />
             <p className="font-heading font-semibold text-zinc-900">{site.name}</p>
           </div>
