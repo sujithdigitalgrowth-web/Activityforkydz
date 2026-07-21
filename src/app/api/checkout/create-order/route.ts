@@ -24,12 +24,25 @@ export async function POST(req: Request) {
   // never trust a client-submitted total for what Razorpay actually collects.
   const { total } = getCartPricing(verifiedProducts);
   const amount = Math.round(total * 100); // paise
+  if (amount < 100) {
+    return NextResponse.json({ error: "Order amount must be at least ₹1" }, { status: 400 });
+  }
 
-  const order = await getRazorpay().orders.create({
-    amount,
-    currency: "INR",
-    notes: { email, ...encodeSlugsToNotes(uniqueSlugs) },
-  });
+  let order;
+  try {
+    order = await getRazorpay().orders.create({
+      amount,
+      currency: "INR",
+      notes: { email, ...encodeSlugsToNotes(uniqueSlugs) },
+    });
+  } catch (err) {
+    console.error("Razorpay order creation failed", err);
+    const statusCode = (err as { statusCode?: number })?.statusCode;
+    if (statusCode === 401) {
+      return NextResponse.json({ error: "Payment gateway authentication failed" }, { status: 401 });
+    }
+    return NextResponse.json({ error: "Could not create payment order. Please try again." }, { status: 500 });
+  }
 
   return NextResponse.json({
     orderId: order.id,
