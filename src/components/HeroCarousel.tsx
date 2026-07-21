@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/products";
 import ProductVisual from "./ProductVisual";
-import AddToCartButton from "./AddToCartButton";
 
 export default function HeroCarousel({ products }: { products: Product[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -42,18 +41,6 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
                 srcOverride={product.bannerImage}
               />
             </Link>
-            <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.88)_55%,rgba(0,0,0,0)_100%)] sm:bg-gradient-to-t sm:from-black/75 sm:via-black/15 sm:to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
-              <div className="flex items-center gap-3">
-                <AddToCartButton product={product} className="px-5 py-2.5" />
-                <Link
-                  href={`/products/${product.slug}`}
-                  className="rounded-full bg-white/15 hover:bg-white/25 text-white font-semibold px-5 py-2.5 backdrop-blur-sm transition-colors"
-                >
-                  View pack →
-                </Link>
-              </div>
-            </div>
           </div>
         ))}
       </div>
