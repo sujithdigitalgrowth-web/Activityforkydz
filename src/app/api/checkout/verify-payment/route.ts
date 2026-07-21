@@ -56,6 +56,14 @@ export async function POST(req: Request) {
       }));
   } catch (err) {
     console.error("Could not fetch order notes for instant download links", err);
+    // TEMP DIAGNOSTIC: payment signature is already verified at this point,
+    // so this is not exposing anything sensitive — just the error message
+    // from the notes lookup, to debug why downloads keep coming back empty.
+    return NextResponse.json({
+      verified: true,
+      downloads: [],
+      debugError: err instanceof Error ? err.message : String(err),
+    });
   }
 
   return NextResponse.json({ verified: true, downloads });
