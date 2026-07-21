@@ -140,7 +140,7 @@ export default async function ProductPage({
             How delivery works
           </h2>
           <ol className="space-y-2 text-zinc-700 list-decimal list-inside">
-            <li>Pay securely with UPI, card or netbanking via PayU.</li>
+            <li>Pay securely with UPI, card or netbanking via Razorpay.</li>
             <li>We email your download link within a minute of payment.</li>
             <li>Open it on any device, print at home, and you&apos;re set.</li>
           </ol>

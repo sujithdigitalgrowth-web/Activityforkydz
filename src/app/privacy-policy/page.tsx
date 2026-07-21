@@ -20,7 +20,7 @@ export default function PrivacyPolicyPage() {
         <li>Your email address, to deliver your PDF and send order-related messages.</li>
         <li>
           Payment details (card, UPI, or netbanking info) are collected and processed directly
-          by our payment partner, PayU — we never see or store your full payment details.
+          by our payment partner, Razorpay — we never see or store your full payment details.
         </li>
       </ul>
       <h2>How we use it</h2>

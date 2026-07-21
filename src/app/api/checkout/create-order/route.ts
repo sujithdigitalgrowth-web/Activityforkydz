@@ -1,28 +1,16 @@
 import { NextResponse } from "next/server";
 import { getProductBySlug } from "@/lib/products";
 import { getCartPricing } from "@/lib/pricing";
-import { getBaseUrl } from "@/lib/seo";
-import {
-  buildPaymentHash,
-  encodeSlugsToUdf,
-  generateTxnId,
-  getPayuActionUrl,
-  getPayuKey,
-} from "@/lib/payu";
+import { getRazorpay } from "@/lib/razorpay";
+import { encodeSlugsToNotes } from "@/lib/cart-notes";
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
   const slugs = body?.slugs as string[] | undefined;
   const email = body?.email as string | undefined;
-  const phoneRaw = body?.phone as string | undefined;
 
   if (!Array.isArray(slugs) || slugs.length === 0 || !email || !/^\S+@\S+\.\S+$/.test(email)) {
     return NextResponse.json({ error: "A valid cart and email are required" }, { status: 400 });
-  }
-
-  const phone = (phoneRaw ?? "").replace(/\D/g, "").slice(-10);
-  if (phone.length !== 10) {
-    return NextResponse.json({ error: "A valid 10-digit phone number is required" }, { status: 400 });
   }
 
   const uniqueSlugs = [...new Set(slugs)];
@@ -33,32 +21,21 @@ export async function POST(req: Request) {
   const verifiedProducts = products.filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   // Amount charged is computed here, server-side, from the cart contents —
-  // never trust a client-submitted total for what PayU actually collects.
+  // never trust a client-submitted total for what Razorpay actually collects.
   const { total } = getCartPricing(verifiedProducts);
-  const amount = total.toFixed(2);
-  const productinfo = verifiedProducts.map((p) => p.title).join(" + ").slice(0, 100);
-  const firstname = (email.split("@")[0].replace(/[^a-zA-Z ]/g, "") || "Customer").slice(0, 60);
-  const txnid = generateTxnId();
-  const udf = encodeSlugsToUdf(uniqueSlugs);
+  const amount = Math.round(total * 100); // paise
 
-  const hash = buildPaymentHash({ txnid, amount, productinfo, firstname, email, ...udf });
-
-  const baseUrl = getBaseUrl();
+  const order = await getRazorpay().orders.create({
+    amount,
+    currency: "INR",
+    notes: { email, ...encodeSlugsToNotes(uniqueSlugs) },
+  });
 
   return NextResponse.json({
-    action: getPayuActionUrl(),
-    fields: {
-      key: getPayuKey(),
-      txnid,
-      amount,
-      productinfo,
-      firstname,
-      email,
-      phone,
-      surl: `${baseUrl}/api/payu/success`,
-      furl: `${baseUrl}/api/payu/failure`,
-      hash,
-      ...udf,
-    },
+    orderId: order.id,
+    amount: order.amount,
+    currency: order.currency,
+    keyId: process.env.RAZORPAY_KEY_ID,
+    products: verifiedProducts.map((p) => ({ title: p.title, slug: p.slug })),
   });
 }
