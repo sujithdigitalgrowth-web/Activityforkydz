@@ -40,6 +40,9 @@ export default function CheckoutPage() {
   // still need to show what was just bought).
   const [checkoutItems, setCheckoutItems] = useState<Product[]>([]);
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [downloadLinks, setDownloadLinks] = useState<
+    { slug: string; title: string; downloadUrl: string }[]
+  >([]);
   const checkoutPricing = getCartPricing(checkoutItems);
 
   useEffect(() => {
@@ -86,6 +89,7 @@ export default function CheckoutPage() {
     if (!validateEmail()) return;
     const snapshot = items;
     setCheckoutItems(snapshot);
+    setDownloadLinks([]);
 
     pushDataLayer({
       event: "add_payment_info",
@@ -142,11 +146,13 @@ export default function CheckoutPage() {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(response),
             });
+            const verifyData = await verifyRes.json().catch(() => null);
             if (!verifyRes.ok) {
               setErrorMessage("We couldn't verify your payment. If money was deducted, it will be refunded automatically — please contact support.");
               setStatus("error");
               return;
             }
+            setDownloadLinks(verifyData?.downloads ?? []);
             setStatus("success");
             clear();
           } catch {
@@ -180,11 +186,36 @@ export default function CheckoutPage() {
         <h1 className="font-heading text-2xl font-semibold text-emerald-900">
           Payment received!
         </h1>
-        <p className="text-zinc-600 mt-2">
-          Your download link{checkoutItems.length === 1 ? "" : "s are"} on the way to{" "}
-          <strong>{email}</strong>. It usually arrives within a minute — check spam if you
-          don&apos;t see it.
-        </p>
+        {downloadLinks.length > 0 ? (
+          <>
+            <p className="text-zinc-600 mt-2">
+              Download {downloadLinks.length === 1 ? "it" : "them"} right away below — we&apos;ve
+              also emailed the link{downloadLinks.length === 1 ? "" : "s"} to{" "}
+              <strong>{email}</strong> in case you need {downloadLinks.length === 1 ? "it" : "them"}{" "}
+              later.
+            </p>
+            <div className="mt-6 space-y-3 text-left max-w-sm mx-auto">
+              {downloadLinks.map((item) => (
+                <a
+                  key={item.slug}
+                  href={item.downloadUrl}
+                  className="flex items-center justify-between gap-3 rounded-xl border border-orange-100 bg-white px-4 py-3 font-semibold text-zinc-900 hover:border-orange-300 transition-colors"
+                >
+                  <span className="truncate">{item.title}</span>
+                  <span className="shrink-0 rounded-full bg-orange-500 hover:bg-orange-600 text-white text-sm px-4 py-1.5">
+                    Download
+                  </span>
+                </a>
+              ))}
+            </div>
+          </>
+        ) : (
+          <p className="text-zinc-600 mt-2">
+            Your download link{checkoutItems.length === 1 ? "" : "s are"} on the way to{" "}
+            <strong>{email}</strong>. It usually arrives within a minute — check spam if you
+            don&apos;t see it.
+          </p>
+        )}
         <Link
           href="/#packs"
           className="inline-block mt-6 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 transition-colors"
