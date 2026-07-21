@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getProductBySlug } from "@/lib/products";
+import { getCartPricing } from "@/lib/pricing";
 import { getBaseUrl } from "@/lib/seo";
 import {
   buildPaymentHash,
@@ -29,10 +30,13 @@ export async function POST(req: Request) {
   if (products.some((p) => !p)) {
     return NextResponse.json({ error: "One or more products were not found" }, { status: 404 });
   }
+  const verifiedProducts = products.filter((p): p is NonNullable<typeof p> => Boolean(p));
 
-  const amountValue = products.reduce((sum, p) => sum + p!.price, 0);
-  const amount = amountValue.toFixed(2);
-  const productinfo = products.map((p) => p!.title).join(" + ").slice(0, 100);
+  // Amount charged is computed here, server-side, from the cart contents —
+  // never trust a client-submitted total for what PayU actually collects.
+  const { total } = getCartPricing(verifiedProducts);
+  const amount = total.toFixed(2);
+  const productinfo = verifiedProducts.map((p) => p.title).join(" + ").slice(0, 100);
   const firstname = (email.split("@")[0].replace(/[^a-zA-Z ]/g, "") || "Customer").slice(0, 60);
   const txnid = generateTxnId();
   const udf = encodeSlugsToUdf(uniqueSlugs);

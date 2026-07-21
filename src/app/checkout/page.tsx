@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { getProductBySlug, type Product } from "@/lib/products";
+import { getCartPricing } from "@/lib/pricing";
 import ProductVisual from "@/components/ProductVisual";
 import CartAddOns from "@/components/CartAddOns";
 import FakeCheckoutModal from "@/components/FakeCheckoutModal";
@@ -29,7 +30,7 @@ function CheckoutPageInner() {
   const items = slugs
     .map((slug) => getProductBySlug(slug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
-  const subtotal = items.reduce((sum, p) => sum + p.price, 0);
+  const pricing = getCartPricing(items);
 
   // PayU is a redirect-based hosted checkout: the customer leaves this page
   // entirely and comes back via a server-verified POST->redirect to
@@ -59,6 +60,7 @@ function CheckoutPageInner() {
   const [orderId, setOrderId] = useState<string | null>(() =>
     initialPayuStatus === "success" ? searchParams.get("txnid") : null
   );
+  const checkoutPricing = getCartPricing(checkoutItems);
 
   useEffect(() => {
     if (initialPayuStatus === "success") clear();
@@ -72,7 +74,7 @@ function CheckoutPageInner() {
       event: "begin_checkout",
       ecommerce: {
         currency: "INR",
-        value: subtotal,
+        value: pricing.total,
         items: toDataLayerItems(items),
       },
     });
@@ -91,11 +93,11 @@ function CheckoutPageInner() {
       ecommerce: {
         transaction_id: orderId,
         currency: "INR",
-        value: checkoutItems.reduce((sum, p) => sum + p.price, 0),
+        value: checkoutPricing.total,
         items: toDataLayerItems(checkoutItems),
       },
     });
-  }, [status, orderId, checkoutItems]);
+  }, [status, orderId, checkoutItems, checkoutPricing.total]);
 
   function validateEmail(): boolean {
     if (!/^\S+@\S+\.\S+$/.test(email)) {
@@ -125,7 +127,7 @@ function CheckoutPageInner() {
       event: "add_payment_info",
       ecommerce: {
         currency: "INR",
-        value: snapshot.reduce((sum, p) => sum + p.price, 0),
+        value: getCartPricing(snapshot).total,
         items: toDataLayerItems(snapshot),
       },
     });
@@ -224,26 +226,50 @@ function CheckoutPageInner() {
               Order summary
             </h2>
             <div className="space-y-3">
-              {items.map((product) => (
-                <div
-                  key={product.slug}
-                  className="flex items-center gap-4 rounded-xl border border-orange-100 bg-white p-3"
-                >
-                  <ProductVisual
-                    product={product}
-                    className="rounded-lg h-16 w-20 shrink-0"
-                    emojiClassName="text-3xl"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <p className="font-heading font-semibold text-zinc-900 truncate">
-                      {product.title}
-                    </p>
-                    <p className="text-sm text-zinc-500">{product.pageCount} pages</p>
+              {items.map((product) => {
+                const isFree = product.slug === pricing.freeSlug;
+                return (
+                  <div
+                    key={product.slug}
+                    className="flex items-center gap-4 rounded-xl border border-orange-100 bg-white p-3"
+                  >
+                    <ProductVisual
+                      product={product}
+                      className="rounded-lg h-16 w-20 shrink-0"
+                      emojiClassName="text-3xl"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p className="font-heading font-semibold text-zinc-900 truncate">
+                        {product.title}
+                      </p>
+                      <p className="text-sm text-zinc-500">{product.pageCount} pages</p>
+                      {isFree && (
+                        <span className="inline-block mt-1 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-0.5">
+                          🎁 Free pack
+                        </span>
+                      )}
+                    </div>
+                    {isFree ? (
+                      <span className="font-bold shrink-0">
+                        <span className="text-zinc-400 line-through text-sm mr-1.5">
+                          ₹{product.price}
+                        </span>
+                        <span className="text-emerald-600">FREE</span>
+                      </span>
+                    ) : (
+                      <span className="font-bold text-orange-600 shrink-0">₹{product.price}</span>
+                    )}
                   </div>
-                  <span className="font-bold text-orange-600 shrink-0">₹{product.price}</span>
-                </div>
-              ))}
+                );
+              })}
             </div>
+
+            {pricing.discount === 0 && items.length < 3 && (
+              <p className="text-xs text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg px-2.5 py-1.5 mt-3">
+                🎁 Add {3 - items.length} more pack{3 - items.length === 1 ? "" : "s"} — buy 2,
+                get 1 free!
+              </p>
+            )}
 
             <div className="mt-4 md:mt-6">
               <CartAddOns />
@@ -252,12 +278,31 @@ function CheckoutPageInner() {
 
           <div className="md:col-span-2">
             <div className="md:sticky md:top-24 rounded-2xl bg-white border border-orange-100 shadow-sm p-4 sm:p-5">
-              <div className="flex items-baseline justify-between mb-3">
-                <span className="text-2xl font-bold text-zinc-900">₹{subtotal}</span>
-                <span className="text-sm text-zinc-500">
-                  {items.length} pack{items.length === 1 ? "" : "s"}
-                </span>
-              </div>
+              {pricing.discount > 0 ? (
+                <>
+                  <div className="flex items-center justify-between text-sm text-zinc-500">
+                    <span>Subtotal</span>
+                    <span>₹{pricing.subtotal}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm text-emerald-600 font-medium mt-1">
+                    <span>🎁 Buy 2, get 1 free</span>
+                    <span>-₹{pricing.discount}</span>
+                  </div>
+                  <div className="flex items-baseline justify-between mt-1.5 mb-3">
+                    <span className="text-2xl font-bold text-zinc-900">₹{pricing.total}</span>
+                    <span className="text-sm text-zinc-500">
+                      {items.length} pack{items.length === 1 ? "" : "s"}
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <div className="flex items-baseline justify-between mb-3">
+                  <span className="text-2xl font-bold text-zinc-900">₹{pricing.total}</span>
+                  <span className="text-sm text-zinc-500">
+                    {items.length} pack{items.length === 1 ? "" : "s"}
+                  </span>
+                </div>
+              )}
 
               <label className="block text-sm font-medium text-zinc-700 mb-1">
                 Your email (we&apos;ll send the PDFs here)
@@ -292,7 +337,7 @@ function CheckoutPageInner() {
                 disabled={status === "processing"}
                 className="w-full rounded-full bg-orange-500 hover:bg-orange-600 disabled:opacity-60 text-white font-semibold py-2.5 transition-colors"
               >
-                {status === "processing" ? "Opening payment..." : `Pay ₹${subtotal}`}
+                {status === "processing" ? "Opening payment..." : `Pay ₹${pricing.total}`}
               </button>
 
               <div className="mt-3 flex items-center justify-center gap-x-3 gap-y-1 flex-wrap text-xs text-zinc-600">
@@ -320,7 +365,7 @@ function CheckoutPageInner() {
       {showMockCheckout && (
         <FakeCheckoutModal
           items={checkoutItems}
-          total={checkoutItems.reduce((sum, p) => sum + p.price, 0)}
+          total={checkoutPricing.total}
           email={email}
           onClose={() => setShowMockCheckout(false)}
           onPaymentSuccess={() => {

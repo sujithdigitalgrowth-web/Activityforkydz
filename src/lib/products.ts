@@ -208,14 +208,14 @@ export const products: Product[] = [
     ageRange: "3-8 years",
     accent: "from-cyan-100 to-sky-50",
     emoji: "🐠",
+    bannerImage: "/banners/oceans-and-sea-life.jpg",
     galleryImages: [
-      { src: "/gallery/oceans-and-sea-life/colouring-pack.jpg", label: "A finished page" },
-      { src: "/gallery/oceans-and-sea-life/look-inside-1.jpg", label: "A look inside the pack" },
-      { src: "/gallery/oceans-and-sea-life/look-inside-2.jpg", label: "A look inside the pack" },
+      { src: "/gallery/oceans-and-sea-life/lobster.jpg", label: "A finished page — Lobster" },
+      { src: "/gallery/oceans-and-sea-life/dolphin.jpg", label: "A look inside the pack — Dolphin" },
+      { src: "/gallery/oceans-and-sea-life/butterfly-fish.jpg", label: "A look inside the pack — Butterfly Fish" },
     ],
     rating: 4.7,
     purchaseCount: 1380,
-    comingSoon: true,
     description:
       "A splashy pack of ocean life — dolphins leaping, turtles gliding, octopuses hiding among the coral — for kids who love anything that lives underwater.",
     whatsInside: [
@@ -282,14 +282,14 @@ export const products: Product[] = [
     ageRange: "3-8 years",
     accent: "from-green-100 to-lime-50",
     emoji: "🌳",
+    bannerImage: "/banners/trees-and-plants.jpg",
     galleryImages: [
-      { src: "/gallery/trees-and-plants/colouring-pack.jpg", label: "A finished page" },
-      { src: "/gallery/trees-and-plants/look-inside-1.jpg", label: "A look inside the pack" },
-      { src: "/gallery/trees-and-plants/look-inside-2.jpg", label: "A look inside the pack" },
+      { src: "/gallery/trees-and-plants/lotus.jpg", label: "A finished page — Lotus" },
+      { src: "/gallery/trees-and-plants/apple-tree.jpg", label: "A look inside the pack — Apple Tree" },
+      { src: "/gallery/trees-and-plants/coconut-tree.jpg", label: "A look inside the pack — Coconut Tree" },
     ],
     rating: 4.5,
     purchaseCount: 860,
-    comingSoon: true,
     description:
       "A calm, green pack of trees and plants, with a simple sequence showing how a tiny seed grows into a tall tree — good for pairing with an actual walk outside.",
     whatsInside: [

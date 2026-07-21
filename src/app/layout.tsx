@@ -3,6 +3,7 @@ import { Fredoka, Nunito } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PromoBar from "@/components/PromoBar";
 import { getBaseUrl, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
@@ -72,6 +73,7 @@ export default function RootLayout({
             __html: JSON.stringify([organizationJsonLd(), websiteJsonLd()]),
           }}
         />
+        <PromoBar />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

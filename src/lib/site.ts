@@ -3,7 +3,7 @@
 // PayU's KYC review and your Refund/Privacy pages both need the real ones.
 export const site = {
   name: "activityforKydz",
-  supportEmail: "support@activityforkydz.com",
+  supportEmail: "activityforkydz@gmail.com",
   legalEntityName: "activityforKydz", // your registered business/proprietor name, if different
   address: "Add your business address here (city, state, PIN, India)",
 };
