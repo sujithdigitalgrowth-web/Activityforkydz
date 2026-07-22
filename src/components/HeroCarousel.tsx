@@ -34,10 +34,19 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
             className="relative snap-center shrink-0 w-full rounded-2xl overflow-hidden shadow-sm"
           >
             <Link href={`/products/${product.slug}`} className="block">
+              {/* Separate mobile/desktop crops (art direction) rather than one
+                  image squeezed into both ratios via object-cover, since a
+                  3:1 desktop banner loses too much width when cropped to 16:9. */}
               <ProductVisual
                 product={product}
-                className="aspect-[16/9] w-full"
-                emojiClassName="text-8xl sm:text-9xl"
+                className="aspect-[16/9] w-full sm:hidden"
+                emojiClassName="text-8xl"
+                srcOverride={product.bannerImageMobile ?? product.bannerImage}
+              />
+              <ProductVisual
+                product={product}
+                className="max-sm:hidden aspect-[3/1] w-full"
+                emojiClassName="text-9xl"
                 srcOverride={product.bannerImage}
               />
             </Link>

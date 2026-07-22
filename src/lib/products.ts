@@ -13,12 +13,17 @@ export type Product = {
   // the emoji + gradient below if that file doesn't exist yet. See
   // public/categories/README.md.
   image?: string;
-  // Optional wide (16:9) banner image, used by the homepage hero carousel
-  // and the product detail page's main image. Leave unset — both fall back
-  // to the regular cover image (`image` above / public/categories/<slug>.jpg)
-  // when there's no dedicated banner. Drop new banners in
-  // public/banners/<slug>.jpg.
+  // Wide banner image, used by the homepage hero carousel and the product
+  // detail page's main image. Leave unset — both fall back to the regular
+  // cover image (`image` above / public/categories/<slug>.jpg) when there's
+  // no dedicated banner. This is the desktop/tablet crop (3:1 ratio,
+  // ~1800x600px) — drop new ones in public/banners/desktop/<slug>.jpg.
   bannerImage?: string;
+  // Optional separate mobile crop (16:9 ratio, ~960x540px) for the hero
+  // carousel, since a 3:1 image cropped down to 16:9 loses ~40% of its
+  // width. Leave unset to just reuse `bannerImage` on mobile too. Drop new
+  // ones in public/banners/mobile/<slug>.jpg.
+  bannerImageMobile?: string;
   // Extra photos for the product page's thumbnail rail (shown to the left of
   // the main image), on top of the cover/banner above. Leave unset — the
   // product page then shows just the single main image with no thumbnail
@@ -59,7 +64,7 @@ export const products: Product[] = [
     ageRange: "3-8 years",
     accent: "from-amber-100 to-orange-50",
     emoji: "🦁",
-    bannerImage: "/banners/animal-friends.jpg",
+    bannerImage: "/banners/desktop/animal-friends.jpg",
     galleryImages: [
       { src: "/gallery/animal-friends/colouring-pack.jpg", label: "A finished page — Duck" },
       { src: "/gallery/animal-friends/sheep.jpg", label: "A look inside the pack — Sheep" },
@@ -97,7 +102,7 @@ export const products: Product[] = [
     ageRange: "3-6 years",
     accent: "from-fuchsia-100 to-pink-50",
     emoji: "🔤",
-    bannerImage: "/banners/alphabet-adventures.jpg",
+    bannerImage: "/banners/desktop/alphabet-adventures.jpg",
     galleryImages: [
       { src: "/gallery/alphabet-adventures/colouring-pack.jpg", label: "A finished page" },
       { src: "/gallery/alphabet-adventures/look-inside-1.jpg", label: "A look inside the pack" },
@@ -134,7 +139,7 @@ export const products: Product[] = [
     ageRange: "4-9 years",
     accent: "from-sky-100 to-blue-50",
     emoji: "🦜",
-    bannerImage: "/banners/birds-of-the-world.jpg",
+    bannerImage: "/banners/desktop/birds-of-the-world.jpg",
     galleryImages: [
       { src: "/gallery/birds-of-the-world/colouring-pack.jpg", label: "A finished page — Bird of Paradise" },
       { src: "/gallery/birds-of-the-world/pelican.jpg", label: "A look inside the pack — Pelican" },
@@ -208,7 +213,7 @@ export const products: Product[] = [
     ageRange: "3-8 years",
     accent: "from-cyan-100 to-sky-50",
     emoji: "🐠",
-    bannerImage: "/banners/oceans-and-sea-life.jpg",
+    bannerImage: "/banners/desktop/oceans-and-sea-life.jpg",
     galleryImages: [
       { src: "/gallery/oceans-and-sea-life/lobster.jpg", label: "A finished page — Lobster" },
       { src: "/gallery/oceans-and-sea-life/dolphin.jpg", label: "A look inside the pack — Dolphin" },
@@ -245,7 +250,7 @@ export const products: Product[] = [
     ageRange: "3-7 years",
     accent: "from-orange-100 to-yellow-50",
     emoji: "🍎",
-    bannerImage: "/banners/fruits-and-vegetables.jpg",
+    bannerImage: "/banners/desktop/fruits-and-vegetables.jpg",
     galleryImages: [
       { src: "/gallery/fruits-and-vegetables/colouring-pack.jpg", label: "A finished page — Raspberry" },
       { src: "/gallery/fruits-and-vegetables/pineapple.jpg", label: "A look inside the pack — Pineapple" },
@@ -282,7 +287,7 @@ export const products: Product[] = [
     ageRange: "3-8 years",
     accent: "from-green-100 to-lime-50",
     emoji: "🌳",
-    bannerImage: "/banners/trees-and-plants.jpg",
+    bannerImage: "/banners/desktop/trees-and-plants.jpg",
     galleryImages: [
       { src: "/gallery/trees-and-plants/lotus.jpg", label: "A finished page — Lotus" },
       { src: "/gallery/trees-and-plants/apple-tree.jpg", label: "A look inside the pack — Apple Tree" },
