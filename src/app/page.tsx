@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { products, getBestSellers } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import HeroCarousel from "@/components/HeroCarousel";
-import CategoryNav from "@/components/CategoryNav";
 import BestSellers from "@/components/BestSellers";
 import Faq from "@/components/Faq";
 import { generalFaq } from "@/lib/faq";
@@ -32,13 +31,6 @@ export default function Home() {
 
       <section className="max-w-[1400px] mx-auto px-6 pt-6 pb-10">
         <HeroCarousel products={products} />
-      </section>
-
-      <section className="max-w-[1400px] mx-auto px-6 pb-10">
-        <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-4">
-          Jump straight to a category
-        </h2>
-        <CategoryNav products={products} />
       </section>
 
       <section className="max-w-[1400px] mx-auto px-6 pb-10">
