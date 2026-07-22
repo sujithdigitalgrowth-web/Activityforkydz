@@ -10,7 +10,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <Link href={`/products/${product.slug}`} className="flex flex-col flex-1">
         <ProductVisual
           product={product}
-          className="aspect-[4/3] w-full"
+          className="aspect-[3/2] w-full"
           emojiClassName="text-5xl sm:text-7xl"
         />
         <div className="p-2.5 sm:p-4 flex flex-col flex-1">

@@ -65,9 +65,11 @@ export default function Home() {
           for our own kids.
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-5">
-          {products.map((product) => (
-            <ProductCard key={product.slug} product={product} />
-          ))}
+          {products
+            .filter((product) => !product.comingSoon)
+            .map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
         </div>
       </section>
 

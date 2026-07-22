@@ -16,13 +16,13 @@ export type Product = {
   // Wide banner image, used by the homepage hero carousel and the product
   // detail page's main image. Leave unset — both fall back to the regular
   // cover image (`image` above / public/categories/<slug>.jpg) when there's
-  // no dedicated banner. This is the desktop/tablet crop (3:1 ratio,
-  // ~1800x600px) — drop new ones in public/banners/desktop/<slug>.jpg.
+  // no dedicated banner. This is the desktop/tablet crop (16:9 ratio,
+  // ~1672x941px) — drop new ones in public/banners/desktop/<slug>.<ext>.
   bannerImage?: string;
-  // Optional separate mobile crop (16:9 ratio, ~960x540px) for the hero
-  // carousel, since a 3:1 image cropped down to 16:9 loses ~40% of its
-  // width. Leave unset to just reuse `bannerImage` on mobile too. Drop new
-  // ones in public/banners/mobile/<slug>.jpg.
+  // Optional separate mobile crop for the hero carousel, in case mobile
+  // ever needs a different crop than desktop again. Leave unset to just
+  // reuse `bannerImage` on mobile too (current default — both breakpoints
+  // are 16:9 right now). Drop new ones in public/banners/mobile/<slug>.<ext>.
   bannerImageMobile?: string;
   // Extra photos for the product page's thumbnail rail (shown to the left of
   // the main image), on top of the cover/banner above. Leave unset — the
@@ -58,13 +58,13 @@ export const products: Product[] = [
     slug: "animal-friends",
     title: "Animal Friends Coloring & Learning Pack",
     categoryLabel: "Animal Friends",
-    tagline: "50 pages of lions, pandas, elephants and every animal kids ask about",
-    price: 79,
-    pageCount: 50,
+    tagline: "52 pages of lions, pandas, elephants and every animal kids ask about",
+    price: 99,
+    pageCount: 52,
     ageRange: "3-8 years",
     accent: "from-amber-100 to-orange-50",
     emoji: "🦁",
-    bannerImage: "/banners/desktop/animal-friends.jpg",
+    bannerImage: "/banners/desktop/animal-friends.png",
     galleryImages: [
       { src: "/gallery/animal-friends/colouring-pack.jpg", label: "A finished page — Duck" },
       { src: "/gallery/animal-friends/sheep.jpg", label: "A look inside the pack — Sheep" },
@@ -75,7 +75,7 @@ export const products: Product[] = [
     description:
       "A big, friendly collection of animals from the jungle, the farm, the ocean and the sky — each one drawn simply enough for small hands to color in, with a fun fact underneath to read together.",
     whatsInside: [
-      "50 pages covering 50+ animals across land, sea and sky",
+      "52 pages covering 50+ animals across land, sea and sky",
       "Simple, bold outlines sized for crayons and thick pencils",
       "One fun animal fact per page for read-aloud time",
       "A 4-page 'spot the animal' game at the end",
@@ -86,34 +86,34 @@ export const products: Product[] = [
       "Gives you a ready answer for 'I'm bored' without opening a screen",
     ],
     longDescription:
-      "Give your child a screen-free adventure with the Animal Friends Coloring & Learning Pack — 50 printable pages featuring lions, elephants, pandas, and every animal kids love to ask about. Each page pairs a simple, bold illustration with the animal's name in English, making it a gentle way to build vocabulary while having fun with crayons. Perfect for toddlers and early learners aged 3–8, this printable animal coloring pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Parents love that it keeps kids engaged for hours without a screen in sight. Whether it's a quiet afternoon at home or a long car ride, these 50 animal coloring pages for kids turn learning into playtime. Download once, print as many times as you like.",
+      "Give your child a screen-free adventure with the Animal Friends Coloring & Learning Pack — 52 printable pages featuring lions, elephants, pandas, and every animal kids love to ask about. Each page pairs a simple, bold illustration with the animal's name in English, making it a gentle way to build vocabulary while having fun with crayons. Perfect for toddlers and early learners aged 3–8, this printable animal coloring pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Parents love that it keeps kids engaged for hours without a screen in sight. Whether it's a quiet afternoon at home or a long car ride, these 52 animal coloring pages for kids turn learning into playtime. Download once, print as many times as you like.",
     relatedSlugs: ["birds-of-the-world", "oceans-and-sea-life"],
     seoTitle: "Animal Friends Coloring & Learning Pack — Printable PDF for Kids",
     seoDescription:
-      "50 printable animal coloring pages for kids ages 3-8. Instant PDF download, print at home. Lions, elephants, pandas and more.",
+      "52 printable animal coloring pages for kids ages 3-8. Instant PDF download, print at home. Lions, elephants, pandas and more.",
   },
   {
     slug: "alphabet-adventures",
     title: "Alphabet Adventures A-Z Pack",
     categoryLabel: "Alphabet A-Z",
     tagline: "One letter, one picture, one word per page from A to Z",
-    price: 49,
-    pageCount: 52,
+    price: 65,
+    pageCount: 28,
     ageRange: "3-6 years",
     accent: "from-fuchsia-100 to-pink-50",
     emoji: "🔤",
-    bannerImage: "/banners/desktop/alphabet-adventures.jpg",
+    bannerImage: "/banners/desktop/alphabet-adventures.png",
     galleryImages: [
-      { src: "/gallery/alphabet-adventures/colouring-pack.jpg", label: "A finished page" },
-      { src: "/gallery/alphabet-adventures/look-inside-1.jpg", label: "A look inside the pack" },
-      { src: "/gallery/alphabet-adventures/look-inside-2.jpg", label: "A look inside the pack" },
+      { src: "/gallery/alphabet-adventures/bear.jpg", label: "A finished page — B is for Bear" },
+      { src: "/gallery/alphabet-adventures/elephant.jpg", label: "A look inside the pack — E is for Elephant" },
+      { src: "/gallery/alphabet-adventures/giraffe.png", label: "A look inside the pack — G is for Giraffe" },
     ],
     rating: 4.6,
     purchaseCount: 1670,
     description:
       "A clean, simple A-Z pack pairing each letter with a picture and word — for kids just starting to connect letters to sounds.",
     whatsInside: [
-      "52 pages: capital and small letter tracing plus a picture per letter",
+      "28 pages: a big traceable letter with a picture and word per page",
       "One 'find the letter' spotting game every 5 letters",
       "Large print sized for early pencil grip",
     ],
@@ -123,23 +123,23 @@ export const products: Product[] = [
       "Good first step before proper handwriting practice",
     ],
     longDescription:
-      "One letter, one picture, one word — this 52-page alphabet coloring pack takes kids on a simple, screen-free journey from A to Z. Designed for toddlers and early learners aged 3–6, each page pairs a big, friendly letter with an easy illustration and word, helping build early reading skills while your child colors. This printable alphabet worksheet pack is a favorite for parents looking for a gentle introduction to letters before kindergarten, or extra practice alongside preschool. Delivered instantly as a PDF straight to your email, there's no app to install — just print at home or at any print shop and start the alphabet adventure. A lovely first step into reading, one letter at a time.",
+      "One letter, one picture, one word — this 28-page alphabet coloring pack takes kids on a simple, screen-free journey from A to Z. Designed for toddlers and early learners aged 3–6, each page pairs a big, friendly letter with an easy illustration and word, helping build early reading skills while your child colors. This printable alphabet worksheet pack is a favorite for parents looking for a gentle introduction to letters before kindergarten, or extra practice alongside preschool. Delivered instantly as a PDF straight to your email, there's no app to install — just print at home or at any print shop and start the alphabet adventure. A lovely first step into reading, one letter at a time.",
     relatedSlugs: ["numbers-1-to-100", "dot-to-dot"],
     seoTitle: "Alphabet Adventures A-Z Pack — Printable Alphabet Coloring for Kids",
     seoDescription:
-      "52-page printable alphabet coloring pack for kids ages 3-6. One letter, one picture, one word. Instant PDF download.",
+      "28-page printable alphabet coloring pack for kids ages 3-6. One letter, one picture, one word. Instant PDF download.",
   },
   {
     slug: "birds-of-the-world",
     title: "Birds of the World Coloring Pack",
     categoryLabel: "Birds of the World",
     tagline: "Peacocks, parrots, owls and more, with names in English",
-    price: 69,
-    pageCount: 60,
+    price: 99,
+    pageCount: 51,
     ageRange: "4-9 years",
     accent: "from-sky-100 to-blue-50",
     emoji: "🦜",
-    bannerImage: "/banners/desktop/birds-of-the-world.jpg",
+    bannerImage: "/banners/desktop/birds-of-the-world.png",
     galleryImages: [
       { src: "/gallery/birds-of-the-world/colouring-pack.jpg", label: "A finished page — Bird of Paradise" },
       { src: "/gallery/birds-of-the-world/pelican.jpg", label: "A look inside the pack — Pelican" },
@@ -150,7 +150,7 @@ export const products: Product[] = [
     description:
       "A quieter, prettier pack for kids who love birds — peacocks in full feather, tiny sparrows, owls at night — good for a calm afternoon at the table.",
     whatsInside: [
-      "60 pages featuring 40+ birds from around the world",
+      "51 pages featuring 40+ birds from around the world",
       "Large single-bird pages plus a few 'birds in a garden' scenes",
       "Bird name labels in simple English for early readers",
     ],
@@ -160,11 +160,11 @@ export const products: Product[] = [
       "Great for kids who find animal packs 'too busy'",
     ],
     longDescription:
-      "Give your child a calm, screen-free way to spend an afternoon with the Birds of the World Coloring Pack — 60 printable pages featuring peacocks, parrots, owls, sparrows and dozens more birds from around the world. Each page pairs a large, detailed illustration with the bird's name in simple English, helping kids build vocabulary while they color. Designed for children aged 4–9, this printable bird coloring pack rewards patience and attention to detail — a nice change of pace from busier, faster activities. It's instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
+      "Give your child a calm, screen-free way to spend an afternoon with the Birds of the World Coloring Pack — 51 printable pages featuring peacocks, parrots, owls, sparrows and dozens more birds from around the world. Each page pairs a large, detailed illustration with the bird's name in simple English, helping kids build vocabulary while they color. Designed for children aged 4–9, this printable bird coloring pack rewards patience and attention to detail — a nice change of pace from busier, faster activities. It's instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
     relatedSlugs: ["animal-friends", "oceans-and-sea-life"],
     seoTitle: "Birds of the World Coloring Pack — Printable PDF for Kids",
     seoDescription:
-      "60-page printable bird coloring pack for kids ages 4-9. Peacocks, parrots, owls and more, with English name labels. Instant PDF download.",
+      "51-page printable bird coloring pack for kids ages 4-9. Peacocks, parrots, owls and more, with English name labels. Instant PDF download.",
   },
   {
     slug: "numbers-1-to-100",
@@ -208,12 +208,12 @@ export const products: Product[] = [
     title: "Oceans & Sea Life Coloring Pack",
     categoryLabel: "Oceans & Sea Life",
     tagline: "Dolphins, turtles, octopuses and every creature under the waves",
-    price: 69,
-    pageCount: 55,
+    price: 99,
+    pageCount: 52,
     ageRange: "3-8 years",
     accent: "from-cyan-100 to-sky-50",
     emoji: "🐠",
-    bannerImage: "/banners/desktop/oceans-and-sea-life.jpg",
+    bannerImage: "/banners/desktop/oceans-and-sea-life.png",
     galleryImages: [
       { src: "/gallery/oceans-and-sea-life/lobster.jpg", label: "A finished page — Lobster" },
       { src: "/gallery/oceans-and-sea-life/dolphin.jpg", label: "A look inside the pack — Dolphin" },
@@ -224,7 +224,7 @@ export const products: Product[] = [
     description:
       "A splashy pack of ocean life — dolphins leaping, turtles gliding, octopuses hiding among the coral — for kids who love anything that lives underwater.",
     whatsInside: [
-      "55 pages covering 30+ sea creatures, from clownfish to whales",
+      "52 pages covering 30+ sea creatures, from clownfish to whales",
       "A two-page coral reef scene to color as one big picture",
       "Sea creature name labels in simple English",
     ],
@@ -234,23 +234,23 @@ export const products: Product[] = [
       "Great for kids who already love water and swimming",
     ],
     longDescription:
-      "Dive into the Oceans & Sea Life Coloring Pack — 55 printable pages of dolphins, turtles, octopuses, clownfish and dozens more creatures that live under the waves, plus a two-page coral reef scene to color as one big picture. Each creature is paired with its name in simple English, making it an easy way to build ocean vocabulary while coloring. Designed for children aged 3–8, this printable sea life coloring pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. It's a natural pairing with an aquarium visit, a beach trip, or a rainy afternoon at the table. Download once, print as many times as you like.",
+      "Dive into the Oceans & Sea Life Coloring Pack — 52 printable pages of dolphins, turtles, octopuses, clownfish and dozens more creatures that live under the waves, plus a two-page coral reef scene to color as one big picture. Each creature is paired with its name in simple English, making it an easy way to build ocean vocabulary while coloring. Designed for children aged 3–8, this printable sea life coloring pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. It's a natural pairing with an aquarium visit, a beach trip, or a rainy afternoon at the table. Download once, print as many times as you like.",
     relatedSlugs: ["animal-friends", "trees-and-plants"],
     seoTitle: "Oceans & Sea Life Coloring Pack — Printable PDF for Kids",
     seoDescription:
-      "55-page printable ocean animals coloring pack for kids ages 3-8. Dolphins, turtles, octopuses and more, with name labels. Instant PDF download.",
+      "52-page printable ocean animals coloring pack for kids ages 3-8. Dolphins, turtles, octopuses and more, with name labels. Instant PDF download.",
   },
   {
     slug: "fruits-and-vegetables",
     title: "Fruits Coloring & Learning Pack",
     categoryLabel: "Fruits",
     tagline: "Apples, mangoes, bananas and more, with names to match",
-    price: 59,
+    price: 70,
     pageCount: 51,
     ageRange: "3-7 years",
     accent: "from-orange-100 to-yellow-50",
     emoji: "🍎",
-    bannerImage: "/banners/desktop/fruits-and-vegetables.jpg",
+    bannerImage: "/banners/desktop/fruits-and-vegetables.png",
     galleryImages: [
       { src: "/gallery/fruits-and-vegetables/colouring-pack.jpg", label: "A finished page — Raspberry" },
       { src: "/gallery/fruits-and-vegetables/pineapple.jpg", label: "A look inside the pack — Pineapple" },
@@ -282,12 +282,12 @@ export const products: Product[] = [
     title: "Trees & Plants Coloring & Learning Pack",
     categoryLabel: "Trees and Plants",
     tagline: "Mighty trees, tiny seedlings and how a seed grows into a plant",
-    price: 59,
-    pageCount: 50,
+    price: 75,
+    pageCount: 52,
     ageRange: "3-8 years",
     accent: "from-green-100 to-lime-50",
     emoji: "🌳",
-    bannerImage: "/banners/desktop/trees-and-plants.jpg",
+    bannerImage: "/banners/desktop/trees-and-plants.png",
     galleryImages: [
       { src: "/gallery/trees-and-plants/lotus.jpg", label: "A finished page — Lotus" },
       { src: "/gallery/trees-and-plants/apple-tree.jpg", label: "A look inside the pack — Apple Tree" },
@@ -298,7 +298,7 @@ export const products: Product[] = [
     description:
       "A calm, green pack of trees and plants, with a simple sequence showing how a tiny seed grows into a tall tree — good for pairing with an actual walk outside.",
     whatsInside: [
-      "50 pages of trees, leaves, seeds and potted plants",
+      "52 pages of trees, leaves, seeds and potted plants",
       "A 4-page 'life of a tree' sequence to color in order",
       "Plant names in simple English",
     ],
@@ -308,11 +308,11 @@ export const products: Product[] = [
       "Gives you an easy reason to point things out on a walk together",
     ],
     longDescription:
-      "The Trees & Plants Coloring & Learning Pack is a calm, green collection of 50 printable pages — mighty trees, tiny seedlings, leaves and potted plants — plus a 4-page sequence showing how a tiny seed grows into a tall tree. Designed for children aged 3–8, it's a quiet, low-stimulation activity that pairs naturally with an actual walk outside, giving you an easy reason to point things out along the way. This printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
+      "The Trees & Plants Coloring & Learning Pack is a calm, green collection of 52 printable pages — mighty trees, tiny seedlings, leaves and potted plants — plus a 4-page sequence showing how a tiny seed grows into a tall tree. Designed for children aged 3–8, it's a quiet, low-stimulation activity that pairs naturally with an actual walk outside, giving you an easy reason to point things out along the way. This printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
     relatedSlugs: ["fruits-and-vegetables", "oceans-and-sea-life"],
     seoTitle: "Trees & Plants Coloring & Learning Pack — Printable PDF for Kids",
     seoDescription:
-      "50-page printable trees and plants coloring pack for kids ages 3-8, with a seed-to-tree growth sequence. Instant PDF download.",
+      "52-page printable trees and plants coloring pack for kids ages 3-8, with a seed-to-tree growth sequence. Instant PDF download.",
   },
   {
     slug: "matching-and-memory",

@@ -45,7 +45,7 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
               />
               <ProductVisual
                 product={product}
-                className="max-sm:hidden aspect-[3/1] w-full"
+                className="max-sm:hidden aspect-[16/9] w-full"
                 emojiClassName="text-9xl"
                 srcOverride={product.bannerImage}
               />
