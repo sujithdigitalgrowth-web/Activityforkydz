@@ -189,10 +189,11 @@ export default function CheckoutPage() {
         {downloadLinks.length > 0 ? (
           <>
             <p className="text-zinc-600 mt-2">
-              Download {downloadLinks.length === 1 ? "it" : "them"} right away below — we&apos;ve
-              also emailed the link{downloadLinks.length === 1 ? "" : "s"} to{" "}
-              <strong>{email}</strong> in case you need {downloadLinks.length === 1 ? "it" : "them"}{" "}
-              later.
+              {downloadLinks.length === 1
+                ? "Download it right away below — we've also emailed the link to "
+                : "Download them right away below — we've also emailed the links to "}
+              <strong>{email}</strong>
+              {downloadLinks.length === 1 ? " in case you need it later." : " in case you need them later."}
             </p>
             <div className="mt-6 space-y-3 text-left max-w-sm mx-auto">
               {downloadLinks.map((item) => (
