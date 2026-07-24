@@ -30,11 +30,11 @@ export default function AddToCartButton({
   if (inCart) {
     return (
       <Link
-        href="/checkout"
+        href="/cart"
         onClick={(e) => e.stopPropagation()}
         className={`inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full font-semibold transition-colors bg-emerald-600 text-white hover:bg-emerald-700 ${className}`}
       >
-        {compact ? "Pay" : "Pay now"} <span aria-hidden="true">→</span>
+        <span aria-hidden="true">✓</span> In cart
       </Link>
     );
   }
