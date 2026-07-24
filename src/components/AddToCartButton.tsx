@@ -8,9 +8,11 @@ import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 export default function AddToCartButton({
   product,
   className = "",
+  compact = false,
 }: {
   product: Product;
   className?: string;
+  compact?: boolean;
 }) {
   const { isInCart, addItem } = useCart();
   const inCart = isInCart(product.slug);
@@ -18,7 +20,7 @@ export default function AddToCartButton({
   if (product.comingSoon) {
     return (
       <span
-        className={`inline-flex items-center justify-center gap-1.5 rounded-full font-semibold bg-zinc-100 text-zinc-400 cursor-not-allowed ${className}`}
+        className={`inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full font-semibold bg-zinc-100 text-zinc-400 cursor-not-allowed ${className}`}
       >
         Coming soon
       </span>
@@ -30,9 +32,9 @@ export default function AddToCartButton({
       <Link
         href="/checkout"
         onClick={(e) => e.stopPropagation()}
-        className={`inline-flex items-center justify-center gap-1.5 rounded-full font-semibold transition-colors bg-emerald-600 text-white hover:bg-emerald-700 ${className}`}
+        className={`inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full font-semibold transition-colors bg-emerald-600 text-white hover:bg-emerald-700 ${className}`}
       >
-        Pay now <span aria-hidden="true">→</span>
+        {compact ? "Pay" : "Pay now"} <span aria-hidden="true">→</span>
       </Link>
     );
   }
@@ -40,6 +42,7 @@ export default function AddToCartButton({
   return (
     <button
       type="button"
+      aria-label="Add to cart"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -53,9 +56,9 @@ export default function AddToCartButton({
           },
         });
       }}
-      className={`inline-flex items-center justify-center gap-1.5 rounded-full font-semibold transition-colors bg-orange-500 text-white hover:bg-orange-600 ${className}`}
+      className={`inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full font-semibold transition-colors bg-orange-500 text-white hover:bg-orange-600 ${className}`}
     >
-      <span aria-hidden="true">+</span> Add to cart
+      <span aria-hidden="true">+</span> {compact ? "Add" : "Add to cart"}
     </button>
   );
 }

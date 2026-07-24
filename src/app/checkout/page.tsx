@@ -296,10 +296,6 @@ export default function CheckoutPage() {
                 get 1 free!
               </p>
             )}
-
-            <div className="mt-4 md:mt-6">
-              <CartAddOns />
-            </div>
           </div>
 
           <div className="md:col-span-2">
@@ -365,6 +361,10 @@ export default function CheckoutPage() {
               </p>
             </div>
           </div>
+        </div>
+
+        <div className="mt-6">
+          <CartAddOns />
         </div>
       </div>
     );

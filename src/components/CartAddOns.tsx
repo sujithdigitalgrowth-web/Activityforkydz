@@ -43,7 +43,11 @@ export default function CartAddOns() {
                 </p>
               </Link>
               <p className="font-bold text-orange-600 text-xs sm:text-sm mt-0.5">₹{product.price}</p>
-              <AddToCartButton product={product} className="w-full mt-1.5 py-1 text-[10px] sm:text-xs" />
+              <AddToCartButton
+                product={product}
+                compact
+                className="w-full mt-1.5 px-1 py-1 text-[10px] sm:text-xs"
+              />
             </div>
           </div>
         ))}
