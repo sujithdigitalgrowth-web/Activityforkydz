@@ -2,6 +2,10 @@ export type Product = {
   slug: string;
   title: string;
   categoryLabel: string; // short name for the category strip tile (title is too long to fit)
+  // Colouring Pack vs Learning Pack — drives the storefront filter tabs and
+  // the "add a learning pack" / "add a colouring pack" cross-sell prompt on
+  // the cart and checkout pages.
+  category: "colouring" | "learning";
   tagline: string;
   price: number; // INR, whole rupees
   pageCount: number;
@@ -62,6 +66,7 @@ export const products: Product[] = [
     slug: "animal-friends",
     title: "Animal Friends Coloring & Learning Pack",
     categoryLabel: "Animal Friends",
+    category: "colouring",
     tagline: "52 pages of lions, pandas, elephants and every animal kids ask about",
     price: 99,
     pageCount: 52,
@@ -100,6 +105,7 @@ export const products: Product[] = [
     slug: "alphabet-adventures",
     title: "Alphabet Adventures A-Z Pack",
     categoryLabel: "Alphabet A-Z",
+    category: "colouring",
     tagline: "One letter, one picture, one word per page from A to Z",
     price: 65,
     pageCount: 28,
@@ -138,6 +144,7 @@ export const products: Product[] = [
     slug: "birds-of-the-world",
     title: "Birds of the World Coloring Pack",
     categoryLabel: "Birds of the World",
+    category: "colouring",
     tagline: "Peacocks, parrots, owls and more, with names in English",
     price: 99,
     pageCount: 51,
@@ -175,6 +182,7 @@ export const products: Product[] = [
     slug: "numbers-1-to-100",
     title: "Numbers 1-100 Practice & Coloring Pack",
     categoryLabel: "Numbers 1-100",
+    category: "colouring",
     tagline: "Trace, count and color your way from 1 to 100",
     price: 89,
     pageCount: 110,
@@ -212,6 +220,7 @@ export const products: Product[] = [
     slug: "oceans-and-sea-life",
     title: "Oceans & Sea Life Coloring Pack",
     categoryLabel: "Oceans & Sea Life",
+    category: "colouring",
     tagline: "Dolphins, turtles, octopuses and every creature under the waves",
     price: 99,
     pageCount: 52,
@@ -249,6 +258,7 @@ export const products: Product[] = [
     slug: "fruits-and-vegetables",
     title: "Fruits Coloring & Learning Pack",
     categoryLabel: "Fruits",
+    category: "colouring",
     tagline: "Apples, mangoes, bananas and more, with names to match",
     price: 70,
     pageCount: 51,
@@ -286,6 +296,7 @@ export const products: Product[] = [
     slug: "trees-and-plants",
     title: "Trees & Plants Coloring & Learning Pack",
     categoryLabel: "Trees and Plants",
+    category: "colouring",
     tagline: "Mighty trees, tiny seedlings and how a seed grows into a plant",
     price: 89,
     pageCount: 52,
@@ -323,6 +334,7 @@ export const products: Product[] = [
     slug: "matching-and-memory",
     title: "Matching & Memory Activity Pack",
     categoryLabel: "Matching & Memory",
+    category: "learning",
     tagline: "Pair the pictures, spot the match, train that memory",
     price: 69,
     pageCount: 40,
@@ -360,6 +372,7 @@ export const products: Product[] = [
     slug: "puzzles-and-find-the-difference",
     title: "Puzzles & Find the Difference Activity Pack",
     categoryLabel: "Puzzles & Find the Difference",
+    category: "learning",
     tagline: "Spot-the-difference scenes, mazes and simple picture puzzles",
     price: 69,
     pageCount: 45,
@@ -397,6 +410,7 @@ export const products: Product[] = [
     slug: "dot-to-dot",
     title: "Dot to Dot: Connect the Numbers & Letters Pack",
     categoryLabel: "Dot to Dot",
+    category: "learning",
     tagline: "Connect the numbers, connect the letters, reveal the picture",
     price: 69,
     pageCount: 50,
@@ -434,13 +448,13 @@ export const products: Product[] = [
     slug: "cursive-handwriting",
     title: "Cursive Handwriting: From First Strokes to Joined-Up Writing",
     categoryLabel: "Cursive Handwriting",
+    category: "learning",
     tagline: "Warm-up strokes, all 26 letters, joining up, then real words and sentences",
     price: 79,
     pageCount: 50,
     ageRange: "3-7 years",
     accent: "from-indigo-100 to-blue-50",
     emoji: "✍️",
-    bannerImage: "/banners/desktop/cursive-handwriting.png",
     galleryImages: [
       { src: "/gallery/cursive-handwriting/colouring-pack.jpg", label: "A finished page" },
       { src: "/gallery/cursive-handwriting/look-inside-1.jpg", label: "A look inside the pack" },
@@ -472,6 +486,7 @@ export const products: Product[] = [
     slug: "festivals-colouring",
     title: "Festivals: A Colouring Book of Celebrations from India and Around the World",
     categoryLabel: "Festivals",
+    category: "colouring",
     tagline: "24 festivals of India, 20 from around the world, and 6 pages of festive patterns",
     price: 89,
     pageCount: 50,
@@ -509,24 +524,36 @@ export const products: Product[] = [
     slug: "letters-and-words",
     title: "Letters and Words: The Big Alphabet Activity Book",
     categoryLabel: "Letters and Words",
-    tagline: "39 print-and-play worksheets that make the alphabet click",
-    price: 69,
-    pageCount: 39,
+    category: "learning",
+    tagline: "39 print-and-play worksheets across four parts, plus a full answer key",
+    price: 99,
+    pageCount: 54,
     ageRange: "3-6 years",
     accent: "from-teal-100 to-cyan-50",
     emoji: "🔠",
+    image: "/categories/Letters%20and%20Words.png",
+    bannerImage: "/banners/desktop/Letters%20and%20Words.png",
     galleryImages: [
-      { src: "/gallery/letters-and-words/colouring-pack.jpg", label: "A finished page" },
-      { src: "/gallery/letters-and-words/look-inside-1.jpg", label: "A look inside the pack" },
-      { src: "/gallery/letters-and-words/look-inside-2.jpg", label: "A look inside the pack" },
+      {
+        src: "/gallery/letters-and-words/Screenshot%202026-07-26%20083209.jpg",
+        label: "What's inside — the full contents page",
+      },
+      {
+        src: "/gallery/letters-and-words/Screenshot%202026-07-26%20083244.jpg",
+        label: "A look inside the pack — Which Letter Comes Next?",
+      },
+      {
+        src: "/gallery/letters-and-words/Screenshot%202026-07-26%20083310.jpg",
+        label: "A look inside the pack — Letter Hunt",
+      },
     ],
     rating: 4.6,
     purchaseCount: 150,
-    comingSoon: true,
+    pdfFile: "Letters and Words.pdf",
     description:
       "Thirty-nine worksheets that get gently harder as they go — letter recognition first, then short words, then first sounds, then practice and play — built around the moment a child notices the letter they just traced is the same one that starts their own name.",
     whatsInside: [
-      "39 worksheets across four parts: meet the alphabet, letters & words, sounds & missing letters, and practice & play",
+      "54 pages total: 39 worksheets across four parts (meet the alphabet, letters & words, sounds & missing letters, and practice & play)",
       "A full answer key at the back",
       "A certificate of finishing",
     ],
@@ -540,12 +567,13 @@ export const products: Product[] = [
     relatedSlugs: ["alphabet-adventures", "numbers-and-counting-mats"],
     seoTitle: "Letters and Words: The Big Alphabet Activity Book — Printable PDF for Kids",
     seoDescription:
-      "39-page printable alphabet activity book for kids ages 3-6, with a full answer key. Letter recognition, short words and first sounds. Instant PDF download.",
+      "54-page printable alphabet activity book for kids ages 3-6, with 39 worksheets and a full answer key. Letter recognition, short words and first sounds. Instant PDF download.",
   },
   {
     slug: "numbers-and-counting-mats",
     title: "Numbers and Counting: Number Tracing and Counting Mats",
     categoryLabel: "Numbers & Counting",
+    category: "learning",
     tagline: "21 counting mats and 19 worksheets covering 0 to 20, ten frames and first sums",
     price: 69,
     pageCount: 40,
@@ -586,6 +614,7 @@ export const products: Product[] = [
     slug: "abc-of-character",
     title: "ABC of Character",
     categoryLabel: "ABC of Character",
+    category: "colouring",
     tagline: "One letter, one good value, from A to Z",
     price: 65,
     pageCount: 28,
@@ -619,6 +648,7 @@ export const products: Product[] = [
     slug: "atoz-activity",
     title: "My First Alphabet Activity Book",
     categoryLabel: "My First Alphabet",
+    category: "learning",
     tagline: "54 activities to learn, trace, find, match and colour from A to Z",
     price: 89,
     pageCount: 54,
@@ -664,20 +694,32 @@ export const products: Product[] = [
     slug: "my-first-lines",
     title: "My First Lines: A Pre-Writing Tracing Workbook",
     categoryLabel: "My First Lines",
+    category: "learning",
     tagline: "Fun line-tracing activities — dashes, waves, zigzags, loops and swirls",
-    price: 59,
+    price: 69,
     pageCount: 27,
-    ageRange: "2-4 years",
+    ageRange: "2-5 years",
     accent: "from-blue-100 to-cyan-50",
     emoji: "〰️",
+    image: "/categories/My%20First%20Lines.png",
+    bannerImage: "/banners/desktop/My%20First%20Lines.png",
     galleryImages: [
-      { src: "/gallery/my-first-lines/colouring-pack.jpg", label: "A finished page" },
-      { src: "/gallery/my-first-lines/look-inside-1.jpg", label: "A look inside the pack" },
-      { src: "/gallery/my-first-lines/look-inside-2.jpg", label: "A look inside the pack" },
+      {
+        src: "/gallery/my-first-lines/Screenshot%202026-07-26%20080932.jpg",
+        label: "A look inside the pack — Butterfly's Flight Path (wave & zigzag tracing)",
+      },
+      {
+        src: "/gallery/my-first-lines/Screenshot%202026-07-26%20080857.jpg",
+        label: "A look inside the pack — Fish Makes Bubbles (spiral tracing)",
+      },
+      {
+        src: "/gallery/my-first-lines/Screenshot%202026-07-26%20081002.jpg",
+        label: "A look inside the pack — Bunny's Loopy Ears (loop tracing)",
+      },
     ],
     rating: 4.5,
     purchaseCount: 80,
-    comingSoon: true,
+    pdfFile: "My First Lines.pdf",
     description:
       "A pre-writing workbook built entirely around one skill: pencil control. Simple dashed lines, waves, zigzags, loops and swirls, sized for the very first time a toddler picks up a crayon.",
     whatsInside: [
@@ -692,7 +734,7 @@ export const products: Product[] = [
     relatedSlugs: ["alphabet-adventures", "cursive-handwriting"],
     seoTitle: "My First Lines: Pre-Writing Tracing Workbook — Printable PDF for Kids",
     seoDescription:
-      "27-page printable pre-writing workbook for kids ages 2-4, with line, curve and pattern tracing practice. Instant PDF download.",
+      "27-page printable pre-writing workbook for kids ages 2-5, with line, curve and pattern tracing practice. Instant PDF download.",
   },
 ];
 

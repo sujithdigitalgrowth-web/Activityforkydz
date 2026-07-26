@@ -31,6 +31,8 @@ Packs with real photos uploaded:
 - `birds-of-the-world/colouring-pack.jpg` — a finished page (Bird of Paradise)
 - `birds-of-the-world/pelican.jpg` — a look inside the pack (Pelican)
 - `birds-of-the-world/rainbow-lorikeet.jpg` — a look inside the pack (Rainbow Lorikeet)
+- `Alphabet Activity Book/*` — a colour preview plus two look-inside pages (Letters D, E, F)
+- `my-first-lines/*` — three look-inside tracing pages (Butterfly, Fish, Bunny)
 
 Packs waiting on photos — folders exist and `products.ts` already points at
 these filenames, so dropping in a same-named `.jpg` is all that's needed:
@@ -48,8 +50,6 @@ these filenames, so dropping in a same-named `.jpg` is all that's needed:
 - `letters-and-words/{colouring-pack,look-inside-1,look-inside-2}.jpg`
 - `numbers-and-counting-mats/{colouring-pack,look-inside-1,look-inside-2}.jpg`
 - `abc-of-character/{colouring-pack,look-inside-1,look-inside-2}.jpg`
-- `atoz-activity/{colouring-pack,look-inside-1,look-inside-2}.jpg`
-- `my-first-lines/{colouring-pack,look-inside-1,look-inside-2}.jpg`
 
 Feel free to rename `look-inside-1`/`look-inside-2` to the actual subject
 (e.g. `sheep.jpg`) once real content exists — just update the matching

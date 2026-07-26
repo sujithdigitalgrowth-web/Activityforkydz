@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { products, getBestSellers } from "@/lib/products";
-import ProductCard from "@/components/ProductCard";
+import ProductGrid from "@/components/ProductGrid";
 import HeroCarousel from "@/components/HeroCarousel";
 import BestSellers from "@/components/BestSellers";
 import Faq from "@/components/Faq";
@@ -64,13 +64,7 @@ export default function Home() {
           We keep this list small on purpose — every pack here is one we&apos;d actually print
           for our own kids.
         </p>
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-5">
-          {products
-            .filter((product) => !product.comingSoon)
-            .map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
-        </div>
+        <ProductGrid products={products.filter((product) => !product.comingSoon)} />
       </section>
 
       <section className="max-w-[1400px] mx-auto px-6 py-10">
