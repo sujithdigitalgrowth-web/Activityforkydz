@@ -29,6 +29,12 @@ export default function Header() {
           >
             Browse packs
           </Link>
+          <Link
+            href="/combos"
+            className="whitespace-nowrap text-sm sm:text-base font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
+          >
+            Combos
+          </Link>
           <CartButton />
         </div>
       </div>

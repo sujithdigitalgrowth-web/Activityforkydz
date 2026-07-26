@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { getProductBySlug } from "@/lib/products";
-import { getCartPricing } from "@/lib/pricing";
+import { getCartPricing, GROUP_SIZE, COMBO_ADJACENT_GROUP_SIZE } from "@/lib/pricing";
+import { COLOURING_COMBO_SLUGS } from "@/lib/bundles";
 import ProductVisual from "@/components/ProductVisual";
 import CartAddOns from "@/components/CartAddOns";
 import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
@@ -15,6 +16,10 @@ export default function CartPage() {
     .map((slug) => getProductBySlug(slug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
   const pricing = getCartPricing(items);
+  const nonComboCount = pricing.comboApplied
+    ? items.filter((p) => !(COLOURING_COMBO_SLUGS as readonly string[]).includes(p.slug)).length
+    : items.length;
+  const groupSize = pricing.comboApplied ? COMBO_ADJACENT_GROUP_SIZE : GROUP_SIZE;
 
   // useCart() is backed by useSyncExternalStore, which renders an empty
   // array on the very first client commit of a hard page load (to match
@@ -66,6 +71,9 @@ export default function CartPage() {
         <div className="md:col-span-3 space-y-4">
           {items.map((product) => {
             const isFree = pricing.freeSlugs.includes(product.slug);
+            const isCombo =
+              pricing.comboApplied &&
+              (COLOURING_COMBO_SLUGS as readonly string[]).includes(product.slug);
             return (
               <div
                 key={product.slug}
@@ -88,6 +96,11 @@ export default function CartPage() {
                   {isFree && (
                     <span className="inline-block mt-1 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-0.5">
                       🎁 Free pack
+                    </span>
+                  )}
+                  {isCombo && (
+                    <span className="inline-block mt-1 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-0.5">
+                      🎉 Combo
                     </span>
                   )}
                 </div>
@@ -120,14 +133,22 @@ export default function CartPage() {
                   <span>Subtotal</span>
                   <span>₹{pricing.subtotal}</span>
                 </div>
-                <div className="flex items-center justify-between text-sm text-emerald-600 font-medium mt-1">
-                  <span>
-                    🎁 {pricing.freeSlugs.length > 1
-                      ? `${pricing.freeSlugs.length} packs free`
-                      : "Buy 2, get 1 free"}
-                  </span>
-                  <span>-₹{pricing.discount}</span>
-                </div>
+                {pricing.comboDiscount > 0 && (
+                  <div className="flex items-center justify-between text-sm text-emerald-600 font-medium mt-1">
+                    <span>🎉 Colouring Combo (6 packs)</span>
+                    <span>-₹{pricing.comboDiscount}</span>
+                  </div>
+                )}
+                {pricing.freeSlugs.length > 0 && (
+                  <div className="flex items-center justify-between text-sm text-emerald-600 font-medium mt-1">
+                    <span>
+                      🎁 {pricing.freeSlugs.length > 1
+                        ? `${pricing.freeSlugs.length} packs free`
+                        : "Buy 3, get 1 free"}
+                    </span>
+                    <span>-₹{pricing.discount - pricing.comboDiscount}</span>
+                  </div>
+                )}
                 <div className="flex items-baseline justify-between mt-1.5 mb-1">
                   <span className="text-zinc-600">Total</span>
                   <span className="text-2xl font-bold text-zinc-900">₹{pricing.total}</span>
@@ -142,10 +163,10 @@ export default function CartPage() {
             <p className="text-xs text-zinc-500 mb-3">
               {items.length} pack{items.length === 1 ? "" : "s"} · instant PDF downloads
             </p>
-            {pricing.discount === 0 && items.length < 3 && (
+            {pricing.freeSlugs.length === 0 && nonComboCount > 0 && nonComboCount < groupSize && (
               <p className="text-xs text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg px-2.5 py-1.5 mb-3">
-                🎁 Add {3 - items.length} more pack{3 - items.length === 1 ? "" : "s"} — buy 2,
-                get 1 free!
+                🎁 Add {groupSize - nonComboCount} more pack{groupSize - nonComboCount === 1 ? "" : "s"} —
+                buy {groupSize - 1}, get 1 free!
               </p>
             )}
             <Link
