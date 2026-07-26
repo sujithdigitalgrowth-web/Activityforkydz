@@ -8,16 +8,11 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <div className="group flex flex-col rounded-xl sm:rounded-2xl border border-orange-100 bg-white overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all">
       <Link href={`/products/${product.slug}`} className="flex flex-col flex-1">
-        <div className="relative">
-          <ProductVisual
-            product={product}
-            className="aspect-[3/2] w-full"
-            emojiClassName="text-5xl sm:text-7xl"
-          />
-          <span className="absolute top-2 left-2 rounded-full bg-white/90 text-zinc-700 text-[10px] sm:text-xs font-semibold px-2 py-0.5 shadow-sm">
-            {product.category === "colouring" ? "Colouring" : "Learning"}
-          </span>
-        </div>
+        <ProductVisual
+          product={product}
+          className="aspect-[3/2] w-full"
+          emojiClassName="text-5xl sm:text-7xl"
+        />
         <div className="p-2.5 sm:p-4 flex flex-col flex-1">
           <h3 className="font-heading font-semibold text-sm sm:text-base text-zinc-900 leading-snug line-clamp-2">
             {product.title}

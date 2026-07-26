@@ -18,6 +18,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   const bestSellers = getBestSellers(3);
+  // Only packs with a real uploaded banner belong in the hero slider —
+  // otherwise it's just an empty gradient with a floating emoji, which
+  // looks broken rather than "coming soon".
+  const heroProducts = products.filter((product) => Boolean(product.bannerImage));
 
   return (
     <div>
@@ -30,13 +34,13 @@ export default function Home() {
       </h1>
 
       <section className="max-w-[1400px] mx-auto px-6 pt-6 pb-10">
-        <HeroCarousel products={products} />
+        <HeroCarousel products={heroProducts} />
       </section>
 
       <section className="max-w-[1400px] mx-auto px-6 pb-10">
         <div className="grid sm:grid-cols-3 gap-4 text-center">
           <div className="rounded-xl bg-white border border-orange-100 p-4">
-            <p className="font-heading text-2xl font-semibold text-orange-600">₹49-99</p>
+            <p className="font-heading text-2xl font-semibold text-orange-600">₹69-129</p>
             <p className="text-sm text-zinc-600 mt-1">per pack, less than a snack</p>
           </div>
           <div className="rounded-xl bg-white border border-orange-100 p-4">
