@@ -1,30 +1,34 @@
 import type { Product } from "./products";
 
-// "Buy 2, get 1 free" — once the cart holds 3 or more packs, the single
-// cheapest one is comped automatically. Doesn't stack (a cart of 6 still
-// only gets one pack free, not two) — simplest version of the promo.
-const FREE_ITEM_MIN_COUNT = 3;
+// "Buy 2, get 1 free" — stacks per complete group of 3 packs (3 -> 1 free,
+// 6 -> 2 free, 9 -> 3 free, ...). Within each group the cheapest pack is
+// the one comped.
+const GROUP_SIZE = 3;
 
 export type CartPricing = {
   subtotal: number;
   discount: number;
   total: number;
-  // Slug of the pack that's free, or null if the cart doesn't qualify yet.
-  freeSlug: string | null;
+  // Slugs of the packs that are free (empty if the cart doesn't qualify yet).
+  freeSlugs: string[];
 };
 
 export function getCartPricing(items: Product[]): CartPricing {
   const subtotal = items.reduce((sum, p) => sum + p.price, 0);
+  const freeCount = Math.floor(items.length / GROUP_SIZE);
 
-  if (items.length < FREE_ITEM_MIN_COUNT) {
-    return { subtotal, discount: 0, total: subtotal, freeSlug: null };
+  if (freeCount === 0) {
+    return { subtotal, discount: 0, total: subtotal, freeSlugs: [] };
   }
 
-  const cheapest = items.reduce((min, p) => (p.price < min.price ? p : min), items[0]);
+  const cheapestFirst = [...items].sort((a, b) => a.price - b.price);
+  const freeItems = cheapestFirst.slice(0, freeCount);
+  const discount = freeItems.reduce((sum, p) => sum + p.price, 0);
+
   return {
     subtotal,
-    discount: cheapest.price,
-    total: subtotal - cheapest.price,
-    freeSlug: cheapest.slug,
+    discount,
+    total: subtotal - discount,
+    freeSlugs: freeItems.map((p) => p.slug),
   };
 }

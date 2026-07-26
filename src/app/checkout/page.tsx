@@ -253,7 +253,7 @@ export default function CheckoutPage() {
             </h2>
             <div className="space-y-3">
               {items.map((product) => {
-                const isFree = product.slug === pricing.freeSlug;
+                const isFree = pricing.freeSlugs.includes(product.slug);
                 return (
                   <div
                     key={product.slug}
@@ -307,7 +307,11 @@ export default function CheckoutPage() {
                     <span>₹{pricing.subtotal}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm text-emerald-600 font-medium mt-1">
-                    <span>🎁 Buy 2, get 1 free</span>
+                    <span>
+                      🎁 {pricing.freeSlugs.length > 1
+                        ? `${pricing.freeSlugs.length} packs free`
+                        : "Buy 2, get 1 free"}
+                    </span>
                     <span>-₹{pricing.discount}</span>
                   </div>
                   <div className="flex items-baseline justify-between mt-1.5 mb-3">

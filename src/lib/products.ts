@@ -34,6 +34,10 @@ export type Product = {
   rating: number; // out of 5. Placeholder for now — replace with real average once you have reviews.
   purchaseCount: number; // placeholder for now — replace with real order counts once you have them
   comingSoon?: boolean; // true until the real PDF is uploaded to public/products/<slug>.pdf
+  // Optional override for the PDF's actual filename in public/products/,
+  // for packs whose file is named after the product title rather than the
+  // slug (e.g. "A-Z Colouring Book.pdf"). Leave unset to use `<slug>.pdf`.
+  pdfFile?: string;
   description: string;
   whatsInside: string[];
   whyItMatters: string[];
@@ -110,6 +114,7 @@ export const products: Product[] = [
     ],
     rating: 4.6,
     purchaseCount: 1670,
+    pdfFile: "A-Z Colouring Book.pdf",
     description:
       "A clean, simple A-Z pack pairing each letter with a picture and word — for kids just starting to connect letters to sounds.",
     whatsInside: [
@@ -282,7 +287,7 @@ export const products: Product[] = [
     title: "Trees & Plants Coloring & Learning Pack",
     categoryLabel: "Trees and Plants",
     tagline: "Mighty trees, tiny seedlings and how a seed grows into a plant",
-    price: 75,
+    price: 89,
     pageCount: 52,
     ageRange: "3-8 years",
     accent: "from-green-100 to-lime-50",
@@ -424,6 +429,270 @@ export const products: Product[] = [
     seoTitle: "Dot to Dot: Connect the Numbers & Letters — Printable PDF for Kids",
     seoDescription:
       "50-page printable dot-to-dot pack for kids ages 4-9, connecting numbers and letters to reveal a picture. Instant PDF download.",
+  },
+  {
+    slug: "cursive-handwriting",
+    title: "Cursive Handwriting: From First Strokes to Joined-Up Writing",
+    categoryLabel: "Cursive Handwriting",
+    tagline: "Warm-up strokes, all 26 letters, joining up, then real words and sentences",
+    price: 79,
+    pageCount: 50,
+    ageRange: "3-7 years",
+    accent: "from-indigo-100 to-blue-50",
+    emoji: "✍️",
+    bannerImage: "/banners/desktop/cursive-handwriting.png",
+    galleryImages: [
+      { src: "/gallery/cursive-handwriting/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/cursive-handwriting/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/cursive-handwriting/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
+    rating: 4.7,
+    purchaseCount: 140,
+    comingSoon: true,
+    description:
+      "A proper cursive curriculum, not just letter copying — six warm-up stroke pages first, then the alphabet, then joining letters together, then real words and sentences to write.",
+    whatsInside: [
+      "50 practice pages across five parts: warm-up strokes, the A-Z alphabet, joining up, words & sentences, and free practice",
+      "A pink starting dot on every letter and four guide lines to keep sizing consistent",
+      "A certificate of finishing at the end",
+    ],
+    whyItMatters: [
+      "Starts with the four basic pen movements instead of forty repeats of one letter",
+      "Builds joining — the part kids actually struggle with — as its own dedicated section",
+      "Short, ten-minute sessions by design, since handwriting is a physical skill, not an intellectual one",
+    ],
+    longDescription:
+      "Cursive Handwriting takes a different route than most copybooks: instead of handing a child letter A to copy forty times, it starts with six pages of pure movement — the scoop, the arch, the loop, the wave — the four shapes that make up almost every lowercase letter. From there it moves through the alphabet one letter a page, then a whole section on joining letters together, then real words: days of the week, months, numbers, colours and short sentences. A pink dot marks where to start each letter, and four guide lines give every letter somewhere to sit. Designed for children aged 3-7, this printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
+    relatedSlugs: ["letters-and-words", "alphabet-adventures"],
+    seoTitle: "Cursive Handwriting Practice Pack — Printable PDF for Kids",
+    seoDescription:
+      "50-page printable cursive handwriting workbook for kids ages 3-7. Warm-up strokes, the alphabet, joining letters, and real words to write. Instant PDF download.",
+  },
+  {
+    slug: "festivals-colouring",
+    title: "Festivals: A Colouring Book of Celebrations from India and Around the World",
+    categoryLabel: "Festivals",
+    tagline: "24 festivals of India, 20 from around the world, and 6 pages of festive patterns",
+    price: 89,
+    pageCount: 50,
+    ageRange: "4-10 years",
+    accent: "from-rose-100 to-amber-50",
+    emoji: "🎉",
+    galleryImages: [
+      { src: "/gallery/festivals-colouring/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/festivals-colouring/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/festivals-colouring/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
+    rating: 4.7,
+    purchaseCount: 130,
+    comingSoon: true,
+    description:
+      "Twenty four festivals from across India sit beside twenty from the rest of the world, drawn in exactly the same style and given exactly the same space on the page — with one short line on every page about what actually happens at that festival.",
+    whatsInside: [
+      "50 pages to colour in three parts: festivals of India, festivals of the world, and festive patterns",
+      "One short read-aloud fact per page about the festival being coloured",
+      "Bold, open outlines that use very little ink and suit any coloring tool",
+    ],
+    whyItMatters: [
+      "Shows that everybody celebrates, and that celebrating looks different everywhere",
+      "No gods, prophets or saints depicted — just lamps, food, instruments and decorations, so any family can pick up a crayon without a second thought",
+      "Turns coloring time into a few seconds of general knowledge, read aloud while your child colours",
+    ],
+    longDescription:
+      "The Festivals Colouring Book brings 24 festivals from across India and 20 from around the world onto the same page in the same style — Diwali beside Christmas, Holi beside Songkran — plus six pages of festive patterns like rangoli and mehendi to finish. Every page carries one short line about what actually happens at that festival, meant to be read aloud while your child colours. Drawn deliberately without any religious figures, so any family from any background can hand a child a crayon without a second thought. Designed for children aged 4-10, this printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
+    relatedSlugs: ["animal-friends", "birds-of-the-world"],
+    seoTitle: "Festivals Colouring Book — Printable PDF for Kids",
+    seoDescription:
+      "50-page printable colouring book of 24 Indian and 20 world festivals for kids ages 4-10, with a read-aloud fact on every page. Instant PDF download.",
+  },
+  {
+    slug: "letters-and-words",
+    title: "Letters and Words: The Big Alphabet Activity Book",
+    categoryLabel: "Letters and Words",
+    tagline: "39 print-and-play worksheets that make the alphabet click",
+    price: 69,
+    pageCount: 39,
+    ageRange: "3-6 years",
+    accent: "from-teal-100 to-cyan-50",
+    emoji: "🔠",
+    galleryImages: [
+      { src: "/gallery/letters-and-words/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/letters-and-words/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/letters-and-words/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
+    rating: 4.6,
+    purchaseCount: 150,
+    comingSoon: true,
+    description:
+      "Thirty-nine worksheets that get gently harder as they go — letter recognition first, then short words, then first sounds, then practice and play — built around the moment a child notices the letter they just traced is the same one that starts their own name.",
+    whatsInside: [
+      "39 worksheets across four parts: meet the alphabet, letters & words, sounds & missing letters, and practice & play",
+      "A full answer key at the back",
+      "A certificate of finishing",
+    ],
+    whyItMatters: [
+      "Builds the letter-shape-sound connection through noticing, not just repetition",
+      "One sheet a day is plenty — about six calm weeks of ten-minute sessions",
+      "Ends with 'My Name in Letters' and 'Draw It Yourself' so the alphabet feels personal",
+    ],
+    longDescription:
+      "Letters and Words is 39 printable worksheets that move through four parts and get gently harder as they go: meeting the alphabet through tracing, putting letters into short words, finding first sounds, and finally practice-and-play pages like letter hunts and colour-by-letter. A full answer key and a certificate of finishing round it out. Designed for children aged 3-6, one sheet a day is plenty — about six calm weeks of ten-minute sessions by the end of which a child knows every letter by sight. This printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
+    relatedSlugs: ["alphabet-adventures", "numbers-and-counting-mats"],
+    seoTitle: "Letters and Words: The Big Alphabet Activity Book — Printable PDF for Kids",
+    seoDescription:
+      "39-page printable alphabet activity book for kids ages 3-6, with a full answer key. Letter recognition, short words and first sounds. Instant PDF download.",
+  },
+  {
+    slug: "numbers-and-counting-mats",
+    title: "Numbers and Counting: Number Tracing and Counting Mats",
+    categoryLabel: "Numbers & Counting",
+    tagline: "21 counting mats and 19 worksheets covering 0 to 20, ten frames and first sums",
+    price: 69,
+    pageCount: 40,
+    ageRange: "3-6 years",
+    accent: "from-violet-100 to-purple-50",
+    emoji: "🧮",
+    galleryImages: [
+      { src: "/gallery/numbers-and-counting-mats/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/numbers-and-counting-mats/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/numbers-and-counting-mats/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
+    rating: 4.7,
+    purchaseCount: 160,
+    comingSoon: true,
+    description:
+      "Every number from 0 to 20 gets a full page, shown four ways at once — as a numeral to trace, as a word, as counters in a ten frame, and as a place on the number line — so a quantity finally means something, not just something to recite.",
+    whatsInside: [
+      "21 number mats (0-20) plus 19 worksheets: counting & ten frames, first sums, and skip counting",
+      "A full answer key at the back",
+      "A certificate of finishing",
+    ],
+    whyItMatters: [
+      "Teaches counting, not just reciting — a child touches and matches a quantity, not just chants numbers",
+      "Slips into a plastic sleeve for reuse with a dry-wipe pen",
+      "Builds toward real sums and skip counting once the mats are done",
+    ],
+    longDescription:
+      "Numbers and Counting is 21 number tracing mats covering 0 to 20, followed by 19 worksheets on counting, ten frames, first sums and skip counting. Each mat shows one quantity four different ways — a numeral to trace, a word, counters in a ten frame, and a spot on the number line — so a number finally means something. A full answer key and a certificate of finishing are included. Designed for children aged 3-6, slip a mat into a plastic sleeve with a dry-wipe pen to reuse it all week. This printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
+    relatedSlugs: ["numbers-1-to-100", "letters-and-words"],
+    seoTitle: "Numbers and Counting: Tracing and Counting Mats — Printable PDF for Kids",
+    seoDescription:
+      "40-page printable number tracing and counting mats for kids ages 3-6, covering 0-20 with ten frames, first sums and skip counting. Instant PDF download.",
+  },
+  {
+    // UNVERIFIED: source PDF is scanned images with no text layer, so this
+    // copy is a best guess from the filename + page count only, not from
+    // reading the actual pages. Review and correct before treating as final.
+    slug: "abc-of-character",
+    title: "ABC of Character",
+    categoryLabel: "ABC of Character",
+    tagline: "One letter, one good value, from A to Z",
+    price: 65,
+    pageCount: 28,
+    ageRange: "3-7 years",
+    accent: "from-amber-100 to-yellow-50",
+    emoji: "🌟",
+    galleryImages: [
+      { src: "/gallery/abc-of-character/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/abc-of-character/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/abc-of-character/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
+    rating: 4.5,
+    purchaseCount: 80,
+    comingSoon: true,
+    description:
+      "An A-Z pack pairing each letter with a value or character trait — for kids old enough to color independently and start talking about kindness, honesty and the like.",
+    whatsInside: [
+      "28 pages: one letter, one value, one picture per page from A to Z",
+      "Large, simple outlines for independent coloring",
+    ],
+    whyItMatters: [
+      "Turns everyday coloring time into short chats about values",
+      "Pairs letters with ideas kids can actually act on, not just objects",
+    ],
+    relatedSlugs: ["alphabet-adventures", "letters-and-words"],
+    seoTitle: "ABC of Character — Printable PDF for Kids",
+    seoDescription:
+      "28-page printable A-Z coloring pack for kids ages 3-7, pairing each letter with a value. Instant PDF download.",
+  },
+  {
+    slug: "atoz-activity",
+    title: "My First Alphabet Activity Book",
+    categoryLabel: "My First Alphabet",
+    tagline: "54 activities to learn, trace, find, match and colour from A to Z",
+    price: 89,
+    pageCount: 54,
+    ageRange: "2-5 years",
+    accent: "from-lime-100 to-green-50",
+    emoji: "🔡",
+    image: "/categories/Alphabet%20Activity%20Book.png",
+    bannerImage: "/banners/desktop/Alphabet%20Activity%20Book.png",
+    galleryImages: [
+      {
+        src: "/gallery/Alphabet%20Activity%20Book/ChatGPT%20Image%20Jul%2026%2C%202026%2C%2007_53_43%20AM.png",
+        label: "A colour preview — Letter F activities",
+      },
+      {
+        src: "/gallery/Alphabet%20Activity%20Book/Screenshot%202026-07-26%20071200.jpg",
+        label: "A look inside the pack — Letter D activities",
+      },
+      {
+        src: "/gallery/Alphabet%20Activity%20Book/Screenshot%202026-07-26%20071227.jpg",
+        label: "A look inside the pack — Letter E tracing",
+      },
+    ],
+    rating: 4.5,
+    purchaseCount: 80,
+    pdfFile: "First Alphabet Activity Book.pdf",
+    description:
+      "A gentle first alphabet book for the youngest learners — every letter from A to Z gets its own match-circle-maze-colour activity page plus a trace-and-find page, built for a toddler just starting to notice that letters mean something.",
+    whatsInside: [
+      "54 activity pages: one match/circle/maze/colour activity page and one trace-and-find page for every letter, A to Z",
+      "Uppercase and lowercase letters, letter sounds, picture matching, mazes and colouring",
+    ],
+    whyItMatters: [
+      "Eases in gently for ages 2-5, a step before the more advanced Letters and Words pack",
+      "Builds early literacy skills through play, not repetition",
+      "Doubles as easy parent-child bonding time, not just solo screen-free practice",
+    ],
+    relatedSlugs: ["letters-and-words", "alphabet-adventures"],
+    seoTitle: "My First Alphabet Activity Book — Printable PDF for Kids",
+    seoDescription:
+      "54-page printable A-Z activity book for kids ages 2-5. Letter recognition, tracing, matching and colouring. Instant PDF download.",
+  },
+  {
+    slug: "my-first-lines",
+    title: "My First Lines: A Pre-Writing Tracing Workbook",
+    categoryLabel: "My First Lines",
+    tagline: "Fun line-tracing activities — dashes, waves, zigzags, loops and swirls",
+    price: 59,
+    pageCount: 27,
+    ageRange: "2-4 years",
+    accent: "from-blue-100 to-cyan-50",
+    emoji: "〰️",
+    galleryImages: [
+      { src: "/gallery/my-first-lines/colouring-pack.jpg", label: "A finished page" },
+      { src: "/gallery/my-first-lines/look-inside-1.jpg", label: "A look inside the pack" },
+      { src: "/gallery/my-first-lines/look-inside-2.jpg", label: "A look inside the pack" },
+    ],
+    rating: 4.5,
+    purchaseCount: 80,
+    comingSoon: true,
+    description:
+      "A pre-writing workbook built entirely around one skill: pencil control. Simple dashed lines, waves, zigzags, loops and swirls, sized for the very first time a toddler picks up a crayon.",
+    whatsInside: [
+      "27 pages of line, curve and pattern tracing practice",
+      "Sized for a toddler's early pencil grip",
+    ],
+    whyItMatters: [
+      "Improves pencil control and builds fine motor skills before letters are introduced",
+      "Enhances focus and concentration in short, achievable bursts",
+      "Boosts early writing readiness and confidence — trace today, write tomorrow",
+    ],
+    relatedSlugs: ["alphabet-adventures", "cursive-handwriting"],
+    seoTitle: "My First Lines: Pre-Writing Tracing Workbook — Printable PDF for Kids",
+    seoDescription:
+      "27-page printable pre-writing workbook for kids ages 2-4, with line, curve and pattern tracing practice. Instant PDF download.",
   },
 ];
 

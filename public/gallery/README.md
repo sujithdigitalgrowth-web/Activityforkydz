@@ -43,6 +43,13 @@ these filenames, so dropping in a same-named `.jpg` is all that's needed:
 - `matching-and-memory/{colouring-pack,look-inside-1,look-inside-2}.jpg`
 - `puzzles-and-find-the-difference/{colouring-pack,look-inside-1,look-inside-2}.jpg`
 - `dot-to-dot/{colouring-pack,look-inside-1,look-inside-2}.jpg`
+- `cursive-handwriting/{colouring-pack,look-inside-1,look-inside-2}.jpg`
+- `festivals-colouring/{colouring-pack,look-inside-1,look-inside-2}.jpg`
+- `letters-and-words/{colouring-pack,look-inside-1,look-inside-2}.jpg`
+- `numbers-and-counting-mats/{colouring-pack,look-inside-1,look-inside-2}.jpg`
+- `abc-of-character/{colouring-pack,look-inside-1,look-inside-2}.jpg`
+- `atoz-activity/{colouring-pack,look-inside-1,look-inside-2}.jpg`
+- `my-first-lines/{colouring-pack,look-inside-1,look-inside-2}.jpg`
 
 Feel free to rename `look-inside-1`/`look-inside-2` to the actual subject
 (e.g. `sheep.jpg`) once real content exists — just update the matching

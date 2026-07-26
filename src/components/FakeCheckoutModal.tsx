@@ -190,7 +190,7 @@ export default function FakeCheckoutModal({
                 {items.map((item) => (
                   <a
                     key={item.slug}
-                    href={`/products/${item.slug}.pdf`}
+                    href={`/products/${encodeURIComponent(item.pdfFile ?? `${item.slug}.pdf`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-between rounded-lg bg-emerald-50 border border-emerald-200 px-4 py-3 text-sm font-semibold text-emerald-800 hover:bg-emerald-100 transition-colors"

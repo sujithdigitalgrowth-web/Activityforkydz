@@ -22,7 +22,8 @@ export async function GET(
     return NextResponse.json({ error: "Invalid or expired download link" }, { status: 403 });
   }
 
-  const filePath = path.join(process.cwd(), "public", "products", `${slug}.pdf`);
+  const pdfFilename = product.pdfFile ?? `${slug}.pdf`;
+  const filePath = path.join(process.cwd(), "public", "products", pdfFilename);
 
   let file: Buffer;
   try {
@@ -37,7 +38,7 @@ export async function GET(
   return new NextResponse(new Uint8Array(file), {
     headers: {
       "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename="${slug}.pdf"`,
+      "Content-Disposition": `attachment; filename="${pdfFilename}"`,
       "Cache-Control": "private, no-store",
     },
   });
