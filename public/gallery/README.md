@@ -36,6 +36,8 @@ Packs with real photos uploaded:
 - `letters-and-words/*` — the contents page plus two look-inside worksheets
 - `numbers-and-counting-mats/*` — two look-inside worksheets plus the answer key
 - `abc-of-character/*` — three look-inside letter pages (C, F, J)
+- `Flower Coloring Book/*` — two flower pages (Hollyhock, Kadamba) plus the contents page
+- `Timing and Shapes/*` — three look-inside pages (clock reading, solid shapes, faces/edges/corners)
 
 Packs waiting on photos — folders exist and `products.ts` already points at
 these filenames, so dropping in a same-named `.jpg` is all that's needed:
