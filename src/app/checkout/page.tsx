@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { getProductBySlug, type Product } from "@/lib/products";
-import { getCartPricing, GROUP_SIZE, COMBO_ADJACENT_GROUP_SIZE } from "@/lib/pricing";
+import { getCartPricing, GROUP_SIZE } from "@/lib/pricing";
 import { COLOURING_COMBO_SLUGS } from "@/lib/bundles";
 import ProductVisual from "@/components/ProductVisual";
 import CartAddOns from "@/components/CartAddOns";
@@ -34,7 +34,7 @@ export default function CheckoutPage() {
   const nonComboCount = pricing.comboApplied
     ? items.filter((p) => !(COLOURING_COMBO_SLUGS as readonly string[]).includes(p.slug)).length
     : items.length;
-  const groupSize = pricing.comboApplied ? COMBO_ADJACENT_GROUP_SIZE : GROUP_SIZE;
+  const groupSize = GROUP_SIZE;
 
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
@@ -252,7 +252,7 @@ export default function CheckoutPage() {
         <h1 className="font-heading text-2xl font-semibold text-zinc-900 mb-6">Checkout</h1>
 
         <div className="grid md:grid-cols-5 gap-6 md:gap-8">
-          <div className="md:col-span-3">
+          <div className="min-w-0 md:col-span-3">
             <h2 className="font-heading text-lg font-semibold text-zinc-900 mb-3">
               Order summary
             </h2>
@@ -311,7 +311,7 @@ export default function CheckoutPage() {
             )}
           </div>
 
-          <div className="md:col-span-2">
+          <div className="min-w-0 md:col-span-2">
             <div className="md:sticky md:top-24 rounded-2xl bg-white border border-orange-100 shadow-sm p-4 sm:p-5">
               {pricing.discount > 0 ? (
                 <>
@@ -330,7 +330,7 @@ export default function CheckoutPage() {
                       <span>
                         🎁 {pricing.freeSlugs.length > 1
                           ? `${pricing.freeSlugs.length} packs free`
-                          : "Buy 3, get 1 free"}
+                          : "Buy 2, get 1 free"}
                       </span>
                       <span>-₹{pricing.discount - pricing.comboDiscount}</span>
                     </div>

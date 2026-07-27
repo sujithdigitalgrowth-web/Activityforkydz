@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { products, getBestSellers } from "@/lib/products";
+import { products, getBestSellers, getProductBySlug } from "@/lib/products";
 import ProductGrid from "@/components/ProductGrid";
 import HeroCarousel from "@/components/HeroCarousel";
 import BestSellers from "@/components/BestSellers";
@@ -18,6 +18,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   const bestSellers = getBestSellers(3);
+  // Featured alongside the real best sellers — new, so it hasn't earned a
+  // sales rank yet, but we still want it visible on the homepage.
+  const featuredPack = getProductBySlug("time-patterns-and-shapes");
+  const bestSellersDisplay = featuredPack ? [...bestSellers, featuredPack] : bestSellers;
   // Only packs with a real uploaded banner belong in the hero slider —
   // otherwise it's just an empty gradient with a floating emoji, which
   // looks broken rather than "coming soon".
@@ -56,8 +60,8 @@ export default function Home() {
 
       <section className="max-w-[1400px] mx-auto px-6 py-10">
         <h2 className="font-heading text-2xl font-semibold text-zinc-900 mb-1">Best sellers</h2>
-        <p className="text-zinc-600 mb-6">The three packs families come back for the most.</p>
-        <BestSellers products={bestSellers} />
+        <p className="text-zinc-600 mb-6">The packs families come back for the most — plus our newest addition.</p>
+        <BestSellers products={bestSellersDisplay} rankedCount={bestSellers.length} />
       </section>
 
       <section id="packs" className="max-w-[1400px] mx-auto px-6 py-10">

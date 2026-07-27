@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function PromoBar() {
   return (
-    <div className="bg-emerald-600 text-white text-center text-xs sm:text-sm font-semibold px-4 py-2">
+    <div className="bg-emerald-600 text-white text-center text-[11px] sm:text-sm font-semibold px-3 py-2 leading-snug">
       <Link href="/#packs" className="hover:underline">
-        🎁 Buy 3 packs, get 1 FREE — applied automatically at checkout
+        🎁 Buy 2 packs, get 1 FREE — applied automatically at checkout
       </Link>
     </div>
   );

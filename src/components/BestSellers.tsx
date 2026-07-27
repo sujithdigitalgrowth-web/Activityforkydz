@@ -4,16 +4,25 @@ import ProductVisual from "./ProductVisual";
 import SocialProof from "./SocialProof";
 import AddToCartButton from "./AddToCartButton";
 
-export default function BestSellers({ products }: { products: Product[] }) {
+export default function BestSellers({
+  products,
+  rankedCount = products.length,
+}: {
+  products: Product[];
+  // Only the first `rankedCount` products are genuine top sellers by
+  // purchase count — anything after that (e.g. a newly launched pack
+  // pinned onto the end) gets a "New" badge instead of a fake rank.
+  rankedCount?: number;
+}) {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-5 items-stretch">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5 items-stretch">
       {products.map((product, i) => (
         <div
           key={product.slug}
           className="group relative flex flex-col rounded-xl sm:rounded-2xl border border-orange-100 bg-white overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all"
         >
           <span className="absolute top-2 left-2 z-10 rounded-full bg-zinc-900 text-white text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:py-1">
-            #{i + 1} best seller
+            {i < rankedCount ? `#${i + 1} best seller` : "New"}
           </span>
           <Link href={`/products/${product.slug}`} className="flex flex-col flex-1">
             <ProductVisual
