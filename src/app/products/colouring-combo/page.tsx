@@ -86,7 +86,7 @@ export default function ColouringComboPage() {
               />
               <div className="p-2 sm:p-2.5">
                 <p className="text-xs sm:text-sm font-semibold text-zinc-900 leading-snug line-clamp-2 group-hover:text-orange-700 transition-colors">
-                  {product.title}
+                  {product.cardTitle ?? product.title}
                 </p>
                 <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
                   {product.pageCount} pages · ₹{product.price}

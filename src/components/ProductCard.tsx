@@ -15,7 +15,7 @@ export default function ProductCard({ product }: { product: Product }) {
         />
         <div className="p-2.5 sm:p-4 flex flex-col flex-1">
           <h3 className="font-heading font-semibold text-sm sm:text-base text-zinc-900 leading-snug line-clamp-2">
-            {product.title}
+            {product.cardTitle ?? product.title}
           </h3>
           <div className="flex items-center justify-between mt-1.5 sm:mt-3">
             <span className="font-bold text-orange-600 text-sm sm:text-base">₹{product.price}</span>

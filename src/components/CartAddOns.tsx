@@ -63,7 +63,7 @@ export default function CartAddOns() {
             <div className="p-1.5 sm:p-2 flex flex-col flex-1">
               <Link href={`/products/${product.slug}`}>
                 <p className="text-[11px] sm:text-xs font-semibold text-zinc-900 leading-snug line-clamp-2 min-h-[1.9em]">
-                  {product.title}
+                  {product.cardTitle ?? product.title}
                 </p>
               </Link>
               <p className="font-bold text-orange-600 text-xs sm:text-sm mt-0.5">₹{product.price}</p>

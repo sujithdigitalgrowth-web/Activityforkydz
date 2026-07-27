@@ -1,6 +1,11 @@
 export type Product = {
   slug: string;
   title: string;
+  // Shorter title for catalog/grid cards (aims for ~30-35 characters so it
+  // fits one line on mobile). Leave unset to just show the full `title` —
+  // only the packs with long titles need an override. The product page,
+  // SEO title/meta, and breadcrumbs always use the full `title`/`seoTitle`.
+  cardTitle?: string;
   categoryLabel: string; // short name for the category strip tile (title is too long to fit)
   // Colouring Pack vs Learning Pack — drives the storefront filter tabs and
   // the "add a learning pack" / "add a colouring pack" cross-sell prompt on
@@ -527,6 +532,7 @@ export const products: Product[] = [
   {
     slug: "letters-and-words",
     title: "Letters and Words: The Big Alphabet Activity Book",
+    cardTitle: "Letters & Words Activity Book",
     categoryLabel: "Letters and Words",
     category: "learning",
     tagline: "39 print-and-play worksheets across four parts, plus a full answer key",
@@ -576,6 +582,7 @@ export const products: Product[] = [
   {
     slug: "numbers-and-counting-mats",
     title: "Numbers and Counting: Number Tracing and Counting Mats",
+    cardTitle: "Numbers & Counting Mats",
     categoryLabel: "Numbers & Counting",
     category: "learning",
     tagline: "21 counting mats and 19 worksheets covering 0 to 20, ten frames and first sums",
@@ -716,6 +723,7 @@ export const products: Product[] = [
   {
     slug: "my-first-lines",
     title: "My First Lines: A Pre-Writing Tracing Workbook",
+    cardTitle: "My First Lines: Tracing Workbook",
     categoryLabel: "My First Lines",
     category: "learning",
     tagline: "Fun line-tracing activities — dashes, waves, zigzags, loops and swirls",
@@ -762,6 +770,7 @@ export const products: Product[] = [
   {
     slug: "flowers-colouring",
     title: "Flowers Colouring Book: 104 Flowers from India and Around the World",
+    cardTitle: "Flowers Colouring Book (104 Designs)",
     categoryLabel: "Flowers",
     category: "colouring",
     tagline: "104 flowers to colour, each with its real colours shown and a fun fact",
@@ -811,6 +820,7 @@ export const products: Product[] = [
   {
     slug: "time-patterns-and-shapes",
     title: "Telling Time, Patterns and Shapes: A 100-Page Activity Workbook",
+    cardTitle: "Time, Patterns & Shapes Workbook",
     categoryLabel: "Time, Patterns & Shapes",
     category: "learning",
     tagline: "20 clock worksheets, 15 pattern pages, shape activities and crosswords, plus a full answer key",
