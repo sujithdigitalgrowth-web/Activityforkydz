@@ -28,9 +28,9 @@ Packs with real photos uploaded:
 - `animal-friends/colouring-pack.jpg` — a finished page (Duck)
 - `animal-friends/sheep.jpg` — a look inside the pack (Sheep)
 - `animal-friends/rabbit.jpg` — a look inside the pack (Rabbit)
-- `birds-of-the-world/colouring-pack.jpg` — a finished page (Bird of Paradise)
-- `birds-of-the-world/pelican.jpg` — a look inside the pack (Pelican)
-- `birds-of-the-world/rainbow-lorikeet.jpg` — a look inside the pack (Rainbow Lorikeet)
+- `birds-of-the-world/owl.jpg` — a look inside the pack (Owl)
+- `birds-of-the-world/parrot.jpg` — a look inside the pack (Parrot)
+- `birds-of-the-world/rooster.jpg` — a look inside the pack (Rooster)
 - `Alphabet Activity Book/*` — a colour preview plus two look-inside pages (Letters D, E, F)
 - `my-first-lines/*` — three look-inside tracing pages (Butterfly, Fish, Bunny)
 - `letters-and-words/*` — the contents page plus two look-inside worksheets

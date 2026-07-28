@@ -8,6 +8,7 @@ import { getCartPricing, GROUP_SIZE } from "@/lib/pricing";
 import { COLOURING_COMBO_SLUGS } from "@/lib/bundles";
 import ProductVisual from "@/components/ProductVisual";
 import CartAddOns from "@/components/CartAddOns";
+import ComboUpsellBanner from "@/components/ComboUpsellBanner";
 import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 
 export default function CartPage() {
@@ -169,6 +170,7 @@ export default function CartPage() {
                 buy {groupSize - 1}, get 1 free!
               </p>
             )}
+            <ComboUpsellBanner />
             <Link
               href="/checkout"
               className="block w-full text-center rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 transition-colors"

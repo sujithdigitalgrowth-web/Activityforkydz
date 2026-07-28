@@ -8,6 +8,7 @@ import { getCartPricing, GROUP_SIZE } from "@/lib/pricing";
 import { COLOURING_COMBO_SLUGS } from "@/lib/bundles";
 import ProductVisual from "@/components/ProductVisual";
 import CartAddOns from "@/components/CartAddOns";
+import ComboUpsellBanner from "@/components/ComboUpsellBanner";
 import FakeCheckoutModal from "@/components/FakeCheckoutModal";
 import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 
@@ -350,6 +351,8 @@ export default function CheckoutPage() {
                   </span>
                 </div>
               )}
+
+              <ComboUpsellBanner />
 
               <label className="block text-sm font-medium text-zinc-700 mb-1">
                 Your email (we&apos;ll send the PDFs here)

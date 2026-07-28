@@ -160,9 +160,9 @@ export const products: Product[] = [
     image: "/categories/Birds%20of%20the%20World.png",
     bannerImage: "/banners/desktop/birds-of-the-world.png",
     galleryImages: [
-      { src: "/gallery/birds-of-the-world/colouring-pack.jpg", label: "A finished page — Bird of Paradise" },
-      { src: "/gallery/birds-of-the-world/pelican.jpg", label: "A look inside the pack — Pelican" },
-      { src: "/gallery/birds-of-the-world/rainbow-lorikeet.jpg", label: "A look inside the pack — Rainbow Lorikeet" },
+      { src: "/gallery/birds-of-the-world/owl.jpg", label: "A look inside the pack — Owl" },
+      { src: "/gallery/birds-of-the-world/parrot.jpg", label: "A look inside the pack — Parrot" },
+      { src: "/gallery/birds-of-the-world/rooster.jpg", label: "A look inside the pack — Rooster" },
     ],
     rating: 4.6,
     purchaseCount: 1460,
