@@ -8,7 +8,6 @@ import { getCartPricing, GROUP_SIZE } from "@/lib/pricing";
 import { COLOURING_COMBO_SLUGS } from "@/lib/bundles";
 import ProductVisual from "@/components/ProductVisual";
 import CartAddOns from "@/components/CartAddOns";
-import ComboUpsellBanner from "@/components/ComboUpsellBanner";
 import FakeCheckoutModal from "@/components/FakeCheckoutModal";
 import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 
@@ -304,7 +303,7 @@ export default function CheckoutPage() {
               })}
             </div>
 
-            {pricing.freeSlugs.length === 0 && nonComboCount > 0 && nonComboCount < groupSize && (
+            {pricing.freeSlugs.length === 0 && nonComboCount > 1 && nonComboCount < groupSize && (
               <p className="text-xs text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg px-2.5 py-1.5 mt-3">
                 🎁 Add {groupSize - nonComboCount} more pack{groupSize - nonComboCount === 1 ? "" : "s"} —
                 buy {groupSize - 1}, get 1 free!
@@ -352,7 +351,19 @@ export default function CheckoutPage() {
                 </div>
               )}
 
-              <ComboUpsellBanner />
+              {pricing.freeSlugs.length === 0 && nonComboCount === 1 && (
+                <div className="mb-3 rounded-xl border-2 border-emerald-400 bg-gradient-to-br from-emerald-50 to-white p-2.5 sm:p-3 text-center">
+                  <span className="inline-block rounded-full bg-emerald-600 text-white text-[10px] font-bold tracking-wide uppercase px-2 py-0.5 mb-1">
+                    Special offer
+                  </span>
+                  <p className="text-xs sm:text-sm font-bold text-emerald-900 leading-snug">
+                    🎁 Buy 2, get 1 free
+                  </p>
+                  <p className="text-[11px] sm:text-xs text-emerald-700 mt-0.5">
+                    Add {groupSize - nonComboCount} more packs to unlock a free pack
+                  </p>
+                </div>
+              )}
 
               <label className="block text-sm font-medium text-zinc-700 mb-1">
                 Your email (we&apos;ll send the PDFs here)
