@@ -21,16 +21,8 @@ export default function ContactPage() {
           {site.supportEmail}
         </a>
       </p>
-      <h2>Fastest way to get help</h2>
       <p>
-        Just reply directly to the download email you received after payment — it already has
-        your order details, so we can sort things out faster.
-      </p>
-      <h2>Business details</h2>
-      <p>
-        {site.legalEntityName}
-        <br />
-        {site.address}
+        Reply to the email above and we&apos;ll get back to you — you&apos;re important to us.
       </p>
     </LegalPage>
   );

@@ -2,12 +2,18 @@
 
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
-import { COLOURING_COMBO_SLUGS, COLOURING_COMBO_PRICE, getColouringComboProducts } from "@/lib/bundles";
+import { getComboProducts, type ComboDef } from "@/lib/bundles";
 import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 
-export default function AddComboButton({ className = "" }: { className?: string }) {
+export default function AddComboButton({
+  combo,
+  className = "",
+}: {
+  combo: ComboDef;
+  className?: string;
+}) {
   const { isInCart, addItem } = useCart();
-  const allInCart = COLOURING_COMBO_SLUGS.every((slug) => isInCart(slug));
+  const allInCart = combo.slugs.every((slug) => isInCart(slug));
 
   if (allInCart) {
     return (
@@ -24,19 +30,19 @@ export default function AddComboButton({ className = "" }: { className?: string 
     <button
       type="button"
       onClick={() => {
-        COLOURING_COMBO_SLUGS.forEach((slug) => addItem(slug));
+        combo.slugs.forEach((slug) => addItem(slug));
         pushDataLayer({
           event: "add_to_cart",
           ecommerce: {
             currency: "INR",
-            value: COLOURING_COMBO_PRICE,
-            items: toDataLayerItems(getColouringComboProducts()),
+            value: combo.price,
+            items: toDataLayerItems(getComboProducts(combo)),
           },
         });
       }}
       className={`inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full font-semibold transition-colors bg-orange-500 text-white hover:bg-orange-600 ${className}`}
     >
-      <span aria-hidden="true">+</span> Add all 6 to cart — ₹{COLOURING_COMBO_PRICE}
+      <span aria-hidden="true">+</span> Add all {combo.slugs.length} to cart — ₹{combo.price}
     </button>
   );
 }

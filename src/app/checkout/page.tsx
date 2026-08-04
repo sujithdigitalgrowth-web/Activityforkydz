@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { getProductBySlug, type Product } from "@/lib/products";
 import { getCartPricing, GROUP_SIZE } from "@/lib/pricing";
-import { COLOURING_COMBO_SLUGS } from "@/lib/bundles";
 import ProductVisual from "@/components/ProductVisual";
 import CartAddOns from "@/components/CartAddOns";
 import FakeCheckoutModal from "@/components/FakeCheckoutModal";
@@ -31,9 +30,8 @@ export default function CheckoutPage() {
     .map((slug) => getProductBySlug(slug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
   const pricing = getCartPricing(items);
-  const nonComboCount = pricing.comboApplied
-    ? items.filter((p) => !(COLOURING_COMBO_SLUGS as readonly string[]).includes(p.slug)).length
-    : items.length;
+  const comboSlugSet = new Set(pricing.appliedCombos.flatMap((c) => c.slugs));
+  const nonComboCount = items.filter((p) => !comboSlugSet.has(p.slug)).length;
   const groupSize = GROUP_SIZE;
 
   const [email, setEmail] = useState("");
@@ -259,9 +257,7 @@ export default function CheckoutPage() {
             <div className="space-y-3">
               {items.map((product) => {
                 const isFree = pricing.freeSlugs.includes(product.slug);
-                const isCombo =
-                  pricing.comboApplied &&
-                  (COLOURING_COMBO_SLUGS as readonly string[]).includes(product.slug);
+                const isCombo = comboSlugSet.has(product.slug);
                 return (
                   <div
                     key={product.slug}
@@ -319,12 +315,15 @@ export default function CheckoutPage() {
                     <span>Subtotal</span>
                     <span>₹{pricing.subtotal}</span>
                   </div>
-                  {pricing.comboDiscount > 0 && (
-                    <div className="flex items-center justify-between text-sm text-emerald-600 font-medium mt-1">
-                      <span>🎉 Colouring Combo (6 packs)</span>
-                      <span>-₹{pricing.comboDiscount}</span>
+                  {pricing.appliedCombos.map((combo) => (
+                    <div
+                      key={combo.routeSlug}
+                      className="flex items-center justify-between text-sm text-emerald-600 font-medium mt-1"
+                    >
+                      <span>🎉 {combo.label}</span>
+                      <span>-₹{combo.discount}</span>
                     </div>
-                  )}
+                  ))}
                   {pricing.freeSlugs.length > 0 && (
                     <div className="flex items-center justify-between text-sm text-emerald-600 font-medium mt-1">
                       <span>
@@ -332,7 +331,9 @@ export default function CheckoutPage() {
                           ? `${pricing.freeSlugs.length} packs free`
                           : "Buy 2, get 1 free"}
                       </span>
-                      <span>-₹{pricing.discount - pricing.comboDiscount}</span>
+                      <span>
+                        -₹{pricing.discount - pricing.appliedCombos.reduce((sum, c) => sum + c.discount, 0)}
+                      </span>
                     </div>
                   )}
                   <div className="flex items-baseline justify-between mt-1.5 mb-3">

@@ -38,6 +38,8 @@ Packs with real photos uploaded:
 - `abc-of-character/*` — three look-inside letter pages (C, F, J)
 - `Flower Coloring Book/*` — two flower pages (Hollyhock, Kadamba) plus the contents page
 - `Timing and Shapes/*` — three look-inside pages (clock reading, solid shapes, faces/edges/corners)
+- `cut-stick-and-make/*` — the contents page plus two look-inside cut-out sheets (A Day in the Park, Fruit or Vegetable?)
+- `big-book-of-comparisons/*` — two Parents and Babies matching pages plus the Weight Comparison page
 
 Packs waiting on photos — folders exist and `products.ts` already points at
 these filenames, so dropping in a same-named `.jpg` is all that's needed:

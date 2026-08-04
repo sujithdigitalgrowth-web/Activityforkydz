@@ -1,10 +1,17 @@
 import type { Product } from "./products";
-import { COLOURING_COMBO_SLUGS, COLOURING_COMBO_PRICE } from "./bundles";
+import { COMBOS } from "./bundles";
 
 // "Buy 2, get 1 free" — every complete group of 3 eligible packs earns 1 free
 // pack (the cheapest in that group). Stacks: 3 -> 1 free, 6 -> 2 free, 9 ->
 // 3 free, ...
 export const GROUP_SIZE = 3;
+
+export type AppliedCombo = {
+  routeSlug: string;
+  label: string;
+  slugs: readonly string[];
+  discount: number;
+};
 
 export type CartPricing = {
   subtotal: number;
@@ -12,26 +19,36 @@ export type CartPricing = {
   total: number;
   // Slugs of the packs that are free (empty if the cart doesn't qualify yet).
   freeSlugs: string[];
-  // True once the cart holds all 6 colouring combo packs — they're then
-  // priced as the flat combo total instead of individually.
-  comboApplied: boolean;
-  comboDiscount: number;
+  // One entry per combo (see src/lib/bundles.ts) that's fully present in the
+  // cart — those packs are priced at the combo's flat total instead of
+  // individually. Usually empty or one entry, but a cart can hold more than
+  // one completed combo at once.
+  appliedCombos: AppliedCombo[];
 };
 
 export function getCartPricing(items: Product[]): CartPricing {
   const subtotal = items.reduce((sum, p) => sum + p.price, 0);
-
   const slugSet = new Set(items.map((p) => p.slug));
-  const comboApplied = COLOURING_COMBO_SLUGS.every((slug) => slugSet.has(slug));
 
-  const comboSlugSet = new Set<string>(COLOURING_COMBO_SLUGS);
-  const comboItems = comboApplied ? items.filter((p) => comboSlugSet.has(p.slug)) : [];
-  const comboOriginalTotal = comboItems.reduce((sum, p) => sum + p.price, 0);
-  const comboDiscount = comboApplied ? Math.max(0, comboOriginalTotal - COLOURING_COMBO_PRICE) : 0;
+  const appliedCombos: AppliedCombo[] = [];
+  const comboSlugSet = new Set<string>();
+  for (const combo of COMBOS) {
+    if (!combo.slugs.every((slug) => slugSet.has(slug))) continue;
+    const comboItems = items.filter((p) => (combo.slugs as readonly string[]).includes(p.slug));
+    const comboOriginalTotal = comboItems.reduce((sum, p) => sum + p.price, 0);
+    appliedCombos.push({
+      routeSlug: combo.routeSlug,
+      label: combo.label,
+      slugs: combo.slugs,
+      discount: Math.max(0, comboOriginalTotal - combo.price),
+    });
+    combo.slugs.forEach((slug) => comboSlugSet.add(slug));
+  }
+  const comboDiscount = appliedCombos.reduce((sum, c) => sum + c.discount, 0);
 
-  // Buy-2-get-1-free only ever applies to whatever's left outside the combo,
-  // and the combo's own packs can never be selected as the free item.
-  const remaining = comboApplied ? items.filter((p) => !comboSlugSet.has(p.slug)) : items;
+  // Buy-2-get-1-free only ever applies to whatever's left outside any applied
+  // combo, and combo packs can never be selected as the free item.
+  const remaining = items.filter((p) => !comboSlugSet.has(p.slug));
   const freeCount = Math.floor(remaining.length / GROUP_SIZE);
 
   let freeSlugs: string[] = [];
@@ -50,7 +67,6 @@ export function getCartPricing(items: Product[]): CartPricing {
     discount,
     total: subtotal - discount,
     freeSlugs,
-    comboApplied,
-    comboDiscount,
+    appliedCombos,
   };
 }

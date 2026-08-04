@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import ComboCard from "@/components/ComboCard";
+import { COMBOS } from "@/lib/bundles";
 
 export const metadata: Metadata = {
   title: "Combo Deals — Bundle & Save | activityforKydz",
   description:
-    "Bundle printable activity packs together and pay less than buying them one by one. Currently: all 6 colouring packs for one flat price.",
+    "Bundle printable activity packs together and pay less than buying them one by one. All 6 colouring packs or all 6 learning packs, each for one flat price.",
   alternates: { canonical: "/combos" },
 };
 
@@ -16,7 +17,9 @@ export default function CombosPage() {
         Bundle a few packs together and pay less than buying them one by one.
       </p>
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-5">
-        <ComboCard />
+        {COMBOS.map((combo) => (
+          <ComboCard key={combo.routeSlug} combo={combo} />
+        ))}
       </div>
     </div>
   );

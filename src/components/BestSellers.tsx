@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/products";
 import ProductVisual from "./ProductVisual";
@@ -7,12 +8,16 @@ import AddToCartButton from "./AddToCartButton";
 export default function BestSellers({
   products,
   rankedCount = products.length,
+  extraTiles,
 }: {
   products: Product[];
   // Only the first `rankedCount` products are genuine top sellers by
   // purchase count — anything after that (e.g. a newly launched pack
   // pinned onto the end) gets a "New" badge instead of a fake rank.
   rankedCount?: number;
+  // Non-product tiles (e.g. a combo card) appended after the ranked
+  // products, inside the same grid so column wrapping stays consistent.
+  extraTiles?: ReactNode;
 }) {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5 items-stretch">
@@ -48,6 +53,7 @@ export default function BestSellers({
           </div>
         </div>
       ))}
+      {extraTiles}
     </div>
   );
 }

@@ -867,15 +867,115 @@ export const products: Product[] = [
     seoDescription:
       "100-page printable workbook for kids ages 5-9 — 20 clock worksheets, patterns, flat and solid shapes, and crosswords, with a full answer key. Instant PDF download.",
   },
+  {
+    slug: "cut-stick-and-make",
+    title: "Cut, Stick and Make: 17 Big Cut and Paste Activities",
+    cardTitle: "Cut, Stick and Make Activity Book",
+    categoryLabel: "Cut, Stick and Make",
+    category: "learning",
+    tagline: "17 big cut-and-paste activities — build faces, houses, trains and gardens",
+    price: 99,
+    pageCount: 50,
+    ageRange: "3-7 years",
+    accent: "from-yellow-100 to-lime-50",
+    emoji: "✂️",
+    image: "/categories/Cut%20Stick%20and%20Make.png",
+    bannerImage: "/banners/desktop/Cut%20Stick%20and%20Make.png",
+    galleryImages: [
+      {
+        src: "/gallery/cut-stick-and-make/Screenshot%202026-08-04%20145908.jpg",
+        label: "What's inside — the full contents page",
+      },
+      {
+        src: "/gallery/cut-stick-and-make/Screenshot%202026-08-04%20145939.jpg",
+        label: "A look inside the pack — A Day in the Park (cut-out pieces)",
+      },
+      {
+        src: "/gallery/cut-stick-and-make/Screenshot%202026-08-04%20150015.jpg",
+        label: "A look inside the pack — Fruit or Vegetable? (cut-out pieces)",
+      },
+    ],
+    rating: 4.6,
+    purchaseCount: 40,
+    pdfFile: "activityforKydz-Cut-Stick-and-Make.pdf",
+    description:
+      "A cut-and-paste activity book built entirely around one idea: bigger pieces work better. Every piece is a full 84mm square — nine times the area of a typical printable pack — so a three-year-old can cut it out with long, confident snips and stick it down without a fight.",
+    whatsInside: [
+      "50 pages: 17 cut-and-paste activities using 100 big 84mm pieces, four to a sheet",
+      "Piece sheets print in colour; the pages they stick onto are line art, so every finished piece stands out",
+      "A certificate of finishing at the end",
+    ],
+    whyItMatters: [
+      "Big pieces are gripped in a whole fist and cut with long, confident snips — no tweezers, no giving up halfway",
+      "Builds scissor control and glue-stick coordination before small, fiddly pieces are realistic",
+      "Every finished page looks like something, which is most of the reward for a first-time cutter",
+    ],
+    longDescription:
+      "Cut, Stick and Make is 50 printable pages built around one idea: bigger pieces work better for small hands. Every one of its 100 pieces is a full 84mm square, four to a sheet — nine times the area found in most printable cut-and-paste packs — so a piece can be gripped in a whole fist, cut with long confident snips, and stuck down without tweezers. Across 17 activities, kids build funny faces, houses, trains and gardens, match shapes, count and stick, and trace how a butterfly or a flower grows. Piece sheets print in colour; the pages they stick onto are line art, so the moment a piece goes down it stands out — and a certificate of finishing rounds off the book. Designed for children aged 3-7, this printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
+    relatedSlugs: ["matching-and-memory", "puzzles-and-find-the-difference"],
+    seoTitle: "Cut, Stick and Make — Printable PDF for Kids",
+    seoDescription:
+      "50-page printable cut-and-paste activity book for kids ages 3-7, with 17 activities and 100 big 84mm pieces. Instant PDF download.",
+  },
+  {
+    slug: "big-book-of-comparisons",
+    title: "The Big Book of Comparisons: 100 Worksheets on Matching, Sorting and Comparing",
+    cardTitle: "Big Book of Comparisons",
+    categoryLabel: "Comparisons",
+    category: "learning",
+    tagline: "Match, sort and compare — 9 skills across 100 worksheets, from parents & babies to thick & thin",
+    price: 129,
+    pageCount: 116,
+    ageRange: "3-6 years",
+    accent: "from-teal-100 to-emerald-50",
+    emoji: "⚖️",
+    image: "/categories/Big%20Book%20of%20Comparisons.png",
+    bannerImage: "/banners/desktop/Big%20Book%20of%20Comparisons.png",
+    galleryImages: [
+      {
+        src: "/gallery/big-book-of-comparisons/Screenshot%202026-08-04%20145602.jpg",
+        label: "A look inside the pack — Parents and Babies (matching)",
+      },
+      {
+        src: "/gallery/big-book-of-comparisons/Screenshot%202026-08-04%20145745.jpg",
+        label: "A look inside the pack — Parents and Babies (matching), page 2",
+      },
+      {
+        src: "/gallery/big-book-of-comparisons/Screenshot%202026-08-04%20145816.jpg",
+        label: "A look inside the pack — Weight Comparison",
+      },
+    ],
+    rating: 4.6,
+    purchaseCount: 40,
+    pdfFile: "activityforKydz-Big-Book-of-Comparisons.pdf",
+    description:
+      "A proper comparing workbook, not just a stack of worksheets — 100 pages across 9 skills, from matching a baby animal to its parent through to telling thick shapes from thin ones, each one practising the same core idea from a different angle.",
+    whatsInside: [
+      "116 pages: 100 worksheets across 9 comparing skills, from parents and babies through to thick and thin",
+      "Sections get gradually harder, ending with subtler ideas like thick/thin that most children hear less often",
+      "A certificate of finishing at the end",
+    ],
+    whyItMatters: [
+      "Comparing is a child's first real thinking with numbers — noticing bigger, taller or heavier comes before counting means anything",
+      "Reading each instruction aloud turns a tick-box page into a 'how do you know?' conversation",
+      "100 worksheets is enough for months of one-or-two-pages-a-day practice without repeating a page",
+    ],
+    longDescription:
+      "The Big Book of Comparisons is 116 printable pages built around the first real thinking a child does with numbers: noticing that one thing is bigger, taller, heavier or different from another. Across 9 sections — Parents and Babies, Which Weighs More, Short and Tall, Which Has More, Circle the Biggest, Connect the Same, Same as the One on the Left, What's Different, and Thick and Thin — 100 worksheets get gradually harder, starting with a gentle animal-matching page and ending with subtler ideas like thick and thin. A certificate of finishing rounds off the book. Designed for children aged 3-6, one or two pages a sitting is plenty — there's no prize for finishing quickly, and the sections don't have to be done in order. This printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
+    relatedSlugs: ["numbers-and-counting-mats", "time-patterns-and-shapes"],
+    seoTitle: "The Big Book of Comparisons — Printable PDF for Kids",
+    seoDescription:
+      "116-page printable workbook for kids ages 3-6 with 100 worksheets on matching, sorting and comparing. Instant PDF download.",
+  },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }
 
-export function getBestSellers(count = 3): Product[] {
+export function getBestSellers(count = 3, excludeSlugs: readonly string[] = []): Product[] {
   return [...products]
-    .filter((p) => !p.comingSoon)
+    .filter((p) => !p.comingSoon && !excludeSlugs.includes(p.slug))
     .sort((a, b) => b.purchaseCount - a.purchaseCount)
     .slice(0, count);
 }
