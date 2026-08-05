@@ -22,8 +22,6 @@ declare global {
 // Set NEXT_PUBLIC_MOCK_PAYMENTS=false once Razorpay keys are live to switch to real payments.
 const USE_MOCK_PAYMENTS = process.env.NEXT_PUBLIC_MOCK_PAYMENTS !== "false";
 
-const PHONE_RE = /^[6-9]\d{9}$/;
-
 type Status = "idle" | "processing" | "success" | "error";
 
 export default function CheckoutPage() {
@@ -37,11 +35,6 @@ export default function CheckoutPage() {
   const groupSize = GROUP_SIZE;
 
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  // Guards /api/cart-capture from firing more than once per valid phone
-  // number (the field can blur/refocus/blur again without the value changing).
-  const [cartSaved, setCartSaved] = useState(false);
-  const [cartId, setCartId] = useState<string | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [showMockCheckout, setShowMockCheckout] = useState(false);
@@ -95,34 +88,6 @@ export default function CheckoutPage() {
     return true;
   }
 
-  // Phone is optional and never blocks checkout — this just logs an
-  // abandoned-cart record (for WhatsApp recovery) once a valid number is
-  // entered, so it fires quietly on blur rather than as part of "Pay".
-  async function handlePhoneBlur() {
-    if (cartSaved || !PHONE_RE.test(phone) || items.length === 0) return;
-    setCartSaved(true);
-    try {
-      const res = await fetch("/api/cart-capture", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          phone,
-          email: email || undefined,
-          items: items.map((p) => p.slug),
-          amount: pricing.total,
-        }),
-      });
-      const data = await res.json().catch(() => null);
-      if (res.ok && data?.cartId) {
-        setCartId(data.cartId);
-      } else {
-        setCartSaved(false); // allow a retry on the next blur
-      }
-    } catch {
-      setCartSaved(false);
-    }
-  }
-
   async function handlePay() {
     if (!validateEmail()) return;
     const snapshot = items;
@@ -152,11 +117,7 @@ export default function CheckoutPage() {
       const res = await fetch("/api/checkout/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          slugs: snapshot.map((p) => p.slug),
-          email,
-          cartId: cartId ?? undefined,
-        }),
+        body: JSON.stringify({ slugs: snapshot.map((p) => p.slug), email }),
       });
       const data = await res.json();
 
@@ -175,12 +136,7 @@ export default function CheckoutPage() {
         order_id: data.orderId,
         name: "activityforKydz",
         description: snapshot.length === 1 ? snapshot[0].title : `${snapshot.length} activity packs`,
-        prefill: {
-          email,
-          // Only pass contact once a phone number was actually captured —
-          // shoppers who skip the field just don't get it prefilled.
-          ...(PHONE_RE.test(phone) ? { contact: `+91${phone}` } : {}),
-        },
+        prefill: { email },
         theme: { color: "#e2661f" },
         handler: async (response: {
           razorpay_payment_id: string;
@@ -404,6 +360,9 @@ export default function CheckoutPage() {
                   <p className="text-xs sm:text-sm font-bold text-emerald-900 leading-snug">
                     🎁 Buy 2, get 1 free
                   </p>
+                  <p className="text-[11px] sm:text-xs text-emerald-700 mt-0.5">
+                    Add {groupSize - nonComboCount} more packs to unlock a free pack
+                  </p>
                 </div>
               )}
 
@@ -415,18 +374,6 @@ export default function CheckoutPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full rounded-lg border border-zinc-300 px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
-              />
-
-              <label className="block text-sm font-medium text-zinc-700 mb-1">
-                WhatsApp number (order updates)
-              </label>
-              <input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
-                onBlur={handlePhoneBlur}
-                placeholder="+91 XXXXXXXXXX"
                 className="w-full rounded-lg border border-zinc-300 px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
 
