@@ -8,6 +8,12 @@ export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
   const slugs = body?.slugs as string[] | undefined;
   const email = body?.email as string | undefined;
+  // Set by /api/cart-capture when the shopper entered a phone number earlier
+  // in checkout — threading it into the order's notes (rather than the
+  // client-side Razorpay Checkout `notes` option) is what makes it reliably
+  // show up on the payment.captured webhook event, since order-level notes
+  // set at creation take precedence over anything passed to the JS widget.
+  const cartId = body?.cartId as string | undefined;
 
   if (!Array.isArray(slugs) || slugs.length === 0 || !email || !/^\S+@\S+\.\S+$/.test(email)) {
     return NextResponse.json({ error: "A valid cart and email are required" }, { status: 400 });
@@ -33,7 +39,7 @@ export async function POST(req: Request) {
     order = await getRazorpay().orders.create({
       amount,
       currency: "INR",
-      notes: { email, ...encodeSlugsToNotes(uniqueSlugs) },
+      notes: { email, ...encodeSlugsToNotes(uniqueSlugs), ...(cartId ? { cartId } : {}) },
     });
   } catch (err) {
     console.error("Razorpay order creation failed", err);

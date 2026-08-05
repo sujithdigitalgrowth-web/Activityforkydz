@@ -5,6 +5,7 @@ import { signDownload } from "@/lib/download-token";
 import { sendDownloadEmail } from "@/lib/email";
 import { decodeSlugsFromNotes } from "@/lib/cart-notes";
 import { getBaseUrl } from "@/lib/seo";
+import { markAbandonedCartCompleted } from "@/lib/cart-capture";
 
 function isValidSignature(rawBody: string, signature: string, secret: string): boolean {
   const expected = createHmac("sha256", secret).update(rawBody).digest("hex");
@@ -35,7 +36,16 @@ export async function POST(req: Request) {
     const notes = payment?.notes ?? {};
     const email: string | undefined = notes.email;
     const orderId: string | undefined = payment?.order_id;
+    const cartId: string | undefined = notes.cartId;
     const slugs = decodeSlugsFromNotes(notes);
+
+    if (cartId) {
+      try {
+        await markAbandonedCartCompleted(cartId);
+      } catch (err) {
+        console.error("Failed to mark abandoned-cart record completed", err);
+      }
+    }
 
     if (email && orderId && slugs.length > 0) {
       const siteUrl = getBaseUrl();
