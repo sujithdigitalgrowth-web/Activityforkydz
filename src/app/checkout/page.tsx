@@ -38,10 +38,9 @@ export default function CheckoutPage() {
 
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  // Tracks which phone number was last successfully logged, so re-blurring
-  // the same value doesn't re-fire the request — but editing to a different
-  // number after saving does (and logs it as a fresh row/cartId).
-  const [savedPhone, setSavedPhone] = useState<string | null>(null);
+  // Guards /api/cart-capture from firing more than once per valid phone
+  // number (the field can blur/refocus/blur again without the value changing).
+  const [cartSaved, setCartSaved] = useState(false);
   const [cartId, setCartId] = useState<string | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -100,12 +99,8 @@ export default function CheckoutPage() {
   // abandoned-cart record (for WhatsApp recovery) once a valid number is
   // entered, so it fires quietly on blur rather than as part of "Pay".
   async function handlePhoneBlur() {
-    if (!PHONE_RE.test(phone) || items.length === 0 || phone === savedPhone) return;
-    // Set before the request resolves, both to mark this value as "handled"
-    // (so a same-value re-blur while the request is in flight is a no-op)
-    // and to unblock a retry: if it fails, resetting to null makes the next
-    // blur try again even though the phone value itself hasn't changed.
-    setSavedPhone(phone);
+    if (cartSaved || !PHONE_RE.test(phone) || items.length === 0) return;
+    setCartSaved(true);
     try {
       const res = await fetch("/api/cart-capture", {
         method: "POST",
@@ -121,10 +116,10 @@ export default function CheckoutPage() {
       if (res.ok && data?.cartId) {
         setCartId(data.cartId);
       } else {
-        setSavedPhone(null); // allow a retry
+        setCartSaved(false); // allow a retry on the next blur
       }
     } catch {
-      setSavedPhone(null);
+      setCartSaved(false);
     }
   }
 
