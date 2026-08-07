@@ -3,9 +3,9 @@ import ComboCard from "@/components/ComboCard";
 import { COMBOS } from "@/lib/bundles";
 
 export const metadata: Metadata = {
-  title: "Combo Deals — Bundle & Save | activityforKydz",
+  title: "Kids Activity Pack Combos — Buy 1 Get 1 Free",
   description:
-    "Bundle printable activity packs together and pay less than buying them one by one. All 6 colouring packs or all 6 learning packs, each for one flat price.",
+    "Bundle printable activity packs together and pay less than buying them one by one. All 6 colouring packs or all 9 learning packs, each for one flat price.",
   alternates: { canonical: "/combos" },
 };
 

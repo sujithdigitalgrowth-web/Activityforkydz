@@ -36,9 +36,9 @@ This is the whole idea behind our **[My First Lines pre-writing workbook](https:
 
 ## Puzzles help more than people expect
 
-Simple jigsaw puzzles, matching games, and find-the-difference activities all quietly involve fine motor coordination — picking up small pieces, turning them, placing them precisely. They also build focus and patience alongside the physical skill, which is why they're worth mixing into a weekly rhythm even if your child doesn't seem like a "puzzle kid" yet.
+Simple jigsaw puzzles, matching games, and cut-and-paste activities all quietly involve fine motor coordination — picking up small pieces, turning them, placing them precisely. They also build focus and patience alongside the physical skill, which is why they're worth mixing into a weekly rhythm even if your child doesn't seem like a "puzzle kid" yet.
 
-Our **[Puzzles & Find the Difference Activity Pack](https://www.activityforkydz.com/products/puzzles-and-find-the-difference)** is built with this age group in mind — simple enough not to frustrate, engaging enough to hold attention past the first minute.
+Our **[Cut, Stick and Make](https://www.activityforkydz.com/products/cut-stick-and-make)** activity book is built with this age group in mind — every piece is a full 84mm square, nine times the size found in most cut-and-paste packs, so a toddler can grip and place them with long, confident snips instead of fumbling with something too small.
 
 ## A realistic weekly mix
 

@@ -10,6 +10,7 @@ export default function ProductVisual({
   emojiClassName = "text-6xl",
   iconOnly = false,
   srcOverride,
+  priority = false,
 }: {
   product: Product;
   className?: string;
@@ -21,10 +22,18 @@ export default function ProductVisual({
   // Use a specific image instead of the default cover (product.image /
   // /categories/<slug>.jpg) — e.g. product.bannerImage for the hero carousel.
   srcOverride?: string;
+  // Only the single above-the-fold likely-LCP image on a page should set
+  // this (e.g. the first hero carousel slide) — everywhere else stays lazy.
+  priority?: boolean;
 }) {
   const [imageFailed, setImageFailed] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const src = srcOverride ?? product.image ?? `/categories/${product.slug}.jpg`;
+  // Titles with long marketing taglines can push "title — tagline" past the
+  // ~125 char alt-text guideline — fall back to the title alone rather than
+  // truncating mid-sentence.
+  const fullAlt = `${product.title} — ${product.tagline}`;
+  const alt = fullAlt.length <= 125 ? fullAlt : product.title;
 
   // The accent + emoji fallback is always the base layer, so there's never a
   // blank flash while the real cover image is still loading (or a 404, for
@@ -37,8 +46,9 @@ export default function ProductVisual({
       {!iconOnly && !imageFailed && (
         <Image
           src={src}
-          alt={`${product.title} — ${product.tagline}`}
+          alt={alt}
           fill
+          priority={priority}
           sizes="(max-width: 768px) 90vw, 400px"
           className={`object-cover transition-opacity duration-300 ${
             imageLoaded ? "opacity-100" : "opacity-0"

@@ -144,7 +144,7 @@ export default function CartPage() {
                     <span>
                       🎁 {pricing.freeSlugs.length > 1
                         ? `${pricing.freeSlugs.length} packs free`
-                        : "Buy 2, get 1 free"}
+                        : "Buy 1, get 1 free"}
                     </span>
                     <span>
                       -₹{pricing.discount - pricing.appliedCombos.reduce((sum, c) => sum + c.discount, 0)}

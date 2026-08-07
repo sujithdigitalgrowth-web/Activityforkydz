@@ -329,7 +329,7 @@ export default function CheckoutPage() {
                       <span>
                         🎁 {pricing.freeSlugs.length > 1
                           ? `${pricing.freeSlugs.length} packs free`
-                          : "Buy 2, get 1 free"}
+                          : "Buy 1, get 1 free"}
                       </span>
                       <span>
                         -₹{pricing.discount - pricing.appliedCombos.reduce((sum, c) => sum + c.discount, 0)}
@@ -358,10 +358,10 @@ export default function CheckoutPage() {
                     Special offer
                   </span>
                   <p className="text-xs sm:text-sm font-bold text-emerald-900 leading-snug">
-                    🎁 Buy 2, get 1 free
+                    🎁 Buy 1, get 1 free
                   </p>
                   <p className="text-[11px] sm:text-xs text-emerald-700 mt-0.5">
-                    Add {groupSize - nonComboCount} more packs to unlock a free pack
+                    Add {groupSize - nonComboCount} more pack{groupSize - nonComboCount === 1 ? "" : "s"} to unlock a free pack
                   </p>
                 </div>
               )}

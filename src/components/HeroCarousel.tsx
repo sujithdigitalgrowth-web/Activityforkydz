@@ -28,7 +28,7 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
         onScroll={handleScroll}
         className="flex items-stretch gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
-        {products.map((product) => (
+        {products.map((product, i) => (
           <div
             key={product.slug}
             className="relative snap-center shrink-0 w-full rounded-2xl overflow-hidden shadow-sm"
@@ -36,18 +36,22 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
             <Link href={`/products/${product.slug}`} className="block">
               {/* Separate mobile/desktop crops (art direction) rather than one
                   image squeezed into both ratios via object-cover, since a
-                  3:1 desktop banner loses too much width when cropped to 16:9. */}
+                  3:1 desktop banner loses too much width when cropped to 16:9.
+                  Only the first slide is the homepage's likely LCP element —
+                  it's the only one that should skip lazy loading. */}
               <ProductVisual
                 product={product}
                 className="aspect-[16/9] w-full sm:hidden"
                 emojiClassName="text-8xl"
                 srcOverride={product.bannerImageMobile ?? product.bannerImage}
+                priority={i === 0}
               />
               <ProductVisual
                 product={product}
                 className="max-sm:hidden aspect-[16/9] w-full"
                 emojiClassName="text-9xl"
                 srcOverride={product.bannerImage}
+                priority={i === 0}
               />
             </Link>
           </div>

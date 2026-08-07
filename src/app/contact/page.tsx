@@ -3,7 +3,7 @@ import LegalPage from "@/components/LegalPage";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact & Support",
+  title: "Contact & Support — activityforKydz",
   description: "Get in touch with activityforKydz for order support, download issues, or questions about our printable kids activity packs.",
   alternates: { canonical: "/contact" },
 };

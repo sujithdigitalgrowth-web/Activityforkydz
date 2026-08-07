@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Fredoka, Nunito } from "next/font/google";
-import Script from "next/script";
 import { GoogleTagManager } from "@next/third-parties/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -26,19 +25,14 @@ export const metadata: Metadata = {
   title: {
     default:
       "activityforKydz — Printable Coloring Pages & Activity Packs for Kids (PDF Download)",
-    template: "%s | activityforKydz",
+    // No "%s | activityforKydz" template: that appended the brand to every
+    // route's title even when the route's own title already included it
+    // (e.g. /combos), producing "... | activityforKydz | activityforKydz".
+    // Each route now supplies its complete, already-branded title instead.
+    template: "%s",
   },
   description:
     "Printable PDF coloring pages and learning activity packs for kids — animals, alphabet, birds, numbers 1-100, ocean life, fruits & vegetables, matching games, puzzles and more. Instant download, print at home, no app needed.",
-  keywords: [
-    "printable coloring pages for kids",
-    "activity pack for kids pdf",
-    "kids colouring pages india",
-    "alphabet coloring pages for kids",
-    "dot to dot printables for kids",
-    "printable activity sheets for kids",
-    "learning worksheets pdf download",
-  ],
   openGraph: {
     type: "website",
     siteName: "activityforKydz",
@@ -78,7 +72,6 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
       </body>
     </html>
   );

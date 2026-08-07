@@ -1,10 +1,10 @@
 import type { Product } from "./products";
 import { COMBOS } from "./bundles";
 
-// "Buy 2, get 1 free" — every complete group of 3 eligible packs earns 1 free
-// pack (the cheapest in that group). Stacks: 3 -> 1 free, 6 -> 2 free, 9 ->
+// "Buy 1, get 1 free" — every complete group of 2 eligible packs earns 1 free
+// pack (the cheapest in that group). Stacks: 2 -> 1 free, 4 -> 2 free, 6 ->
 // 3 free, ...
-export const GROUP_SIZE = 3;
+export const GROUP_SIZE = 2;
 
 export type AppliedCombo = {
   routeSlug: string;

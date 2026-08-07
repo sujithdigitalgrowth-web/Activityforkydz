@@ -58,10 +58,10 @@ export type Product = {
   // Coming-soon targets are filtered out automatically at render time, so
   // this can be set ahead of a pack going live.
   relatedSlugs?: string[];
-  // Overrides for the page <title> (without the " | activityforKydz" suffix
-  // — the root layout's title template adds that) and meta description.
-  // Falls back to the generated title/description in generateMetadata when
-  // unset.
+  // Overrides for the page <title> and meta description, rendered exactly
+  // as written — no brand suffix is appended (per SEO pack: product titles
+  // stay unbranded to save title-tag space). Falls back to the generated
+  // title/description in generateMetadata when unset.
   seoTitle?: string;
   seoDescription?: string;
 };
@@ -80,9 +80,9 @@ export const products: Product[] = [
     emoji: "🦁",
     bannerImage: "/banners/desktop/animal-friends.png",
     galleryImages: [
-      { src: "/gallery/animal-friends/colouring-pack.jpg", label: "A finished page — Duck" },
-      { src: "/gallery/animal-friends/sheep.jpg", label: "A look inside the pack — Sheep" },
-      { src: "/gallery/animal-friends/rabbit.jpg", label: "A look inside the pack — Rabbit" },
+      { src: "/gallery/animal-friends/colouring-pack.jpg", label: "Printable duck colouring page" },
+      { src: "/gallery/animal-friends/sheep.jpg", label: "Printable sheep colouring page" },
+      { src: "/gallery/animal-friends/rabbit.jpg", label: "Printable rabbit colouring page" },
     ],
     rating: 4.8,
     purchaseCount: 3240,
@@ -120,9 +120,9 @@ export const products: Product[] = [
     image: "/categories/Alphabet%20Adventures%20A-Z%20Pack.png",
     bannerImage: "/banners/desktop/alphabet-adventures.png",
     galleryImages: [
-      { src: "/gallery/alphabet-adventures/bear.jpg", label: "A finished page — B is for Bear" },
-      { src: "/gallery/alphabet-adventures/elephant.jpg", label: "A look inside the pack — E is for Elephant" },
-      { src: "/gallery/alphabet-adventures/giraffe.png", label: "A look inside the pack — G is for Giraffe" },
+      { src: "/gallery/alphabet-adventures/bear.jpg", label: "Letter B tracing page — B is for Bear" },
+      { src: "/gallery/alphabet-adventures/elephant.jpg", label: "Letter E tracing page — E is for Elephant" },
+      { src: "/gallery/alphabet-adventures/giraffe.png", label: "Letter G tracing page — G is for Giraffe" },
     ],
     rating: 4.6,
     purchaseCount: 1670,
@@ -141,7 +141,7 @@ export const products: Product[] = [
     ],
     longDescription:
       "One letter, one picture, one word — this 28-page alphabet coloring pack takes kids on a simple, screen-free journey from A to Z. Designed for toddlers and early learners aged 3–6, each page pairs a big, friendly letter with an easy illustration and word, helping build early reading skills while your child colors. This printable alphabet worksheet pack is a favorite for parents looking for a gentle introduction to letters before kindergarten, or extra practice alongside preschool. Delivered instantly as a PDF straight to your email, there's no app to install — just print at home or at any print shop and start the alphabet adventure. A lovely first step into reading, one letter at a time.",
-    relatedSlugs: ["numbers-1-to-100", "dot-to-dot"],
+    relatedSlugs: [],
     seoTitle: "Alphabet Adventures A-Z Pack — Printable Alphabet Coloring for Kids",
     seoDescription:
       "28-page printable alphabet coloring pack for kids ages 3-6. One letter, one picture, one word. Instant PDF download.",
@@ -160,9 +160,9 @@ export const products: Product[] = [
     image: "/categories/Birds%20of%20the%20World.png",
     bannerImage: "/banners/desktop/birds-of-the-world.png",
     galleryImages: [
-      { src: "/gallery/birds-of-the-world/owl.jpg", label: "A look inside the pack — Owl" },
-      { src: "/gallery/birds-of-the-world/parrot.jpg", label: "A look inside the pack — Parrot" },
-      { src: "/gallery/birds-of-the-world/rooster.jpg", label: "A look inside the pack — Rooster" },
+      { src: "/gallery/birds-of-the-world/owl.jpg", label: "Printable owl colouring page" },
+      { src: "/gallery/birds-of-the-world/parrot.jpg", label: "Printable parrot colouring page" },
+      { src: "/gallery/birds-of-the-world/rooster.jpg", label: "Printable rooster colouring page" },
     ],
     rating: 4.6,
     purchaseCount: 1460,
@@ -186,44 +186,6 @@ export const products: Product[] = [
       "51-page printable bird coloring pack for kids ages 4-9. Peacocks, parrots, owls and more, with English name labels. Instant PDF download.",
   },
   {
-    slug: "numbers-1-to-100",
-    title: "Numbers 1-100 Practice & Coloring Pack",
-    categoryLabel: "Numbers 1-100",
-    category: "colouring",
-    tagline: "Trace, count and color your way from 1 to 100",
-    price: 89,
-    pageCount: 110,
-    ageRange: "4-7 years",
-    accent: "from-emerald-100 to-teal-50",
-    emoji: "🔢",
-    galleryImages: [
-      { src: "/gallery/numbers-1-to-100/colouring-pack.jpg", label: "A finished page" },
-      { src: "/gallery/numbers-1-to-100/look-inside-1.jpg", label: "A look inside the pack" },
-      { src: "/gallery/numbers-1-to-100/look-inside-2.jpg", label: "A look inside the pack" },
-    ],
-    rating: 4.9,
-    purchaseCount: 3680,
-    comingSoon: true,
-    description:
-      "A proper practice workbook, not just a coloring pack — tracing pages for each number, count-and-color pages, and simple addition using pictures.",
-    whatsInside: [
-      "110 pages: numbers 1-100 tracing, count-and-color, and picture addition",
-      "Dotted-line numbers sized for early pencil grip",
-      "A printable progress chart to stick on the fridge",
-    ],
-    whyItMatters: [
-      "Builds number recognition and pencil control together",
-      "Structured enough to use daily, 1-2 pages at a time",
-      "Something concrete you can point to as 'progress'",
-    ],
-    longDescription:
-      "The Numbers 1-100 Practice & Coloring Pack is a proper practice workbook, not just a coloring pack — 110 printable pages that take kids from tracing single digits to counting, coloring and simple picture addition, all the way up to 100. Designed for children aged 4–7, each page is sized for early pencil grip, with a printable progress chart included so kids — and parents — can see how far they've come. It's instant-download only: no app, no login, just a PDF you can print at home or at any print shop, one or two pages at a time. Download once, print as many times as you like.",
-    relatedSlugs: ["alphabet-adventures", "dot-to-dot"],
-    seoTitle: "Numbers 1-100 Practice & Coloring Pack — Printable PDF for Kids",
-    seoDescription:
-      "110-page printable numbers 1-100 workbook for kids ages 4-7. Tracing, count-and-color and picture addition. Instant PDF download.",
-  },
-  {
     slug: "oceans-and-sea-life",
     title: "Oceans & Sea Life Coloring Pack",
     categoryLabel: "Oceans & Sea Life",
@@ -237,9 +199,9 @@ export const products: Product[] = [
     image: "/categories/Oceans%20and%20Sea%20Life%20Coloring.png",
     bannerImage: "/banners/desktop/oceans-and-sea-life.png",
     galleryImages: [
-      { src: "/gallery/oceans-and-sea-life/lobster.jpg", label: "A finished page — Lobster" },
-      { src: "/gallery/oceans-and-sea-life/dolphin.jpg", label: "A look inside the pack — Dolphin" },
-      { src: "/gallery/oceans-and-sea-life/butterfly-fish.jpg", label: "A look inside the pack — Butterfly Fish" },
+      { src: "/gallery/oceans-and-sea-life/lobster.jpg", label: "Printable lobster colouring page" },
+      { src: "/gallery/oceans-and-sea-life/dolphin.jpg", label: "Printable dolphin colouring page" },
+      { src: "/gallery/oceans-and-sea-life/butterfly-fish.jpg", label: "Printable butterfly fish colouring page" },
     ],
     rating: 4.7,
     purchaseCount: 1380,
@@ -275,9 +237,9 @@ export const products: Product[] = [
     emoji: "🍎",
     bannerImage: "/banners/desktop/fruits-and-vegetables.png",
     galleryImages: [
-      { src: "/gallery/fruits-and-vegetables/colouring-pack.jpg", label: "A finished page — Raspberry" },
-      { src: "/gallery/fruits-and-vegetables/pineapple.jpg", label: "A look inside the pack — Pineapple" },
-      { src: "/gallery/fruits-and-vegetables/grapes.jpg", label: "A look inside the pack — Grapes" },
+      { src: "/gallery/fruits-and-vegetables/colouring-pack.jpg", label: "Printable raspberry colouring page" },
+      { src: "/gallery/fruits-and-vegetables/pineapple.jpg", label: "Printable pineapple colouring page" },
+      { src: "/gallery/fruits-and-vegetables/grapes.jpg", label: "Printable grapes colouring page" },
     ],
     rating: 4.6,
     purchaseCount: 990,
@@ -295,7 +257,7 @@ export const products: Product[] = [
     ],
     longDescription:
       "The Fruits Coloring & Learning Pack brings 51 printable pages of the fruits kids already see every day — apples, mangoes, bananas, strawberries and more — plus a 'fill your fruit basket' scene and a simple matching activity. Each picture is labeled in simple English, turning coloring time into an easy vocabulary lesson. Designed for children aged 3–7, this printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. It's a gentle, low-pressure way to start conversations about healthy snacking. Download once, print as many times as you like.",
-    relatedSlugs: ["trees-and-plants", "matching-and-memory"],
+    relatedSlugs: ["trees-and-plants"],
     seoTitle: "Fruits Coloring & Learning Pack — Printable PDF for Kids",
     seoDescription:
       "51-page printable fruits coloring pack for kids ages 3-7. Learn fruit names while coloring. Instant PDF download.",
@@ -314,9 +276,9 @@ export const products: Product[] = [
     image: "/categories/Trees%20and%20Plants%20Coloring.png",
     bannerImage: "/banners/desktop/trees-and-plants.png",
     galleryImages: [
-      { src: "/gallery/trees-and-plants/lotus.jpg", label: "A finished page — Lotus" },
-      { src: "/gallery/trees-and-plants/apple-tree.jpg", label: "A look inside the pack — Apple Tree" },
-      { src: "/gallery/trees-and-plants/coconut-tree.jpg", label: "A look inside the pack — Coconut Tree" },
+      { src: "/gallery/trees-and-plants/lotus.jpg", label: "Printable lotus colouring page" },
+      { src: "/gallery/trees-and-plants/apple-tree.jpg", label: "Printable apple tree colouring page" },
+      { src: "/gallery/trees-and-plants/coconut-tree.jpg", label: "Printable coconut tree colouring page" },
     ],
     rating: 4.5,
     purchaseCount: 860,
@@ -340,196 +302,6 @@ export const products: Product[] = [
       "52-page printable trees and plants coloring pack for kids ages 3-8, with a seed-to-tree growth sequence. Instant PDF download.",
   },
   {
-    slug: "matching-and-memory",
-    title: "Matching & Memory Activity Pack",
-    categoryLabel: "Matching & Memory",
-    category: "learning",
-    tagline: "Pair the pictures, spot the match, train that memory",
-    price: 99,
-    pageCount: 40,
-    ageRange: "3-6 years",
-    accent: "from-purple-100 to-violet-50",
-    emoji: "🧠",
-    galleryImages: [
-      { src: "/gallery/matching-and-memory/colouring-pack.jpg", label: "A finished page" },
-      { src: "/gallery/matching-and-memory/look-inside-1.jpg", label: "A look inside the pack" },
-      { src: "/gallery/matching-and-memory/look-inside-2.jpg", label: "A look inside the pack" },
-    ],
-    rating: 4.6,
-    purchaseCount: 720,
-    comingSoon: true,
-    description:
-      "A pack of cut-and-play matching pairs plus print-and-play memory grids — the kind of quiet, focused activity that keeps little hands busy without a screen.",
-    whatsInside: [
-      "40 pages of matching pairs and memory grids, easy to hard",
-      "Cut-out cards for a proper table memory game",
-      "Simple 'which one is different' warm-up pages",
-    ],
-    whyItMatters: [
-      "Builds concentration and short-term memory through play",
-      "Easy to play together as a family, not just solo coloring",
-      "Reusable — laminate the cards and play again and again",
-    ],
-    longDescription:
-      "The Matching & Memory Activity Pack is 40 printable pages of cut-and-play matching pairs and print-and-play memory grids, ranging from easy to a bit more challenging. Designed for children aged 3–6, it builds concentration and short-term memory through play — and unlike a coloring page, it's reusable: laminate the cards and play again and again, alone or as a family. This printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
-    relatedSlugs: ["puzzles-and-find-the-difference", "dot-to-dot"],
-    seoTitle: "Matching & Memory Activity Pack — Printable PDF for Kids",
-    seoDescription:
-      "40-page printable matching pairs and memory game pack for kids ages 3-6. Cut-out cards, print-and-play grids. Instant PDF download.",
-  },
-  {
-    slug: "puzzles-and-find-the-difference",
-    title: "Puzzles & Find the Difference Activity Pack",
-    categoryLabel: "Puzzles & Find the Difference",
-    category: "learning",
-    tagline: "Spot-the-difference scenes, mazes and simple picture puzzles",
-    price: 99,
-    pageCount: 45,
-    ageRange: "4-9 years",
-    accent: "from-slate-100 to-zinc-50",
-    emoji: "🧩",
-    galleryImages: [
-      { src: "/gallery/puzzles-and-find-the-difference/colouring-pack.jpg", label: "A finished page" },
-      { src: "/gallery/puzzles-and-find-the-difference/look-inside-1.jpg", label: "A look inside the pack" },
-      { src: "/gallery/puzzles-and-find-the-difference/look-inside-2.jpg", label: "A look inside the pack" },
-    ],
-    rating: 4.7,
-    purchaseCount: 940,
-    comingSoon: true,
-    description:
-      "A pack built for kids who like to look closely — spot-the-difference scenes, simple mazes and picture puzzles that reward patience over speed.",
-    whatsInside: [
-      "45 pages of spot-the-difference, mazes and picture puzzles",
-      "An answer key at the back for quick checking",
-      "Difficulty ramps up gently from page to page",
-    ],
-    whyItMatters: [
-      "Builds visual attention and patience in a fun, low-pressure way",
-      "Great for waiting rooms, car rides and quiet afternoons",
-      "Gives kids a real sense of 'I solved it' without a screen",
-    ],
-    longDescription:
-      "The Puzzles & Find the Difference Activity Pack is 45 printable pages built for kids who like to look closely — spot-the-difference scenes, simple mazes and picture puzzles that reward patience over speed, with an answer key at the back for quick checking. Designed for children aged 4–9, the difficulty ramps up gently from page to page, making it a reliable go-to for waiting rooms, car rides and quiet afternoons. This printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
-    relatedSlugs: ["matching-and-memory", "dot-to-dot"],
-    seoTitle: "Puzzles & Find the Difference Activity Pack — Printable PDF for Kids",
-    seoDescription:
-      "45-page printable spot-the-difference, maze and puzzle pack for kids ages 4-9. Instant PDF download, print at home.",
-  },
-  {
-    slug: "dot-to-dot",
-    title: "Dot to Dot: Connect the Numbers & Letters Pack",
-    categoryLabel: "Dot to Dot",
-    category: "learning",
-    tagline: "Connect the numbers, connect the letters, reveal the picture",
-    price: 99,
-    pageCount: 50,
-    ageRange: "4-9 years",
-    accent: "from-red-100 to-rose-50",
-    emoji: "✏️",
-    galleryImages: [
-      { src: "/gallery/dot-to-dot/colouring-pack.jpg", label: "A finished page" },
-      { src: "/gallery/dot-to-dot/look-inside-1.jpg", label: "A look inside the pack" },
-      { src: "/gallery/dot-to-dot/look-inside-2.jpg", label: "A look inside the pack" },
-    ],
-    rating: 4.7,
-    purchaseCount: 1050,
-    comingSoon: true,
-    description:
-      "Classic dot-to-dot, done two ways — number sequences and A-Z letter sequences — so kids practice counting and the alphabet while a picture reveals itself.",
-    whatsInside: [
-      "50 pages split between number dot-to-dots and letter dot-to-dots",
-      "A gentle difficulty curve, from 1-20 dots up to 1-100",
-      "A blank coloring step once the picture is revealed",
-    ],
-    whyItMatters: [
-      "Reinforces number and letter order in a genuinely fun way",
-      "Builds pencil control and left-to-right tracking",
-      "The 'reveal' moment keeps kids motivated to finish the page",
-    ],
-    longDescription:
-      "Dot to Dot: Connect the Numbers & Letters is 50 printable pages of classic dot-to-dot puzzles, done two ways — number sequences and A-Z letter sequences — so kids practice counting and the alphabet while a picture reveals itself underneath. Designed for children aged 4–9, the difficulty ramps up gently from 1-20 dots up to 1-100, with a blank coloring step once each picture is complete. This printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
-    relatedSlugs: ["numbers-1-to-100", "alphabet-adventures"],
-    seoTitle: "Dot to Dot: Connect the Numbers & Letters — Printable PDF for Kids",
-    seoDescription:
-      "50-page printable dot-to-dot pack for kids ages 4-9, connecting numbers and letters to reveal a picture. Instant PDF download.",
-  },
-  {
-    slug: "cursive-handwriting",
-    title: "Cursive Handwriting: From First Strokes to Joined-Up Writing",
-    categoryLabel: "Cursive Handwriting",
-    category: "learning",
-    tagline: "Warm-up strokes, all 26 letters, joining up, then real words and sentences",
-    price: 99,
-    pageCount: 50,
-    ageRange: "3-7 years",
-    accent: "from-indigo-100 to-blue-50",
-    emoji: "✍️",
-    galleryImages: [
-      { src: "/gallery/cursive-handwriting/colouring-pack.jpg", label: "A finished page" },
-      { src: "/gallery/cursive-handwriting/look-inside-1.jpg", label: "A look inside the pack" },
-      { src: "/gallery/cursive-handwriting/look-inside-2.jpg", label: "A look inside the pack" },
-    ],
-    rating: 4.7,
-    purchaseCount: 140,
-    comingSoon: true,
-    description:
-      "A proper cursive curriculum, not just letter copying — six warm-up stroke pages first, then the alphabet, then joining letters together, then real words and sentences to write.",
-    whatsInside: [
-      "50 practice pages across five parts: warm-up strokes, the A-Z alphabet, joining up, words & sentences, and free practice",
-      "A pink starting dot on every letter and four guide lines to keep sizing consistent",
-      "A certificate of finishing at the end",
-    ],
-    whyItMatters: [
-      "Starts with the four basic pen movements instead of forty repeats of one letter",
-      "Builds joining — the part kids actually struggle with — as its own dedicated section",
-      "Short, ten-minute sessions by design, since handwriting is a physical skill, not an intellectual one",
-    ],
-    longDescription:
-      "Cursive Handwriting takes a different route than most copybooks: instead of handing a child letter A to copy forty times, it starts with six pages of pure movement — the scoop, the arch, the loop, the wave — the four shapes that make up almost every lowercase letter. From there it moves through the alphabet one letter a page, then a whole section on joining letters together, then real words: days of the week, months, numbers, colours and short sentences. A pink dot marks where to start each letter, and four guide lines give every letter somewhere to sit. Designed for children aged 3-7, this printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
-    relatedSlugs: ["letters-and-words", "alphabet-adventures"],
-    seoTitle: "Cursive Handwriting Practice Pack — Printable PDF for Kids",
-    seoDescription:
-      "50-page printable cursive handwriting workbook for kids ages 3-7. Warm-up strokes, the alphabet, joining letters, and real words to write. Instant PDF download.",
-  },
-  {
-    slug: "festivals-colouring",
-    title: "Festivals: A Colouring Book of Celebrations from India and Around the World",
-    categoryLabel: "Festivals",
-    category: "colouring",
-    tagline: "24 festivals of India, 20 from around the world, and 6 pages of festive patterns",
-    price: 89,
-    pageCount: 50,
-    ageRange: "4-10 years",
-    accent: "from-rose-100 to-amber-50",
-    emoji: "🎉",
-    galleryImages: [
-      { src: "/gallery/festivals-colouring/colouring-pack.jpg", label: "A finished page" },
-      { src: "/gallery/festivals-colouring/look-inside-1.jpg", label: "A look inside the pack" },
-      { src: "/gallery/festivals-colouring/look-inside-2.jpg", label: "A look inside the pack" },
-    ],
-    rating: 4.7,
-    purchaseCount: 130,
-    comingSoon: true,
-    description:
-      "Twenty four festivals from across India sit beside twenty from the rest of the world, drawn in exactly the same style and given exactly the same space on the page — with one short line on every page about what actually happens at that festival.",
-    whatsInside: [
-      "50 pages to colour in three parts: festivals of India, festivals of the world, and festive patterns",
-      "One short read-aloud fact per page about the festival being coloured",
-      "Bold, open outlines that use very little ink and suit any coloring tool",
-    ],
-    whyItMatters: [
-      "Shows that everybody celebrates, and that celebrating looks different everywhere",
-      "No gods, prophets or saints depicted — just lamps, food, instruments and decorations, so any family can pick up a crayon without a second thought",
-      "Turns coloring time into a few seconds of general knowledge, read aloud while your child colours",
-    ],
-    longDescription:
-      "The Festivals Colouring Book brings 24 festivals from across India and 20 from around the world onto the same page in the same style — Diwali beside Christmas, Holi beside Songkran — plus six pages of festive patterns like rangoli and mehendi to finish. Every page carries one short line about what actually happens at that festival, meant to be read aloud while your child colours. Drawn deliberately without any religious figures, so any family from any background can hand a child a crayon without a second thought. Designed for children aged 4-10, this printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
-    relatedSlugs: ["animal-friends", "birds-of-the-world"],
-    seoTitle: "Festivals Colouring Book — Printable PDF for Kids",
-    seoDescription:
-      "50-page printable colouring book of 24 Indian and 20 world festivals for kids ages 4-10, with a read-aloud fact on every page. Instant PDF download.",
-  },
-  {
     slug: "letters-and-words",
     title: "Letters and Words: The Big Alphabet Activity Book",
     cardTitle: "Letters & Words Activity Book",
@@ -546,15 +318,15 @@ export const products: Product[] = [
     galleryImages: [
       {
         src: "/gallery/letters-and-words/Screenshot%202026-07-26%20083209.jpg",
-        label: "What's inside — the full contents page",
+        label: "Contents page listing all worksheets in the Letters and Words activity book",
       },
       {
         src: "/gallery/letters-and-words/Screenshot%202026-07-26%20083244.jpg",
-        label: "A look inside the pack — Which Letter Comes Next?",
+        label: "Which Letter Comes Next worksheet",
       },
       {
         src: "/gallery/letters-and-words/Screenshot%202026-07-26%20083310.jpg",
-        label: "A look inside the pack — Letter Hunt",
+        label: "Letter Hunt worksheet",
       },
     ],
     rating: 4.6,
@@ -596,15 +368,15 @@ export const products: Product[] = [
     galleryImages: [
       {
         src: "/gallery/numbers-and-counting-mats/Screenshot%202026-07-26%20114102.jpg",
-        label: "A look inside the pack — Sums Without Pictures",
+        label: "Sums Without Pictures worksheet",
       },
       {
         src: "/gallery/numbers-and-counting-mats/Screenshot%202026-07-26%20114136.jpg",
-        label: "A look inside the pack — All Three Together (skip counting)",
+        label: "All Three Together skip counting worksheet",
       },
       {
         src: "/gallery/numbers-and-counting-mats/Screenshot%202026-07-26%20114201.jpg",
-        label: "The full answer key",
+        label: "Answer key page",
       },
     ],
     rating: 4.7,
@@ -624,7 +396,7 @@ export const products: Product[] = [
     ],
     longDescription:
       "Numbers and Counting is 21 number tracing mats covering 0 to 20, followed by 19 worksheets on counting, ten frames, first sums and skip counting. Each mat shows one quantity four different ways — a numeral to trace, a word, counters in a ten frame, and a spot on the number line — so a number finally means something. A full answer key and a certificate of finishing are included. Designed for children aged 3-6, slip a mat into a plastic sleeve with a dry-wipe pen to reuse it all week. This printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
-    relatedSlugs: ["numbers-1-to-100", "letters-and-words"],
+    relatedSlugs: ["letters-and-words"],
     seoTitle: "Numbers and Counting: Tracing and Counting Mats — Printable PDF for Kids",
     seoDescription:
       "56-page printable number tracing and counting mats for kids ages 3-6, covering 0-20 with ten frames, first sums and skip counting. Instant PDF download.",
@@ -645,15 +417,15 @@ export const products: Product[] = [
     galleryImages: [
       {
         src: "/gallery/abc-of-character/Screenshot%202026-07-26%20114304.jpg",
-        label: "A look inside the pack — C is for Caring",
+        label: "Letter C page — C is for Caring",
       },
       {
         src: "/gallery/abc-of-character/Screenshot%202026-07-26%20114328.jpg",
-        label: "A look inside the pack — F is for Friendly",
+        label: "Letter F page — F is for Friendly",
       },
       {
         src: "/gallery/abc-of-character/Screenshot%202026-07-26%20114354.jpg",
-        label: "A look inside the pack — J is for Joyful",
+        label: "Letter J page — J is for Joyful",
       },
     ],
     rating: 4.5,
@@ -690,15 +462,15 @@ export const products: Product[] = [
     galleryImages: [
       {
         src: "/gallery/Alphabet%20Activity%20Book/ChatGPT%20Image%20Jul%2026%2C%202026%2C%2007_53_43%20AM.png",
-        label: "A colour preview — Letter F activities",
+        label: "Letter F activity page preview",
       },
       {
         src: "/gallery/Alphabet%20Activity%20Book/Screenshot%202026-07-26%20071200.jpg",
-        label: "A look inside the pack — Letter D activities",
+        label: "Letter D activity worksheet",
       },
       {
         src: "/gallery/Alphabet%20Activity%20Book/Screenshot%202026-07-26%20071227.jpg",
-        label: "A look inside the pack — Letter E tracing",
+        label: "Letter E tracing worksheet",
       },
     ],
     rating: 4.5,
@@ -737,15 +509,15 @@ export const products: Product[] = [
     galleryImages: [
       {
         src: "/gallery/my-first-lines/Screenshot%202026-07-26%20080932.jpg",
-        label: "A look inside the pack — Butterfly's Flight Path (wave & zigzag tracing)",
+        label: "Butterfly's Flight Path wave and zigzag tracing worksheet",
       },
       {
         src: "/gallery/my-first-lines/Screenshot%202026-07-26%20080857.jpg",
-        label: "A look inside the pack — Fish Makes Bubbles (spiral tracing)",
+        label: "Fish Makes Bubbles spiral tracing worksheet",
       },
       {
         src: "/gallery/my-first-lines/Screenshot%202026-07-26%20081002.jpg",
-        label: "A look inside the pack — Bunny's Loopy Ears (loop tracing)",
+        label: "Bunny's Loopy Ears loop tracing worksheet",
       },
     ],
     rating: 4.5,
@@ -762,7 +534,7 @@ export const products: Product[] = [
       "Enhances focus and concentration in short, achievable bursts",
       "Boosts early writing readiness and confidence — trace today, write tomorrow",
     ],
-    relatedSlugs: ["alphabet-adventures", "cursive-handwriting"],
+    relatedSlugs: ["alphabet-adventures"],
     seoTitle: "My First Lines: Pre-Writing Tracing Workbook — Printable PDF for Kids",
     seoDescription:
       "27-page printable pre-writing workbook for kids ages 2-5, with line, curve and pattern tracing practice. Instant PDF download.",
@@ -784,15 +556,15 @@ export const products: Product[] = [
     galleryImages: [
       {
         src: "/gallery/Flower%20Coloring%20Book/Screenshot%202026-07-26%20171953.jpg",
-        label: "A look inside the pack — Hollyhock",
+        label: "Hollyhock flower colouring page",
       },
       {
         src: "/gallery/Flower%20Coloring%20Book/Screenshot%202026-07-26%20172022.jpg",
-        label: "A look inside the pack — Kadamba",
+        label: "Kadamba flower colouring page",
       },
       {
         src: "/gallery/Flower%20Coloring%20Book/Screenshot%202026-07-26%20171857.jpg",
-        label: "The full contents page",
+        label: "Contents page listing all 104 flowers in the Flowers Colouring Book",
       },
     ],
     rating: 4.7,
@@ -834,15 +606,15 @@ export const products: Product[] = [
     galleryImages: [
       {
         src: "/gallery/Timing%20and%20Shapes/Screenshot%202026-07-26%20171637.jpg",
-        label: "A look inside the pack — Minutes Past and Minutes To",
+        label: "Minutes Past and Minutes To clock worksheet",
       },
       {
         src: "/gallery/Timing%20and%20Shapes/Screenshot%202026-07-26%20171443.jpg",
-        label: "A look inside the pack — Solids to Know",
+        label: "Solids to Know shape worksheet",
       },
       {
         src: "/gallery/Timing%20and%20Shapes/Screenshot%202026-07-26%20171553.jpg",
-        label: "A look inside the pack — Faces, Edges and Corners",
+        label: "Faces, Edges and Corners shape worksheet",
       },
     ],
     rating: 4.6,
@@ -862,7 +634,7 @@ export const products: Product[] = [
     ],
     longDescription:
       "Telling Time, Patterns and Shapes is a 100-page printable workbook built around three skills that take real, repeated practice to stick: reading a clock, spotting what comes next in a pattern, and naming flat and solid shapes by their faces, edges and corners. It starts with simple o'clock times and works up gradually to minutes past and minutes to, covers AB patterns and beyond, walks through solid shapes like cubes, cuboids, spheres, prisms, cones and cylinders, and rounds it all off with 8 crosswords that fold vocabulary revision into the maths without it feeling like more worksheets. A full answer key is included at the back. Designed for children aged 5-9, this printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
-    relatedSlugs: ["numbers-and-counting-mats", "numbers-1-to-100"],
+    relatedSlugs: ["numbers-and-counting-mats"],
     seoTitle: "Telling Time, Patterns and Shapes Workbook — Printable PDF for Kids",
     seoDescription:
       "100-page printable workbook for kids ages 5-9 — 20 clock worksheets, patterns, flat and solid shapes, and crosswords, with a full answer key. Instant PDF download.",
@@ -884,20 +656,20 @@ export const products: Product[] = [
     galleryImages: [
       {
         src: "/gallery/cut-stick-and-make/Screenshot%202026-08-04%20145908.jpg",
-        label: "What's inside — the full contents page",
+        label: "Contents page listing all 17 activities in the Cut, Stick and Make book",
       },
       {
         src: "/gallery/cut-stick-and-make/Screenshot%202026-08-04%20145939.jpg",
-        label: "A look inside the pack — A Day in the Park (cut-out pieces)",
+        label: "A Day in the Park cut-and-paste activity pieces",
       },
       {
         src: "/gallery/cut-stick-and-make/Screenshot%202026-08-04%20150015.jpg",
-        label: "A look inside the pack — Fruit or Vegetable? (cut-out pieces)",
+        label: "Fruit or Vegetable? cut-and-paste activity pieces",
       },
     ],
     rating: 4.6,
     purchaseCount: 40,
-    pdfFile: "activityforKydz-Cut-Stick-and-Make.pdf",
+    pdfFile: "Cut Stick and Make activity Book.pdf",
     description:
       "A cut-and-paste activity book built entirely around one idea: bigger pieces work better. Every piece is a full 84mm square — nine times the area of a typical printable pack — so a three-year-old can cut it out with long, confident snips and stick it down without a fight.",
     whatsInside: [
@@ -912,7 +684,7 @@ export const products: Product[] = [
     ],
     longDescription:
       "Cut, Stick and Make is 50 printable pages built around one idea: bigger pieces work better for small hands. Every one of its 100 pieces is a full 84mm square, four to a sheet — nine times the area found in most printable cut-and-paste packs — so a piece can be gripped in a whole fist, cut with long confident snips, and stuck down without tweezers. Across 17 activities, kids build funny faces, houses, trains and gardens, match shapes, count and stick, and trace how a butterfly or a flower grows. Piece sheets print in colour; the pages they stick onto are line art, so the moment a piece goes down it stands out — and a certificate of finishing rounds off the book. Designed for children aged 3-7, this printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
-    relatedSlugs: ["matching-and-memory", "puzzles-and-find-the-difference"],
+    relatedSlugs: [],
     seoTitle: "Cut, Stick and Make — Printable PDF for Kids",
     seoDescription:
       "50-page printable cut-and-paste activity book for kids ages 3-7, with 17 activities and 100 big 84mm pieces. Instant PDF download.",
@@ -934,20 +706,20 @@ export const products: Product[] = [
     galleryImages: [
       {
         src: "/gallery/big-book-of-comparisons/Screenshot%202026-08-04%20145602.jpg",
-        label: "A look inside the pack — Parents and Babies (matching)",
+        label: "Parents and Babies matching worksheet",
       },
       {
         src: "/gallery/big-book-of-comparisons/Screenshot%202026-08-04%20145745.jpg",
-        label: "A look inside the pack — Parents and Babies (matching), page 2",
+        label: "Parents and Babies matching worksheet, page 2",
       },
       {
         src: "/gallery/big-book-of-comparisons/Screenshot%202026-08-04%20145816.jpg",
-        label: "A look inside the pack — Weight Comparison",
+        label: "Weight Comparison worksheet",
       },
     ],
     rating: 4.6,
     purchaseCount: 40,
-    pdfFile: "activityforKydz-Big-Book-of-Comparisons.pdf",
+    pdfFile: "Big Book of Comparisons.pdf",
     description:
       "A proper comparing workbook, not just a stack of worksheets — 100 pages across 9 skills, from matching a baby animal to its parent through to telling thick shapes from thin ones, each one practising the same core idea from a different angle.",
     whatsInside: [
@@ -966,6 +738,51 @@ export const products: Product[] = [
     seoTitle: "The Big Book of Comparisons — Printable PDF for Kids",
     seoDescription:
       "116-page printable workbook for kids ages 3-6 with 100 worksheets on matching, sorting and comparing. Instant PDF download.",
+  },
+  {
+    slug: "reading-comprehension",
+    title: "Reading Comprehension Worksheets",
+    categoryLabel: "Reading Comprehension",
+    category: "learning",
+    tagline: "38 short passages to read, trace and talk about together",
+    price: 99,
+    pageCount: 76,
+    // Not stated on the pack itself — early-reader difficulty (short
+    // sentences, tracing word, multiple choice) puts it a step past pure
+    // letter-tracing packs like Alphabet Adventures (3-6), so this errs a
+    // little older than those. Adjust once real customer feedback comes in.
+    ageRange: "5-9 years",
+    accent: "from-violet-100 to-fuchsia-50",
+    emoji: "📖",
+    image: "/categories/Reading%20Comprehension.png",
+    bannerImage: "/banners/desktop/Reading%20Comprehension.png",
+    galleryImages: [
+      { src: "/gallery/Reading%20Comprehension/Screenshot%202026-08-07%20141127.jpg", label: "My Dog reading passage with multiple-choice questions" },
+      { src: "/gallery/Reading%20Comprehension/Screenshot%202026-08-07%20141218.jpg", label: "The Lion reading passage with multiple-choice questions" },
+      { src: "/gallery/Reading%20Comprehension/Screenshot%202026-08-07%20141259.jpg", label: "Elephant tracing word page" },
+    ],
+    rating: 4.5,
+    purchaseCount: 40,
+    pdfFile: "Reading Comprehension.pdf",
+    description:
+      "Thirty-eight short reading passages — from Dog and Ant to Winter and School — each paired with a big tracing word and three multiple-choice questions, built for kids just starting to read on their own.",
+    whatsInside: [
+      "Thirty eight short passages, from Dog and Ant to Winter and School",
+      "A big tracing word for every topic, ready to colour in",
+      "Three multiple choice questions after every passage",
+      "Simple sentences, perfect for early and emerging readers",
+    ],
+    whyItMatters: [
+      "Builds real reading confidence through short, repeatable passages instead of one long text",
+      "The multiple-choice questions turn reading into an active check, not just word-calling",
+      "A big tracing word per topic keeps handwriting practice in the mix alongside reading",
+    ],
+    longDescription:
+      "Reading Comprehension Worksheets is 76 printable pages built around 38 short, simple passages — Dog, Ant, Lion, Elephant and 34 more, right through to Winter and School. Every topic gets two pages: a big tracing word to colour in, then a short passage of simple sentences followed by three multiple-choice questions to check what was actually understood, not just read aloud. Designed for early and emerging readers, it's built to be read together — a passage or two a sitting is plenty. This printable pack is instant-download only: no app, no login, just a PDF you can print at home or at any print shop. Download once, print as many times as you like.",
+    relatedSlugs: ["letters-and-words", "alphabet-adventures"],
+    seoTitle: "Reading Comprehension Worksheets — 38 Printable Passages for Kids",
+    seoDescription:
+      "76-page printable reading comprehension pack for early readers — 38 short passages, each with a tracing word and three multiple-choice questions. Instant PDF download.",
   },
 ];
 

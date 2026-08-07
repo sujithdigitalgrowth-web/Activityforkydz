@@ -33,9 +33,10 @@ export const COLOURING_COMBO_SLUGS = [
 
 export const COLOURING_COMBO_PRICE = 340;
 
-// The learning combo: all 6 learning/activity packs at a flat bundle price.
+// The learning combo: all 9 learning/activity packs at a flat bundle price.
 // Same mechanics as the colouring combo above — getCartPricing() applies it
-// automatically once a cart holds all 6 of these slugs.
+// automatically once a cart holds all 9 of these slugs. Keep this in sync
+// with every product in products.ts that has category: "learning".
 export const LEARNING_COMBO_SLUGS = [
   "letters-and-words",
   "numbers-and-counting-mats",
@@ -43,9 +44,12 @@ export const LEARNING_COMBO_SLUGS = [
   "atoz-activity",
   "my-first-lines",
   "time-patterns-and-shapes",
+  "cut-stick-and-make",
+  "big-book-of-comparisons",
+  "reading-comprehension",
 ] as const;
 
-export const LEARNING_COMBO_PRICE = 340;
+export const LEARNING_COMBO_PRICE = 390;
 
 export const COMBOS: ComboDef[] = [
   {
@@ -61,11 +65,11 @@ export const COMBOS: ComboDef[] = [
   },
   {
     routeSlug: "learning-combo",
-    label: "All 6 Learning Packs",
+    label: "All 9 Learning Packs",
     fullLabel: "The Complete Learning Pack Combo",
     slugs: LEARNING_COMBO_SLUGS,
     price: LEARNING_COMBO_PRICE,
-    image: "/categories/Learning%20Pack%20Combo%20Offer.png",
+    image: "/categories/Learning%20packs%20combo%20offer.png",
     accent: "from-teal-100 to-cyan-50",
     emoji: "🧠",
     borderClass: "border-teal-300",

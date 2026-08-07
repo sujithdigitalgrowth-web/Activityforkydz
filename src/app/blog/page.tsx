@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {
-  title: "Blog — Screen-Free Activity Ideas for Kids",
+  title: "Screen-Free Activity Ideas & Worksheets for Kids",
   description:
     "Simple, screen-free activity ideas, festival guides, and printable-friendly inspiration for kids, from activityforKydz.",
   alternates: { canonical: "/blog" },

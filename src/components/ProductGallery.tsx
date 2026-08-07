@@ -35,6 +35,11 @@ function Slot({
 }) {
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  // "<title> — <label>" occasionally clears ~125 chars for long titles
+  // paired with a long label — drop the title prefix rather than truncate
+  // the description mid-sentence; the label alone still identifies the page.
+  const fullAlt = `${product.title} — ${slide.label}`;
+  const alt = fullAlt.length <= 125 ? fullAlt : slide.label;
 
   // The letterbox bars around a contained (non-cropped) image should blend
   // with the page background rather than clash with the product's accent
@@ -49,7 +54,7 @@ function Slot({
       {!failed && (
         <Image
           src={slide.src}
-          alt={`${product.title} — ${slide.label}`}
+          alt={alt}
           fill
           sizes={onClick ? "64px" : "(max-width: 768px) 90vw, 800px"}
           priority={priority}
@@ -88,7 +93,11 @@ export default function ProductGallery({
   mainClassName?: string;
 }) {
   const cover = product.bannerImage ?? product.image ?? `/categories/${product.slug}.jpg`;
-  const slides: Slide[] = [{ src: cover, label: product.title }, ...(product.galleryImages ?? [])];
+  // Cover slide's label feeds into the alt text below as "<title> — <label>"
+  // (Slot guards the combined length) — using product.title here would
+  // render as a literal duplicate ("Title — Title"), so use the tagline
+  // instead, same convention as ProductVisual's cover alt.
+  const slides: Slide[] = [{ src: cover, label: product.tagline }, ...(product.galleryImages ?? [])];
   const [selected, setSelected] = useState(0);
 
   if (slides.length === 1) {

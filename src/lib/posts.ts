@@ -6,9 +6,9 @@ const POSTS_DIR = path.join(process.cwd(), "content", "blog");
 
 export type PostFrontmatter = {
   title: string;
-  // Overrides for the page <title> (without the " | activityforKydz" suffix
-  // — the root layout's title template adds that) and meta description.
-  // Same pattern as Product.seoTitle/seoDescription.
+  // Overrides for the page <title> and meta description, rendered exactly
+  // as written — no brand suffix is appended. Same pattern as
+  // Product.seoTitle/seoDescription.
   seoTitle?: string;
   seoDescription: string;
   excerpt: string;
