@@ -56,10 +56,15 @@ function Slot({
           src={slide.src}
           alt={alt}
           fill
-          sizes={onClick ? "64px" : "(max-width: 768px) 90vw, 800px"}
+          sizes={onClick ? "64px" : "(max-width: 1024px) 90vw, 950px"}
           priority={priority}
-          className={`${fit === "contain" ? "object-contain" : "object-cover"} transition-opacity duration-300 ${
-            loaded ? "opacity-100" : "opacity-0"
+          // Same reasoning as ProductVisual: the priority slide is this
+          // page's LCP candidate, so it can't wait on a client onLoad
+          // state update + CSS transition to become visible.
+          className={`${fit === "contain" ? "object-contain" : "object-cover"} ${
+            priority
+              ? "opacity-100"
+              : `transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"}`
           }`}
           onLoad={() => setLoaded(true)}
           onError={() => setFailed(true)}

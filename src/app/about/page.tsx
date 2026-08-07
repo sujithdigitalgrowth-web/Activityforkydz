@@ -4,13 +4,20 @@ import LegalPage from "@/components/LegalPage";
 export const metadata: Metadata = {
   title: "About activityforKydz — Screen-Free Packs for Kids",
   description:
-    "activityforKydz makes printable PDF coloring and activity packs for kids, so screen time can turn into paper, crayons and a quiet hour.",
+    "Why we make printable activity packs instead of another kids app. Made in India for parents who want less screen time and more finished pages.",
   alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About activityforKydz — Screen-Free Packs for Kids",
+    description:
+      "Why we make printable activity packs instead of another kids app. Made in India for parents who want less screen time and more finished pages.",
+    url: "/about",
+    type: "website",
+  },
 };
 
 export default function AboutPage() {
   return (
-    <LegalPage title="About activityforKydz">
+    <LegalPage title="We Got Tired of Handing Over the Phone">
       <p>
         activityforKydz started from a very ordinary problem: too much screen time, and not
         enough good, screen-free ways to fill an afternoon. Coloring books from the store were

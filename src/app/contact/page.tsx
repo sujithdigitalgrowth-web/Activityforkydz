@@ -4,13 +4,19 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact & Support — activityforKydz",
-  description: "Get in touch with activityforKydz for order support, download issues, or questions about our printable kids activity packs.",
+  description: "Didn't get your download? Print not working? Email us and we'll sort it out, usually the same day. Real people, no ticket system.",
   alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact & Support — activityforKydz",
+    description: "Didn't get your download? Print not working? Email us and we'll sort it out, usually the same day. Real people, no ticket system.",
+    url: "/contact",
+    type: "website",
+  },
 };
 
 export default function ContactPage() {
   return (
-    <LegalPage title="Contact & support">
+    <LegalPage title="Something Not Working? Tell Us">
       <p>
         Have a question about an order, a download that didn&apos;t arrive, or anything else?
         We read every email ourselves.

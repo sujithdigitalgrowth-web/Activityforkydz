@@ -7,8 +7,14 @@ import ProductGallery from "@/components/ProductGallery";
 import SocialProof from "@/components/SocialProof";
 import Faq from "@/components/Faq";
 import ViewItemTracker from "@/components/ViewItemTracker";
-import { generalFaq } from "@/lib/faq";
+import { generalFaq, generalFaqForSchema } from "@/lib/faq";
 import { breadcrumbJsonLd, faqJsonLd, getBaseUrl, productJsonLd } from "@/lib/seo";
+import {
+  getCategoryPage,
+  getRelatedProducts,
+  PRACTISE_BY_SLUG,
+  schoolStageLabel,
+} from "@/lib/product-page";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -32,7 +38,12 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/products/${product.slug}` },
-    openGraph: { title, description },
+    openGraph: {
+      title,
+      description,
+      url: `/products/${product.slug}`,
+      type: "website",
+    },
   };
 }
 
@@ -45,18 +56,20 @@ export default async function ProductPage({
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
-  const relatedProducts = (product.relatedSlugs ?? [])
-    .map((s) => getProductBySlug(s))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p) && !p?.comingSoon);
+  const categoryPage = getCategoryPage(product.slug);
+  const { related: relatedProducts, combo: relatedCombo } = getRelatedProducts(product);
+  const practise = PRACTISE_BY_SLUG[product.slug] ?? [];
+  const stage = schoolStageLabel(product.ageRange);
 
   const baseUrl = getBaseUrl();
   const jsonLd = [
     productJsonLd(product),
     breadcrumbJsonLd([
       { name: "Home", url: baseUrl },
+      { name: categoryPage.label, url: `${baseUrl}${categoryPage.href}` },
       { name: product.title, url: `${baseUrl}/products/${product.slug}` },
     ]),
-    faqJsonLd(generalFaq),
+    faqJsonLd(generalFaqForSchema),
   ];
 
   return (
@@ -72,11 +85,20 @@ export default async function ProductPage({
           Home
         </Link>
         <span className="mx-2">/</span>
+        <Link href={categoryPage.href} className="hover:text-orange-600">
+          {categoryPage.label}
+        </Link>
+        <span className="mx-2">/</span>
         <span className="text-zinc-700">{product.title}</span>
       </nav>
 
       <div className="grid lg:grid-cols-4 gap-6 lg:gap-8 mb-8">
         <div className="lg:col-span-3">
+          {product.galleryImages && product.galleryImages.length > 0 && (
+            <p className="text-xs font-semibold text-orange-600 uppercase tracking-wide mb-2">
+              Look inside the pack
+            </p>
+          )}
           <ProductGallery product={product} mainClassName="rounded-2xl aspect-[16/9] w-full" />
         </div>
         <div className="lg:col-span-1">
@@ -103,6 +125,37 @@ export default async function ProductPage({
           <span className="rounded-full bg-orange-100 text-orange-700 px-3 py-1 font-medium">
             Instant PDF download
           </span>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-orange-100 bg-orange-50/50 p-5 grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-3 text-sm">
+          <div>
+            <p className="text-zinc-500">Ages</p>
+            <p className="font-medium text-zinc-900">{product.ageRange}</p>
+          </div>
+          <div>
+            <p className="text-zinc-500">Pages</p>
+            <p className="font-medium text-zinc-900">{product.pageCount}</p>
+          </div>
+          <div>
+            <p className="text-zinc-500">Format</p>
+            <p className="font-medium text-zinc-900">PDF, A4, print-ready</p>
+          </div>
+          <div>
+            <p className="text-zinc-500">School stage</p>
+            <p className="font-medium text-zinc-900">{stage}</p>
+          </div>
+          <div>
+            <p className="text-zinc-500">Delivery</p>
+            <p className="font-medium text-zinc-900">Emailed instantly</p>
+          </div>
+          <div>
+            <p className="text-zinc-500">Printing</p>
+            <p className="font-medium text-zinc-900">Unlimited, forever</p>
+          </div>
+          <div>
+            <p className="text-zinc-500">Price</p>
+            <p className="font-medium text-zinc-900">₹{product.price}</p>
+          </div>
         </div>
 
         <p className="text-zinc-700 leading-relaxed mt-6">{product.description}</p>
@@ -135,6 +188,22 @@ export default async function ProductPage({
           </ul>
         </section>
 
+        {practise.length > 0 && (
+          <section className="mt-8">
+            <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
+              What your child will practise
+            </h2>
+            <ul className="space-y-2">
+              {practise.map((item) => (
+                <li key={item} className="flex gap-2 text-zinc-700">
+                  <span className="text-orange-500">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <section className="mt-8">
           <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
             How delivery works
@@ -162,7 +231,7 @@ export default async function ProductPage({
           <Faq items={generalFaq} />
         </section>
 
-        {relatedProducts.length > 0 && (
+        {(relatedProducts.length > 0 || relatedCombo) && (
           <section className="mt-8">
             <h2 className="font-heading text-xl font-semibold text-zinc-900 mb-3">
               You might also like
@@ -178,9 +247,34 @@ export default async function ProductPage({
                   </Link>
                 </li>
               ))}
+              {relatedCombo && (
+                <li>
+                  <Link
+                    href={`/products/${relatedCombo.routeSlug}`}
+                    className="text-orange-600 font-medium hover:underline"
+                  >
+                    {relatedCombo.fullLabel} — ₹{relatedCombo.price}
+                  </Link>
+                </li>
+              )}
             </ul>
           </section>
         )}
+
+        <section className="mt-8 pt-6 border-t border-orange-100">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-orange-600 font-medium">
+            <li>
+              <Link href={categoryPage.href} className="hover:underline">
+                Browse all {categoryPage.label.toLowerCase()}
+              </Link>
+            </li>
+            <li>
+              <Link href="/combos" className="hover:underline">
+                Save with a bundle
+              </Link>
+            </li>
+          </ul>
+        </section>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 ---
 title: "Fine Motor Skills Activities for Toddlers (2-4 Years)"
-seoTitle: "Fine Motor Skills Activities for Toddlers (2-4 Years)"
+seoTitle: "Fine Motor Skills Activities for Toddlers 2-4 Years"
 seoDescription: "Simple, screen-free fine motor activities that build the hand strength and control your toddler needs before school — no special equipment required."
 excerpt: "Simple, screen-free fine motor activities that build the hand strength and control your toddler needs before school — no special equipment required."
 publishedDate: "2026-08-06"
@@ -53,6 +53,8 @@ You don't need a strict schedule for this — fine motor development happens bes
 
 Some children get there faster than others, and that's fine. What matters most isn't hitting a milestone by a certain birthday — it's steady, low-pressure practice that builds real hand strength and control over time, through activities that feel like play rather than a lesson.
 
-If you're looking for a simple place to start, our **[My First Lines workbook](https://www.activityforkydz.com/products/my-first-lines)** is designed exactly for this stage — print it, hand over a crayon, and let the hand-strength building happen quietly, one wavy line at a time.
+If you're looking for a simple place to start, our **[My First Lines workbook](https://www.activityforkydz.com/products/my-first-lines)** is designed exactly for this stage — print it, hand over a crayon, and let the hand-strength building happen quietly, one wavy line at a time. Browse our [tracing worksheets](https://www.activityforkydz.com/tracing-worksheets) or [activities for 2–3 year olds](https://www.activityforkydz.com/for-2-3-years) for more at this stage.
+
+**Related reading:** for more screen-free ideas at this age, see [20 screen-free activities for 3 year olds](https://www.activityforkydz.com/blog/screen-free-activities-for-3-year-olds).
 
 *activityforKydz makes printable, screen-free activity packs for kids — delivered instantly by email, made for print. [Browse our packs](https://www.activityforkydz.com/#packs).*

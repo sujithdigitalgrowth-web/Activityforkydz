@@ -3,9 +3,15 @@ import LegalPage from "@/components/LegalPage";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "How activityforKydz collects and uses your information when you buy a printable PDF activity pack.",
+  title: "Privacy Policy — activityforKydz",
+  description: "How we handle your email address and payment data. Short version: we don't sell it and we don't spam you.",
   alternates: { canonical: "/privacy-policy" },
+  openGraph: {
+    title: "Privacy Policy — activityforKydz",
+    description: "How we handle your email address and payment data. Short version: we don't sell it and we don't spam you.",
+    url: "/privacy-policy",
+    type: "website",
+  },
 };
 
 export default function PrivacyPolicyPage() {

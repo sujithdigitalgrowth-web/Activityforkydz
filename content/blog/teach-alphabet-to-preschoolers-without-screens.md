@@ -1,7 +1,7 @@
 ---
 title: "How to Teach the Alphabet to Preschoolers Without Screens"
-seoTitle: "How to Teach the Alphabet to Preschoolers Without Screens"
-seoDescription: "Practical, screen-free ways to help your child learn the alphabet — no app required. Simple activities that actually stick."
+seoTitle: "How to Teach the Alphabet Without Screens"
+seoDescription: "A step-by-step way to teach preschoolers the alphabet without apps. Letter order, common mistakes, and what to do when they forget."
 excerpt: "Practical, screen-free ways to help your child learn the alphabet — no app required. Simple activities that actually stick."
 publishedDate: "2026-08-01"
 placeholderEmoji: "🔤"
@@ -56,6 +56,6 @@ If you'd like some structure without overcomplicating it, this rhythm works well
 
 The best alphabet learning rarely looks like "learning" from a child's point of view — it looks like coloring, tracing, and a bit of pride when they get their own name right for the first time. That's really the whole goal: not a test passed, but a skill that quietly becomes theirs.
 
-If you'd like a ready-made way to start this week, our **[Alphabet Adventures A-Z Pack](https://www.activityforkydz.com/products/alphabet-adventures)** gives you all 26 letters, one page each, ready to print and color together — no app, no login, just paper and a bit of quiet.
+If you'd like a ready-made way to start this week, our **[Alphabet Adventures A-Z Pack](https://www.activityforkydz.com/products/alphabet-adventures)** gives you all 26 letters, one page each, ready to print and color together — no app, no login, just paper and a bit of quiet. Browse our [alphabet worksheets](https://www.activityforkydz.com/alphabet-worksheets) for more ways to build on this.
 
 *activityforKydz makes printable, screen-free activity packs for kids — delivered instantly by email, made for print. [Browse our packs](https://www.activityforkydz.com/#packs).*

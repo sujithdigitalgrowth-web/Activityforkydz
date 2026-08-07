@@ -38,6 +38,12 @@ export default function Header() {
             >
               Combos
             </Link>
+            <Link
+              href="/activity-books-for-kids"
+              className="whitespace-nowrap text-[11px] sm:text-base font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
+            >
+              Activity Books
+            </Link>
           </nav>
 
           <CartButton />

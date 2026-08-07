@@ -1,7 +1,7 @@
 ---
 title: "20 Screen-Free Activities for 3-Year-Olds at Home"
-seoTitle: "20 Screen-Free Activities for 3-Year-Olds at Home"
-seoDescription: "A big list of simple, screen-free activities for 3-year-olds — easy to set up at home, no special equipment or planning required."
+seoTitle: "20 Screen-Free Activities for 3 Year Olds at Home"
+seoDescription: "20 screen-free activities for 3 year olds using things already in your house. Tested by Indian parents, no prep, no apps, no screens."
 excerpt: "A big list of simple, screen-free activities for 3-year-olds — easy to set up at home, no special equipment or planning required."
 publishedDate: "2026-08-21"
 placeholderEmoji: "🧸"
@@ -48,6 +48,8 @@ None of these need special equipment, a Pinterest-level setup, or much planning.
 
 You don't need to plan a whole day around this list — most parents find it easier to keep 3-4 "go-to" activities ready at any time, and swap them out every week or two once interest fades. A small basket with a few coloring pages, a puzzle, and some playdough covers a lot of ground with almost no daily setup.
 
-If you'd like a ready stack of coloring and learning pages to keep in that basket, a few of our packs work especially well for this age group — **[Animal Friends](https://www.activityforkydz.com/products/animal-friends)** for coloring, **[The Big Book of Comparisons](https://www.activityforkydz.com/products/big-book-of-comparisons)** for quiet matching and sorting time, and **[My First Lines](https://www.activityforkydz.com/products/my-first-lines)** for early tracing practice. Print a few pages, keep them in a drawer, and you'll always have something ready for the next "I'm bored" moment.
+If you'd like a ready stack of coloring and learning pages to keep in that basket, a few of our packs work especially well for this age group — **[Animal Friends](https://www.activityforkydz.com/products/animal-friends)** for coloring, **[The Big Book of Comparisons](https://www.activityforkydz.com/products/big-book-of-comparisons)** for quiet matching and sorting time, and **[My First Lines](https://www.activityforkydz.com/products/my-first-lines)** for early tracing practice. Print a few pages, keep them in a drawer, and you'll always have something ready for the next "I'm bored" moment. Browse our [activities for 2–3 year olds](https://www.activityforkydz.com/for-2-3-years) or the [full range of activity books](https://www.activityforkydz.com/activity-books-for-kids) for more like this.
+
+**Related reading:** if the fine motor side of this list is useful, see [fine motor skills activities for toddlers](https://www.activityforkydz.com/blog/fine-motor-skills-activities-for-toddlers). If your child loved the animal walks, they'll probably also like these [fun animal facts](https://www.activityforkydz.com/blog/fun-animal-facts-every-kid-should-know).
 
 *activityforKydz makes printable, screen-free activity packs for kids — delivered instantly by email, made for print. [Browse our packs](https://www.activityforkydz.com/#packs).*

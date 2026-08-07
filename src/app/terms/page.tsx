@@ -3,9 +3,15 @@ import LegalPage from "@/components/LegalPage";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions",
-  description: "Terms and conditions for purchasing printable PDF activity packs from activityforKydz.",
+  title: "Terms & Conditions — activityforKydz",
+  description: "Terms of use for activityforKydz printable activity packs, including licence and permitted printing.",
   alternates: { canonical: "/terms" },
+  openGraph: {
+    title: "Terms & Conditions — activityforKydz",
+    description: "Terms of use for activityforKydz printable activity packs, including licence and permitted printing.",
+    url: "/terms",
+    type: "website",
+  },
 };
 
 export default function TermsPage() {

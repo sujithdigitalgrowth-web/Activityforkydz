@@ -5,8 +5,15 @@ import { getAllPosts } from "@/lib/posts";
 export const metadata: Metadata = {
   title: "Screen-Free Activity Ideas & Worksheets for Kids",
   description:
-    "Simple, screen-free activity ideas, festival guides, and printable-friendly inspiration for kids, from activityforKydz.",
+    "Free printable worksheets, nursery and LKG activity ideas, and screen-free things to do with kids aged 2-8. Practical guides from Indian parents.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Screen-Free Activity Ideas & Worksheets for Kids",
+    description:
+      "Free printable worksheets, nursery and LKG activity ideas, and screen-free things to do with kids aged 2-8. Practical guides from Indian parents.",
+    url: "/blog",
+    type: "website",
+  },
 };
 
 export default function BlogIndexPage() {
@@ -14,7 +21,7 @@ export default function BlogIndexPage() {
 
   return (
     <div className="max-w-[1400px] mx-auto px-6 py-10">
-      <h1 className="font-heading text-3xl font-semibold text-zinc-900">Blog</h1>
+      <h1 className="font-heading text-3xl font-semibold text-zinc-900">Ideas, Worksheets and Things to Print</h1>
       <p className="text-lg text-zinc-600 mt-2">
         Screen-free activity ideas, festival guides, and printable inspiration for kids.
       </p>

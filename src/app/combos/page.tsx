@@ -7,12 +7,19 @@ export const metadata: Metadata = {
   description:
     "Bundle printable activity packs together and pay less than buying them one by one. All 6 colouring packs or all 9 learning packs, each for one flat price.",
   alternates: { canonical: "/combos" },
+  openGraph: {
+    title: "Kids Activity Pack Combos — Buy 1 Get 1 Free",
+    description:
+      "Bundle printable activity packs together and pay less than buying them one by one. All 6 colouring packs or all 9 learning packs, each for one flat price.",
+    url: "/combos",
+    type: "website",
+  },
 };
 
 export default function CombosPage() {
   return (
     <div className="max-w-[1400px] mx-auto px-6 py-10">
-      <h1 className="font-heading text-2xl font-semibold text-zinc-900 mb-1">Combo deals</h1>
+      <h1 className="font-heading text-2xl font-semibold text-zinc-900 mb-1">Activity Pack Combos</h1>
       <p className="text-zinc-600 mb-6">
         Bundle a few packs together and pay less than buying them one by one.
       </p>

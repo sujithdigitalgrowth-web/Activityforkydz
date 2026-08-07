@@ -45,6 +45,7 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
                 emojiClassName="text-8xl"
                 srcOverride={product.bannerImageMobile ?? product.bannerImage}
                 priority={i === 0}
+                sizes="92vw"
               />
               <ProductVisual
                 product={product}
@@ -52,6 +53,7 @@ export default function HeroCarousel({ products }: { products: Product[] }) {
                 emojiClassName="text-9xl"
                 srcOverride={product.bannerImage}
                 priority={i === 0}
+                sizes="(max-width: 1400px) 92vw, 1352px"
               />
             </Link>
           </div>

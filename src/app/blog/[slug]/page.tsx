@@ -4,7 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
 import { Markdown } from "@/lib/markdown";
-import { blogPostingJsonLd, breadcrumbJsonLd, getBaseUrl } from "@/lib/seo";
+import { blogPostingJsonLd, breadcrumbJsonLd, getBaseUrl, howToJsonLd, itemListJsonLd } from "@/lib/seo";
+import { HOWTO_BY_SLUG, ITEMLIST_BY_SLUG } from "@/lib/blog-schema";
 
 export function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
@@ -28,6 +29,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description: post.seoDescription,
+      url: `/blog/${post.slug}`,
       type: "article",
       publishedTime: post.publishedDate,
     },
@@ -44,6 +46,8 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const baseUrl = getBaseUrl();
+  const howTo = HOWTO_BY_SLUG[post.slug];
+  const itemList = ITEMLIST_BY_SLUG[post.slug];
   const jsonLd = [
     blogPostingJsonLd(post),
     breadcrumbJsonLd([
@@ -51,6 +55,8 @@ export default async function BlogPostPage({
       { name: "Blog", url: `${baseUrl}/blog` },
       { name: post.title, url: `${baseUrl}/blog/${post.slug}` },
     ]),
+    ...(howTo ? [howToJsonLd(howTo)] : []),
+    ...(itemList ? [itemListJsonLd(itemList)] : []),
   ];
 
   const formattedDate = new Date(post.publishedDate).toLocaleDateString("en-IN", {

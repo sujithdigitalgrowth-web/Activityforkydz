@@ -1,7 +1,7 @@
 ---
 title: "How to Teach Numbers 1-100 Without Screens"
-seoTitle: "How to Teach Numbers 1-100 to Kids Without Screens"
-seoDescription: "Simple, screen-free ways to help your child learn to count and recognize numbers 1-100. Practical tips plus a printable numbers practice pack."
+seoTitle: "How to Teach Numbers 1 to 100 Without Screens"
+seoDescription: "Teach your child numbers 1-100 without an app. The counting order that works, common sticking points, and free printable practice."
 excerpt: "Practical, screen-free ways to help your child build real number confidence from 1 to 100 — no app required."
 publishedDate: "2026-07-15"
 placeholderEmoji: "🔢"
@@ -24,7 +24,7 @@ A hundred chart (numbers 1-100 laid out in a 10x10 grid) is one of the most effe
 
 Recognizing a number and being able to write it are two different skills, and both need separate practice. Tracing worksheets are useful here specifically because they combine the visual (seeing the number shape), the physical (the hand movement to form it), and the verbal (saying the number while writing it) — three ways of learning the same thing at once, which tends to help it stick.
 
-This is exactly the gap our [Numbers and Counting mats](https://www.activityforkydz.com/products/numbers-and-counting-mats) were built to fill — each mat shows one number four ways at once (a numeral to trace, a word, counters in a ten frame, and a spot on the number line), so kids get repeated, hands-on practice without it feeling like a worksheet chore.
+This is exactly the gap our [Numbers and Counting mats](https://www.activityforkydz.com/products/numbers-and-counting-mats) were built to fill for the early numbers a child starts with — each mat covers one number from 0 to 20, shown four ways at once (a numeral to trace, a word, counters in a ten frame, and a spot on the number line), so kids get repeated, hands-on practice on the foundation numbers without it feeling like a worksheet chore.
 
 ## 4. Skip-counting makes bigger numbers less intimidating
 
@@ -42,7 +42,7 @@ Ten focused minutes a day, most days of the week, will get a child further than 
 
 You don't need flashy tools to teach numbers well — a hundred chart, some tracing practice, and a bit of everyday counting will do most of the work. The goal isn't speed, it's building a real, intuitive sense of what numbers mean, one small session at a time.
 
-If you're looking for something ready-made to support this practice at home, our [Numbers and Counting mats](https://www.activityforkydz.com/products/numbers-and-counting-mats) combine tracing, counting and skip-counting practice in one printable pack — no app, just print and go.
+If you're looking for something ready-made to support the early stages of this practice at home, our [Numbers and Counting mats](https://www.activityforkydz.com/products/numbers-and-counting-mats) combine tracing, counting and skip-counting practice for numbers 0-20 in one printable pack — a solid starting point before moving on to bigger numbers — no app, just print and go. See our [learning worksheets](https://www.activityforkydz.com/learning-worksheets) or [UKG worksheets](https://www.activityforkydz.com/ukg-worksheets) for the next steps once your child is comfortable past 20.
 
 ---
 

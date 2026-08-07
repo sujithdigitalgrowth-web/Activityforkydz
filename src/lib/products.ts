@@ -78,7 +78,7 @@ export const products: Product[] = [
     ageRange: "3-8 years",
     accent: "from-amber-100 to-orange-50",
     emoji: "🦁",
-    bannerImage: "/banners/desktop/animal-friends.png",
+    bannerImage: "/banners/desktop/animal-friends.webp",
     galleryImages: [
       { src: "/gallery/animal-friends/colouring-pack.jpg", label: "Printable duck colouring page" },
       { src: "/gallery/animal-friends/sheep.jpg", label: "Printable sheep colouring page" },

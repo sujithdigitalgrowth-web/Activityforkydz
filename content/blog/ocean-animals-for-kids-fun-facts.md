@@ -1,7 +1,7 @@
 ---
 title: "Ocean Animals for Kids: Fun Facts & Learning Ideas"
-seoTitle: "Ocean Animals for Kids: Fun Facts & Learning Ideas"
-seoDescription: "Dolphins, turtles, octopuses and more — fun, easy-to-understand ocean animal facts for kids, plus simple ways to bring them into playtime."
+seoTitle: "Ocean Animals for Kids — Fun Facts and Activities"
+seoDescription: "Fun ocean animal facts for kids plus printable activities. Dolphins, octopus, turtles and more, explained simply for ages 4-8."
 excerpt: "Dolphins, turtles, octopuses and more — fun, easy-to-understand ocean animal facts for kids, plus simple ways to bring them into playtime."
 publishedDate: "2026-08-16"
 placeholderEmoji: "🐬"
@@ -38,8 +38,10 @@ Ocean animals tend to fascinate children in a way that's slightly different from
 
 ## From fact to activity
 
-A fact is a great start, but coloring is where it really sinks in — giving a child time to notice the shape of a turtle's shell, the pattern on a clownfish, the many arms of an octopus. Our **[Oceans & Sea Life Coloring Pack](https://www.activityforkydz.com/products/oceans-and-sea-life)** covers dolphins, turtles, octopuses and more, all ready to print and color together — a full afternoon of quiet, screen-free ocean exploration, no aquarium visit required.
+A fact is a great start, but coloring is where it really sinks in — giving a child time to notice the shape of a turtle's shell, the pattern on a clownfish, the many arms of an octopus. Our **[Oceans & Sea Life Coloring Pack](https://www.activityforkydz.com/products/oceans-and-sea-life)** covers dolphins, turtles, octopuses and more, all ready to print and color together — a full afternoon of quiet, screen-free ocean exploration, no aquarium visit required. Browse our [full range of colouring packs](https://www.activityforkydz.com/coloring-packs) for more themes like this one.
 
 Pair one fact with one page at a time, and let your child build their own small collection of ocean knowledge, one creature at a time.
+
+**Related reading:** for more animal facts kids love, see [fun animal facts every kid should know](https://www.activityforkydz.com/blog/fun-animal-facts-every-kid-should-know).
 
 *activityforKydz makes printable, screen-free activity packs for kids — delivered instantly by email, made for print. [Browse our packs](https://www.activityforkydz.com/#packs).*

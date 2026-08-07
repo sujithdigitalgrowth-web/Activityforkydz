@@ -3,9 +3,15 @@ import LegalPage from "@/components/LegalPage";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Refund & Cancellation Policy",
-  description: "Refund and cancellation policy for digital PDF downloads purchased from activityforKydz.",
+  title: "Refund Policy — activityforKydz",
+  description: "Not happy with a pack? Here's exactly how refunds work on digital downloads and how to request one.",
   alternates: { canonical: "/refund-policy" },
+  openGraph: {
+    title: "Refund Policy — activityforKydz",
+    description: "Not happy with a pack? Here's exactly how refunds work on digital downloads and how to request one.",
+    url: "/refund-policy",
+    type: "website",
+  },
 };
 
 export default function RefundPolicyPage() {

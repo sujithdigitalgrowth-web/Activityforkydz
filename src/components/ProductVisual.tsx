@@ -11,6 +11,11 @@ export default function ProductVisual({
   iconOnly = false,
   srcOverride,
   priority = false,
+  // Default matches the original hardcoded value — grid cards and other
+  // small tiles never render wider than ~400px, so this stays correct for
+  // them. Full-width usages (the hero carousel) pass their own sizes,
+  // since "400px" badly undersells how wide they actually render.
+  sizes = "(max-width: 768px) 90vw, 400px",
 }: {
   product: Product;
   className?: string;
@@ -24,7 +29,20 @@ export default function ProductVisual({
   srcOverride?: string;
   // Only the single above-the-fold likely-LCP image on a page should set
   // this (e.g. the first hero carousel slide) — everywhere else stays lazy.
+  //
+  // Deliberately does NOT use next/image's own priority/preload prop.
+  // ProductVisual's only priority caller (HeroCarousel) renders two DOM
+  // images per slide — a mobile crop and a desktop crop — gated by a CSS
+  // media query so only one is ever visible at a time. Next's own docs
+  // warn against preload/priority in exactly that "multiple
+  // viewport-conditional LCP candidates" situation: it forces BOTH images
+  // to preload/eager-load regardless of which one CSS is hiding.
+  // fetchPriority="high" instead just raises fetch urgency for whichever
+  // one the browser actually requests — the default lazy +
+  // IntersectionObserver loading still correctly skips the hidden one,
+  // and still fires immediately since it's already in the viewport.
   priority?: boolean;
+  sizes?: string;
 }) {
   const [imageFailed, setImageFailed] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -48,10 +66,18 @@ export default function ProductVisual({
           src={src}
           alt={alt}
           fill
-          priority={priority}
-          sizes="(max-width: 768px) 90vw, 400px"
-          className={`object-cover transition-opacity duration-300 ${
-            imageLoaded ? "opacity-100" : "opacity-0"
+          fetchPriority={priority ? "high" : undefined}
+          sizes={sizes}
+          // Priority images are the page's LCP candidate — fading them in
+          // from opacity-0 only after a client `onLoad` state update fires
+          // means LCP has to wait for JS hydration on top of the image
+          // download, adding seconds on a throttled mobile CPU. Skip the
+          // fade for priority images only; non-priority images (grid
+          // cards, thumbnails) keep it since LCP never waits on those.
+          className={`object-cover ${
+            priority
+              ? "opacity-100"
+              : `transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`
           }`}
           onLoad={() => setImageLoaded(true)}
           onError={() => setImageFailed(true)}

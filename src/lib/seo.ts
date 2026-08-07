@@ -50,6 +50,10 @@ export function websiteJsonLd() {
 // reason within 7 days." Same reasoning as the aggregateRating omission above.
 export function productJsonLd(product: Product) {
   const baseUrl = getBaseUrl();
+  const ageMatch = product.ageRange.match(/(\d+)\s*-\s*(\d+)/);
+  const suggestedMinAge = ageMatch ? Number(ageMatch[1]) : undefined;
+  const suggestedMaxAge = ageMatch ? Number(ageMatch[2]) : undefined;
+
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -58,12 +62,32 @@ export function productJsonLd(product: Product) {
     image: product.image ? `${baseUrl}${product.image}` : undefined,
     category: "Printable kids activity PDF",
     brand: { "@type": "Brand", name: site.name },
+    // Real, current product-data fields only — no fabricated review data.
+    audience: suggestedMinAge
+      ? { "@type": "PeopleAudience", suggestedMinAge, suggestedMaxAge }
+      : undefined,
+    numberOfPages: product.pageCount,
+    encodingFormat: "application/pdf",
     offers: {
       "@type": "Offer",
       price: product.price,
       priceCurrency: "INR",
       availability: "https://schema.org/InStock",
       url: `${baseUrl}/products/${product.slug}`,
+      // A digital file bought new is trivially "new condition" — not a
+      // fabricated claim. seller.name is the real site name, not a
+      // placeholder (unlike site.address, which still is one).
+      itemCondition: "https://schema.org/NewCondition",
+      seller: { "@type": "Organization", name: site.name },
+      // Deliberately no shippingDetails: nothing ships, this is a digital
+      // download. Deliberately no hasMerchantReturnPolicy/priceValidUntil:
+      // the real refund policy only covers non-delivery, a corrupted file,
+      // or double-charging within 7 days — schema.org's return-policy
+      // categories don't have a value for that, and forcing it into
+      // MerchantReturnFiniteReturnWindow would misrepresent it as "return
+      // for any reason within 7 days." No priceValidUntil date exists —
+      // prices aren't scheduled to change, so there's nothing real to put
+      // there.
     },
   };
 }
@@ -92,6 +116,77 @@ export function blogPostingJsonLd(post: BlogPost) {
     url: `${baseUrl}/blog/${post.slug}`,
     author: { "@type": "Organization", name: site.name },
     publisher: { "@type": "Organization", name: site.name },
+  };
+}
+
+// Only used for blog posts where the visible article genuinely walks
+// through an ordered process — steps must be a direct, unembellished
+// mapping of the article's own headings/text, not invented for schema.
+export function howToJsonLd(opts: {
+  name: string;
+  description: string;
+  steps: { name: string; text: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: opts.name,
+    description: opts.description,
+    step: opts.steps.map((s) => ({
+      "@type": "HowToStep",
+      name: s.name,
+      text: s.text,
+    })),
+  };
+}
+
+// Only used where the visible article contains a genuine, countable list —
+// itemListElement mirrors the actual visible items, and numberOfItems is
+// derived from items.length, never hardcoded, so it can't drift from the
+// list actually being described.
+export function itemListJsonLd(opts: { name: string; items: string[] }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: opts.name,
+    numberOfItems: opts.items.length,
+    itemListElement: opts.items.map((name, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name,
+    })),
+  };
+}
+
+// items should be exactly what's rendered on the page — no removed/unlisted
+// products belong in here, since this schema is a factual description of
+// the page's own content, not a catalog-wide index.
+export function collectionPageJsonLd({
+  name,
+  description,
+  url,
+  items,
+}: {
+  name: string;
+  description: string;
+  url: string;
+  items: { name: string; url: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    description,
+    url,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: items.map((item, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: item.name,
+        url: item.url,
+      })),
+    },
   };
 }
 
