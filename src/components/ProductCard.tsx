@@ -6,7 +6,12 @@ import AddToCartButton from "./AddToCartButton";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="group flex flex-col rounded-xl sm:rounded-2xl border border-orange-100 bg-white overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all">
+    <div className="group relative flex flex-col rounded-xl sm:rounded-2xl border border-orange-100 bg-white overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all">
+      {product.badge && (
+        <span className="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 z-10 rounded-full bg-rose-600 text-white text-[10px] sm:text-xs font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 shadow-sm">
+          {product.badge}
+        </span>
+      )}
       <Link href={`/products/${product.slug}`} className="flex flex-col flex-1">
         <ProductVisual
           product={product}

@@ -6,6 +6,7 @@ import ProductGrid from "@/components/ProductGrid";
 import HeroCarousel from "@/components/HeroCarousel";
 import ComboCard from "@/components/ComboCard";
 import BestSellers from "@/components/BestSellers";
+import ProductVisual from "@/components/ProductVisual";
 import Faq from "@/components/Faq";
 import { generalFaq, generalFaqForSchema } from "@/lib/faq";
 import { faqJsonLd } from "@/lib/seo";
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const trialPack = getProductBySlug("abc-of-character-trial");
   const bestSellers = getBestSellers(2, ["alphabet-adventures"]);
   // Featured alongside the real best sellers — new, so it hasn't earned a
   // sales rank yet, but we still want it visible on the homepage.
@@ -64,6 +66,42 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {trialPack && (
+        <section className="max-w-[1400px] mx-auto px-6 pt-2 pb-3">
+          <Link
+            href={`/products/${trialPack.slug}`}
+            className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 rounded-2xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50 to-white p-4 sm:p-6 hover:shadow-md transition-shadow"
+          >
+            <ProductVisual
+              product={trialPack}
+              className="rounded-xl w-full max-w-xs h-56 sm:w-36 sm:h-36 shrink-0 border-2 border-emerald-400 shadow-md ring-4 ring-emerald-100"
+              emojiClassName="text-5xl"
+            />
+            <div className="flex-1 min-w-0 text-center sm:text-left">
+              <span className="inline-block rounded-full bg-emerald-600 text-white px-3 py-1 text-xs font-semibold mb-1.5">
+                🎉 Best deal
+              </span>
+              <h2 className="font-heading text-lg sm:text-2xl font-semibold text-zinc-900">
+                ABC of Character — Trial Pack
+              </h2>
+              <ul className="text-zinc-600 text-sm mt-1.5 space-y-1 inline-block text-left">
+                <li>✓ 8 letters to try, instant download</li>
+                <li>✓ Loved it? Get the full 26-letter pack</li>
+              </ul>
+            </div>
+            <div className="shrink-0 text-center">
+              <div className="mb-2">
+                <span className="text-zinc-400 line-through text-sm mr-1.5">₹99</span>
+                <span className="text-2xl font-bold text-emerald-600">₹19</span>
+              </div>
+              <span className="inline-block rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2.5 transition-colors">
+                Try it for ₹19
+              </span>
+            </div>
+          </Link>
+        </section>
+      )}
 
       <section className="max-w-[1400px] mx-auto px-6 pt-4 pb-3">
         <HeroCarousel products={heroProducts} />

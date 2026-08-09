@@ -180,6 +180,9 @@ export default function CheckoutPage() {
     }
   }
 
+  const boughtTrialPack = checkoutItems.some((p) => p.slug === "abc-of-character-trial");
+  const fullAbcPack = getProductBySlug("abc-of-character");
+
   let content: React.ReactNode;
 
   if (status === "success") {
@@ -219,6 +222,19 @@ export default function CheckoutPage() {
             <strong>{email}</strong>. It usually arrives within a minute — check spam if you
             don&apos;t see it.
           </p>
+        )}
+        {boughtTrialPack && fullAbcPack && (
+          <div className="mt-6 mx-auto max-w-sm rounded-xl border-2 border-rose-300 bg-rose-50 p-4">
+            <p className="text-sm font-semibold text-rose-900">
+              Loved those 8 letters? Get all 26 in the full pack.
+            </p>
+            <Link
+              href={`/products/${fullAbcPack.slug}`}
+              className="inline-block mt-2 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-semibold px-5 py-2 text-sm transition-colors"
+            >
+              Get the full ABC pack — ₹{fullAbcPack.price}
+            </Link>
+          </div>
         )}
         <Link
           href="/#packs"

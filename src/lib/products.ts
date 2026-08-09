@@ -43,6 +43,9 @@ export type Product = {
   rating: number; // out of 5. Placeholder for now — replace with real average once you have reviews.
   purchaseCount: number; // placeholder for now — replace with real order counts once you have them
   comingSoon?: boolean; // true until the real PDF is uploaded to public/products/<slug>.pdf
+  // Optional short label shown as a corner ribbon on the catalog card
+  // (ProductCard) — leave unset for the normal look. Used for the trial pack.
+  badge?: string;
   // Optional override for the PDF's actual filename in public/products/,
   // for packs whose file is named after the product title rather than the
   // slug (e.g. "A-Z Colouring Book.pdf"). Leave unset to use `<slug>.pdf`.
@@ -445,6 +448,39 @@ export const products: Product[] = [
     seoTitle: "ABC of Character — Printable PDF for Kids",
     seoDescription:
       "28-page printable A-Z coloring pack for kids ages 3-6, pairing each letter with a value. Instant PDF download.",
+  },
+  {
+    slug: "abc-of-character-trial",
+    title: "ABC of Character — Trial Pack (Letters A-H)",
+    cardTitle: "ABC Trial Pack (A-H) — ₹19",
+    categoryLabel: "ABC Trial Pack",
+    category: "learning",
+    tagline: "8 letters for ₹19 — see if your kid loves it before you get all 26",
+    price: 19,
+    pageCount: 8,
+    ageRange: "3-6 years",
+    accent: "from-amber-100 to-yellow-50",
+    emoji: "🌟",
+    image: "/categories/ABC%20Character.png",
+    bannerImage: "/banners/desktop/ABC%20Character.png",
+    rating: 4.5,
+    purchaseCount: 0,
+    pdfFile: "ABC of Character Trial.pdf",
+    badge: "🔥 Trial ₹19",
+    description:
+      "A taster of ABC of Character — letters A to H pairing each one with a value or character trait, so you can see how much your kid enjoys it before getting the full 26-letter pack.",
+    whatsInside: [
+      "8 pages: one letter, one value, one picture per page from A to H",
+      "Same large, simple outlines as the full pack, for independent coloring",
+    ],
+    whyItMatters: [
+      "A low-cost way to try the format before buying the full A-Z pack",
+      "Turns coloring time into short chats about values from day one",
+    ],
+    relatedSlugs: ["abc-of-character", "alphabet-adventures", "letters-and-words"],
+    seoTitle: "ABC of Character Trial Pack (A-H) — ₹19 Printable PDF",
+    seoDescription:
+      "Try 8 pages of ABC of Character for ₹19 — a printable taster pack for kids ages 3-6. Instant PDF download.",
   },
   {
     slug: "atoz-activity",
