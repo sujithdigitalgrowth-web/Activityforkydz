@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd, getBaseUrl } from "@
 
 const PAGE_TITLE = "Printable Learning Worksheets for Kids PDF";
 const PAGE_DESCRIPTION =
-  "Printable learning worksheets for kids: alphabets, numbers, shapes, patterns, opposites and cutting activities. Ages 2-8, instant PDF download.";
+  "Printable learning worksheets for kids: alphabets, numbers, shapes, patterns, opposites and cutting activities. Ages 1-9, instant PDF download.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -28,10 +28,19 @@ export const metadata: Metadata = {
 // removed from the catalog. The 8 survivors are rendered below, grouped
 // by skill per the pack's structure — see the implementation report for
 // the age-range mismatch this produced against the pack's "ages 2-8" copy.
-const LETTERS_AND_WORDS_SLUGS = ["atoz-activity", "letters-and-words", "abc-of-character"] as const;
+// Cut & Paste Alphabet, Daily Practice Bundle, Shapes Activity Book, A
+// Hundred Mazes and One Right Answer were added later, slotted into the
+// skill group each genuinely belongs to.
+const LETTERS_AND_WORDS_SLUGS = ["atoz-activity", "letters-and-words", "abc-of-character", "cut-and-paste-alphabet"] as const;
 const NUMBERS_AND_COUNTING_SLUGS = ["numbers-and-counting-mats"] as const;
-const WRITING_AND_MOTOR_SLUGS = ["my-first-lines", "cut-stick-and-make"] as const;
-const THINKING_AND_REASONING_SLUGS = ["big-book-of-comparisons", "time-patterns-and-shapes"] as const;
+const WRITING_AND_MOTOR_SLUGS = ["my-first-lines", "cut-stick-and-make", "daily-practice-bundle"] as const;
+const THINKING_AND_REASONING_SLUGS = [
+  "big-book-of-comparisons",
+  "time-patterns-and-shapes",
+  "shapes-activity-book",
+  "a-hundred-mazes",
+  "one-right-answer",
+] as const;
 
 const lettersAndWordsGroup = LETTERS_AND_WORDS_SLUGS.map(getProductBySlug).filter(
   (p): p is NonNullable<typeof p> => Boolean(p)
@@ -227,8 +236,8 @@ export default function LearningWorksheetsPage() {
         </p>
         <p>
           These are printable learning worksheets covering the full preschool range —
-          alphabets, numbers, shapes, patterns, opposites, matching and cutting — for ages 2 to
-          8. Download the PDF, print the pages you need, print them again when you need them
+          alphabets, numbers, shapes, patterns, opposites, matching and cutting — for ages 1 to
+          9. Download the PDF, print the pages you need, print them again when you need them
           again.
         </p>
       </div>

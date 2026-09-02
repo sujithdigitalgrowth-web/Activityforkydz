@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import CartButton from "./CartButton";
 
 export default function Header() {
   return (
@@ -26,27 +25,12 @@ export default function Header() {
               Home
             </Link>
             <Link
-              href="/#packs"
-              className="whitespace-nowrap text-[11px] sm:text-base font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
-            >
-              <span className="sm:hidden">Browse</span>
-              <span className="hidden sm:inline">Browse packs</span>
-            </Link>
-            <Link
               href="/combos"
               className="whitespace-nowrap text-[11px] sm:text-base font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
             >
               Combos
             </Link>
-            <Link
-              href="/activity-books-for-kids"
-              className="whitespace-nowrap text-[11px] sm:text-base font-semibold text-zinc-700 hover:text-orange-600 transition-colors"
-            >
-              Activity Books
-            </Link>
           </nav>
-
-          <CartButton />
         </div>
       </div>
     </header>

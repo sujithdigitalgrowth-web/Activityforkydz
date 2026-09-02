@@ -26,13 +26,18 @@ export const metadata: Metadata = {
 // been removed (no real assets existed for it). The 5 survivors already
 // cover the full skill range this page describes (strokes, letters,
 // numbers, comparing), so nothing else from the current catalog was added
-// — see the implementation report.
+// — see the implementation report. Shapes Activity Book was added later —
+// it directly covers the "identify basic shapes" skill listed below, which
+// nothing else on this page did. Daily Practice Bundle was added because
+// its first third of content (Age 3 days) is nursery-level.
 const NURSERY_PRODUCT_SLUGS = [
   "atoz-activity",
   "my-first-lines",
   "numbers-and-counting-mats",
   "big-book-of-comparisons",
   "alphabet-adventures",
+  "shapes-activity-book",
+  "daily-practice-bundle",
 ] as const;
 const nurseryProducts = NURSERY_PRODUCT_SLUGS.map(getProductBySlug).filter(
   (p): p is NonNullable<typeof p> => Boolean(p)

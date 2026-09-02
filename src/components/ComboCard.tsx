@@ -3,12 +3,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getComboProducts, type ComboDef } from "@/lib/bundles";
+import { getComboProducts, getComboDiscountPercent, type ComboDef } from "@/lib/bundles";
 
 export default function ComboCard({ combo }: { combo: ComboDef }) {
   const [imageFailed, setImageFailed] = useState(false);
   const products = getComboProducts(combo);
   const originalTotal = products.reduce((sum, p) => sum + p.price, 0);
+  const discountPercent = getComboDiscountPercent(combo);
 
   return (
     <Link
@@ -39,7 +40,7 @@ export default function ComboCard({ combo }: { combo: ComboDef }) {
           <span className="text-xs sm:text-sm text-zinc-400 line-through">₹{originalTotal}</span>
         </div>
         <p className="text-[10px] sm:text-xs text-emerald-700 font-semibold mt-1">
-          Save ₹{originalTotal - combo.price}
+          Save {discountPercent}%
         </p>
       </div>
     </Link>

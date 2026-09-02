@@ -28,12 +28,18 @@ export const metadata: Metadata = {
 // reading-comprehension are added because they genuinely cover UKG-level
 // number-name and sentence-reading practice, filling part of the gap left
 // by the removed Numbers 1-100 pack — see the implementation report.
+// Wait, What? Animal Facts was added later on the same basis as Reading
+// Comprehension — it's a genuine reading-practice book that also covers
+// the animals topic in UKG EVS. Daily Practice Bundle spans into
+// UKG-level content (its Age 6-7 days: addition, subtraction, sequencing).
 const UKG_PRODUCT_SLUGS = [
   "time-patterns-and-shapes",
   "letters-and-words",
   "numbers-and-counting-mats",
   "reading-comprehension",
   "cut-stick-and-make",
+  "wait-what-animal-facts",
+  "daily-practice-bundle",
 ] as const;
 const ukgProducts = UKG_PRODUCT_SLUGS.map(getProductBySlug).filter(
   (p): p is NonNullable<typeof p> => Boolean(p)

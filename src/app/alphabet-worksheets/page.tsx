@@ -25,12 +25,15 @@ export const metadata: Metadata = {
 // The historical pack expected 5 products; Cursive Handwriting has since
 // been removed from the catalog. The 4 survivors are rendered below — see
 // the implementation report for the one live product (My First Lines)
-// considered and deliberately not added.
+// considered and deliberately not added. Cut & Paste Alphabet was added
+// later — it's a genuine A-Z letter-recognition product, just via cutting
+// and pasting instead of tracing.
 const ALPHABET_PRODUCT_SLUGS = [
   "alphabet-adventures",
   "letters-and-words",
   "atoz-activity",
   "abc-of-character",
+  "cut-and-paste-alphabet",
 ] as const;
 const alphabetProducts = ALPHABET_PRODUCT_SLUGS.map(getProductBySlug).filter(
   (p): p is NonNullable<typeof p> => Boolean(p)

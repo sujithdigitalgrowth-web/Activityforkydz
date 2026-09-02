@@ -5,12 +5,12 @@ import { getAllPosts } from "@/lib/posts";
 export const metadata: Metadata = {
   title: "Screen-Free Activity Ideas & Worksheets for Kids",
   description:
-    "Free printable worksheets, nursery and LKG activity ideas, and screen-free things to do with kids aged 2-8. Practical guides from Indian parents.",
+    "Free printable worksheets, nursery and LKG activity ideas, and screen-free things to do with kids aged 1-9. Practical guides from Indian parents.",
   alternates: { canonical: "/blog" },
   openGraph: {
     title: "Screen-Free Activity Ideas & Worksheets for Kids",
     description:
-      "Free printable worksheets, nursery and LKG activity ideas, and screen-free things to do with kids aged 2-8. Practical guides from Indian parents.",
+      "Free printable worksheets, nursery and LKG activity ideas, and screen-free things to do with kids aged 1-9. Practical guides from Indian parents.",
     url: "/blog",
     type: "website",
   },

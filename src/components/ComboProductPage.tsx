@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getComboProducts, type ComboDef } from "@/lib/bundles";
+import { getComboProducts, getComboDiscountPercent, type ComboDef } from "@/lib/bundles";
 import ProductVisual from "@/components/ProductVisual";
 import AddComboButton from "@/components/AddComboButton";
 import Faq from "@/components/Faq";
@@ -10,7 +10,7 @@ export default function ComboProductPage({ combo }: { combo: ComboDef }) {
   const comboProducts = getComboProducts(combo);
   const originalTotal = comboProducts.reduce((sum, p) => sum + p.price, 0);
   const totalPages = comboProducts.reduce((sum, p) => sum + p.pageCount, 0);
-  const savings = originalTotal - combo.price;
+  const discountPercent = getComboDiscountPercent(combo);
   const baseUrl = getBaseUrl();
   const jsonLd = [
     faqJsonLd(generalFaq),
@@ -40,16 +40,24 @@ export default function ComboProductPage({ combo }: { combo: ComboDef }) {
           Combo deal
         </span>
         <h1 className="font-heading text-3xl font-semibold text-zinc-900">{combo.fullLabel}</h1>
-        <p className="text-lg text-zinc-600 mt-2">
-          {combo.label} — {comboProducts.map((p) => p.cardTitle ?? p.title).join(", ")} —{" "}
-          {totalPages} pages in total.
+        <p className="text-lg text-zinc-700 font-medium mt-2">{combo.hook}</p>
+        <ul className="mt-3 space-y-1.5">
+          {combo.highlights.map((highlight) => (
+            <li key={highlight} className="flex gap-2 text-zinc-700">
+              <span className="text-orange-500 shrink-0" aria-hidden="true">✓</span>
+              <span>{highlight}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="text-sm text-zinc-500 mt-3">
+          {comboProducts.length} packs · {totalPages} pages in total
         </p>
 
         <div className="flex items-baseline gap-3 mt-5">
           <span className="text-3xl font-bold text-orange-600">₹{combo.price}</span>
           <span className="text-lg text-zinc-400 line-through">₹{originalTotal}</span>
           <span className="rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 text-sm font-semibold">
-            Save ₹{savings}
+            Save {discountPercent}%
           </span>
         </div>
 

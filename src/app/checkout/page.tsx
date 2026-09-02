@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { getProductBySlug, type Product } from "@/lib/products";
 import { getCartPricing, GROUP_SIZE } from "@/lib/pricing";
+import { COMBOS, getComboDiscountPercent } from "@/lib/bundles";
 import ProductVisual from "@/components/ProductVisual";
-import CartAddOns from "@/components/CartAddOns";
 import FakeCheckoutModal from "@/components/FakeCheckoutModal";
 import { pushDataLayer, toDataLayerItems } from "@/lib/gtm";
 
@@ -180,9 +180,6 @@ export default function CheckoutPage() {
     }
   }
 
-  const boughtTrialPack = checkoutItems.some((p) => p.slug === "abc-of-character-trial");
-  const fullAbcPack = getProductBySlug("abc-of-character");
-
   let content: React.ReactNode;
 
   if (status === "success") {
@@ -208,7 +205,7 @@ export default function CheckoutPage() {
                   href={item.downloadUrl}
                   className="flex items-center justify-between gap-3 rounded-xl border border-orange-100 bg-white px-4 py-3 font-semibold text-zinc-900 hover:border-orange-300 transition-colors"
                 >
-                  <span className="truncate">{item.title}</span>
+                  <span className="text-sm leading-snug line-clamp-2">{item.title}</span>
                   <span className="shrink-0 rounded-full bg-orange-500 hover:bg-orange-600 text-white text-sm px-4 py-1.5">
                     Download
                   </span>
@@ -223,24 +220,11 @@ export default function CheckoutPage() {
             don&apos;t see it.
           </p>
         )}
-        {boughtTrialPack && fullAbcPack && (
-          <div className="mt-6 mx-auto max-w-sm rounded-xl border-2 border-rose-300 bg-rose-50 p-4">
-            <p className="text-sm font-semibold text-rose-900">
-              Loved those 8 letters? Get all 26 in the full pack.
-            </p>
-            <Link
-              href={`/products/${fullAbcPack.slug}`}
-              className="inline-block mt-2 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-semibold px-5 py-2 text-sm transition-colors"
-            >
-              Get the full ABC pack — ₹{fullAbcPack.price}
-            </Link>
-          </div>
-        )}
         <Link
-          href="/#packs"
+          href="/combos"
           className="inline-block mt-6 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 transition-colors"
         >
-          Browse more packs
+          Browse combos
         </Link>
       </div>
     );
@@ -251,12 +235,12 @@ export default function CheckoutPage() {
         <h1 className="font-heading text-2xl font-semibold text-zinc-900">
           Nothing to check out yet
         </h1>
-        <p className="text-zinc-600 mt-2">Add a few packs to your cart first.</p>
+        <p className="text-zinc-600 mt-2">Pick a combo first.</p>
         <Link
-          href="/#packs"
+          href="/combos"
           className="inline-block mt-6 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 transition-colors"
         >
-          Browse packs
+          Browse combos
         </Link>
       </div>
     );
@@ -266,7 +250,7 @@ export default function CheckoutPage() {
         <h1 className="font-heading text-2xl font-semibold text-zinc-900 mb-6">Checkout</h1>
 
         <div className="grid md:grid-cols-5 gap-6 md:gap-8">
-          <div className="min-w-0 md:col-span-3">
+          <div className="min-w-0 md:col-span-3 order-2 md:order-1">
             <h2 className="font-heading text-lg font-semibold text-zinc-900 mb-3">
               Order summary
             </h2>
@@ -281,34 +265,34 @@ export default function CheckoutPage() {
                   >
                     <ProductVisual
                       product={product}
-                      className="rounded-lg h-16 w-20 shrink-0"
-                      emojiClassName="text-3xl"
+                      className="rounded-lg h-14 w-16 sm:h-16 sm:w-20 shrink-0"
+                      emojiClassName="text-2xl sm:text-3xl"
                     />
                     <div className="flex-1 min-w-0">
-                      <p className="font-heading font-semibold text-zinc-900 truncate">
-                        {product.title}
+                      <p className="font-heading font-semibold text-zinc-900 text-xs sm:text-sm leading-snug line-clamp-2">
+                        {product.cardTitle ?? product.title}
                       </p>
-                      <p className="text-sm text-zinc-500">{product.pageCount} pages</p>
+                      <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">{product.pageCount} pages</p>
                       {isFree && (
-                        <span className="inline-block mt-1 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-0.5">
+                        <span className="inline-block mt-1 text-[10px] sm:text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-0.5">
                           🎁 Free pack
                         </span>
                       )}
                       {isCombo && (
-                        <span className="inline-block mt-1 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-0.5">
+                        <span className="inline-block mt-1 text-[10px] sm:text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2 py-0.5">
                           🎉 Combo
                         </span>
                       )}
                     </div>
                     {isFree ? (
-                      <span className="font-bold shrink-0">
-                        <span className="text-zinc-400 line-through text-sm mr-1.5">
+                      <span className="font-bold text-sm sm:text-base shrink-0">
+                        <span className="text-zinc-400 line-through text-xs sm:text-sm mr-1.5">
                           ₹{product.price}
                         </span>
                         <span className="text-emerald-600">FREE</span>
                       </span>
                     ) : (
-                      <span className="font-bold text-orange-600 shrink-0">₹{product.price}</span>
+                      <span className="font-bold text-orange-600 text-sm sm:text-base shrink-0">₹{product.price}</span>
                     )}
                   </div>
                 );
@@ -323,7 +307,7 @@ export default function CheckoutPage() {
             )}
           </div>
 
-          <div className="min-w-0 md:col-span-2">
+          <div className="min-w-0 md:col-span-2 order-1 md:order-2">
             <div className="md:sticky md:top-24 rounded-2xl bg-white border border-orange-100 shadow-sm p-4 sm:p-5">
               {pricing.discount > 0 ? (
                 <>
@@ -331,15 +315,19 @@ export default function CheckoutPage() {
                     <span>Subtotal</span>
                     <span>₹{pricing.subtotal}</span>
                   </div>
-                  {pricing.appliedCombos.map((combo) => (
-                    <div
-                      key={combo.routeSlug}
-                      className="flex items-center justify-between text-sm text-emerald-600 font-medium mt-1"
-                    >
-                      <span>🎉 {combo.label}</span>
-                      <span>-₹{combo.discount}</span>
-                    </div>
-                  ))}
+                  {pricing.appliedCombos.map((combo) => {
+                    const comboDef = COMBOS.find((c) => c.routeSlug === combo.routeSlug);
+                    const percent = comboDef ? getComboDiscountPercent(comboDef) : 0;
+                    return (
+                      <div
+                        key={combo.routeSlug}
+                        className="flex items-center justify-between text-sm text-emerald-600 font-medium mt-1"
+                      >
+                        <span>🎉 {combo.label}</span>
+                        <span>-{percent}%</span>
+                      </div>
+                    );
+                  })}
                   {pricing.freeSlugs.length > 0 && (
                     <div className="flex items-center justify-between text-sm text-emerald-600 font-medium mt-1">
                       <span>
@@ -352,20 +340,24 @@ export default function CheckoutPage() {
                       </span>
                     </div>
                   )}
-                  <div className="flex items-baseline justify-between mt-1.5 mb-3">
+                  <div className="flex items-baseline justify-between mt-1.5 mb-1">
+                    <span className="text-zinc-600">Total</span>
                     <span className="text-2xl font-bold text-zinc-900">₹{pricing.total}</span>
-                    <span className="text-sm text-zinc-500">
-                      {items.length} pack{items.length === 1 ? "" : "s"}
-                    </span>
                   </div>
+                  <p className="text-xs text-zinc-500 mb-3">
+                    {items.length} pack{items.length === 1 ? "" : "s"}
+                  </p>
                 </>
               ) : (
-                <div className="flex items-baseline justify-between mb-3">
-                  <span className="text-2xl font-bold text-zinc-900">₹{pricing.total}</span>
-                  <span className="text-sm text-zinc-500">
+                <>
+                  <div className="flex items-baseline justify-between mb-1">
+                    <span className="text-zinc-600">Total</span>
+                    <span className="text-2xl font-bold text-zinc-900">₹{pricing.total}</span>
+                  </div>
+                  <p className="text-xs text-zinc-500 mb-3">
                     {items.length} pack{items.length === 1 ? "" : "s"}
-                  </span>
-                </div>
+                  </p>
+                </>
               )}
 
               {pricing.freeSlugs.length === 0 && nonComboCount === 1 && (
@@ -417,10 +409,6 @@ export default function CheckoutPage() {
               </p>
             </div>
           </div>
-        </div>
-
-        <div className="mt-6">
-          <CartAddOns />
         </div>
       </div>
     );

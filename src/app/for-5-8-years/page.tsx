@@ -35,6 +35,10 @@ export const metadata: Metadata = {
 // Numbers & Counting Mats, Big Book of Comparisons — all 3-6) were left
 // off: they're the backbone of the 3-5 tier page and only reach this
 // tier's boundary, not its actual range. See the implementation report.
+//
+// A Hundred Mazes, One Right Answer and Wait, What? Animal Facts were
+// added later — all three are genuinely 5-9 years, safely past this
+// tier's top end.
 const AGE_PRODUCT_SLUGS = [
   "time-patterns-and-shapes",
   "cut-stick-and-make",
@@ -45,6 +49,9 @@ const AGE_PRODUCT_SLUGS = [
   "trees-and-plants",
   "animal-friends",
   "oceans-and-sea-life",
+  "a-hundred-mazes",
+  "one-right-answer",
+  "wait-what-animal-facts",
 ] as const;
 const ageProducts = AGE_PRODUCT_SLUGS.map(getProductBySlug).filter(
   (p): p is NonNullable<typeof p> => Boolean(p)

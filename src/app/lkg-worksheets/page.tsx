@@ -25,13 +25,20 @@ export const metadata: Metadata = {
 // The historical pack expected 6 products; dot-to-dot has since been
 // removed (no real assets existed for it). The 5 survivors already cover
 // the full LKG skill range this page describes, so nothing else from the
-// current catalog was added — see the implementation report.
+// current catalog was added — see the implementation report. Shapes
+// Activity Book was added later — it directly covers the "Basic shapes"
+// Term 1 Maths topic below. Cut & Paste Alphabet was added alongside
+// Cut, Stick and Make as a second cutting-and-matching option. Daily
+// Practice Bundle spans into LKG-level content (ages 4-5 days).
 const LKG_PRODUCT_SLUGS = [
   "letters-and-words",
   "numbers-and-counting-mats",
   "alphabet-adventures",
   "big-book-of-comparisons",
   "cut-stick-and-make",
+  "shapes-activity-book",
+  "cut-and-paste-alphabet",
+  "daily-practice-bundle",
 ] as const;
 const lkgProducts = LKG_PRODUCT_SLUGS.map(getProductBySlug).filter(
   (p): p is NonNullable<typeof p> => Boolean(p)

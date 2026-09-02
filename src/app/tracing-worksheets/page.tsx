@@ -25,12 +25,14 @@ export const metadata: Metadata = {
 // The historical pack expected 5 products; Cursive Handwriting has since
 // been removed from the catalog. The 4 survivors are rendered below — see
 // the implementation report for the fact-check on Numbers & Counting Mats'
-// actual number range.
+// actual number range. Shapes Activity Book was added later — it directly
+// covers Stage 2 below, which previously had no linked product.
 const TRACING_PRODUCT_SLUGS = [
   "my-first-lines",
   "numbers-and-counting-mats",
   "alphabet-adventures",
   "atoz-activity",
+  "shapes-activity-book",
 ] as const;
 const tracingProducts = TRACING_PRODUCT_SLUGS.map(getProductBySlug).filter(
   (p): p is NonNullable<typeof p> => Boolean(p)
@@ -39,6 +41,7 @@ const tracingProducts = TRACING_PRODUCT_SLUGS.map(getProductBySlug).filter(
 const myFirstLines = getProductBySlug("my-first-lines");
 const alphabetAdventures = getProductBySlug("alphabet-adventures");
 const numbersAndCounting = getProductBySlug("numbers-and-counting-mats");
+const shapesActivityBook = getProductBySlug("shapes-activity-book");
 
 // Computed from the live products actually rendered on this page, not
 // hardcoded — the pack's stale figure was ₹69.
@@ -179,6 +182,19 @@ export default function TracingWorksheetsPage() {
           <p>
             Squares, triangles, rectangles, stars. These combine strokes and require planning a
             whole path in advance, which letters also demand.
+          </p>
+          <p>
+            {shapesActivityBook ? (
+              <Link
+                href={`/products/${shapesActivityBook.slug}`}
+                className="text-orange-600 font-medium hover:underline"
+              >
+                Shapes Activity Book
+              </Link>
+            ) : (
+              "Shapes Activity Book"
+            )}{" "}
+            covers this stage, with a tracing page for each of 10 shapes.
           </p>
 
           <h3 className="font-heading text-lg font-semibold text-zinc-900 mt-6 mb-2">

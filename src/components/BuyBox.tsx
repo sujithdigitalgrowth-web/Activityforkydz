@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import type { Product } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
-import AddToCartButton from "./AddToCartButton";
 
 export default function BuyBox({ product }: { product: Product }) {
   const router = useRouter();
@@ -21,7 +20,11 @@ export default function BuyBox({ product }: { product: Product }) {
         <p className="text-sm text-zinc-500 mt-0.5">{product.pageCount} pages · instant download</p>
 
         <div className="mt-6 space-y-2">
-          {!product.comingSoon && (
+          {product.comingSoon ? (
+            <span className="block w-full text-center rounded-full bg-zinc-100 text-zinc-400 font-semibold py-3 cursor-not-allowed">
+              Coming soon
+            </span>
+          ) : (
             <button
               onClick={buyNow}
               className="w-full rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 transition-colors"
@@ -29,7 +32,6 @@ export default function BuyBox({ product }: { product: Product }) {
               Buy now — ₹{product.price}
             </button>
           )}
-          <AddToCartButton product={product} className="w-full py-3" />
         </div>
 
         <div className="mt-6 space-y-2 text-xs text-zinc-600">

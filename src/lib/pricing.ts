@@ -32,7 +32,14 @@ export function getCartPricing(items: Product[]): CartPricing {
 
   const appliedCombos: AppliedCombo[] = [];
   const comboSlugSet = new Set<string>();
-  for (const combo of COMBOS) {
+  // Largest combo first — the Everything combo's slugs are a superset of
+  // the colouring and learning combos, so once it claims a cart's slugs,
+  // the smaller combos must be skipped rather than also applying on top of
+  // it (which would stack all three discounts instead of charging the
+  // ₹499 flat price once).
+  const combosBySizeDesc = [...COMBOS].sort((a, b) => b.slugs.length - a.slugs.length);
+  for (const combo of combosBySizeDesc) {
+    if (combo.slugs.some((slug) => comboSlugSet.has(slug))) continue;
     if (!combo.slugs.every((slug) => slugSet.has(slug))) continue;
     const comboItems = items.filter((p) => (combo.slugs as readonly string[]).includes(p.slug));
     const comboOriginalTotal = comboItems.reduce((sum, p) => sum + p.price, 0);

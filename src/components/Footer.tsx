@@ -20,86 +20,18 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 text-sm">
-          <div>
-            <p className="font-semibold text-zinc-900 mb-2">By class</p>
-            <ul className="space-y-1 text-zinc-600">
-              <li>
-                <Link href="/nursery-worksheets" className="hover:text-orange-600">
-                  Nursery worksheets
-                </Link>
-              </li>
-              <li>
-                <Link href="/lkg-worksheets" className="hover:text-orange-600">
-                  LKG worksheets
-                </Link>
-              </li>
-              <li>
-                <Link href="/ukg-worksheets" className="hover:text-orange-600">
-                  UKG worksheets
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="font-semibold text-zinc-900 mb-2">By type</p>
-            <ul className="space-y-1 text-zinc-600">
-              <li>
-                <Link href="/coloring-packs" className="hover:text-orange-600">
-                  Colouring packs
-                </Link>
-              </li>
-              <li>
-                <Link href="/learning-worksheets" className="hover:text-orange-600">
-                  Learning worksheets
-                </Link>
-              </li>
-              <li>
-                <Link href="/alphabet-worksheets" className="hover:text-orange-600">
-                  Alphabet worksheets
-                </Link>
-              </li>
-              <li>
-                <Link href="/tracing-worksheets" className="hover:text-orange-600">
-                  Tracing worksheets
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="font-semibold text-zinc-900 mb-2">By age</p>
-            <ul className="space-y-1 text-zinc-600">
-              <li>
-                <Link href="/for-2-3-years" className="hover:text-orange-600">
-                  Activities for 2–3 years
-                </Link>
-              </li>
-              <li>
-                <Link href="/for-3-5-years" className="hover:text-orange-600">
-                  Activities for 3–5 years
-                </Link>
-              </li>
-              <li>
-                <Link href="/for-5-8-years" className="hover:text-orange-600">
-                  Activities for 5–8 years
-                </Link>
-              </li>
-            </ul>
-          </div>
-
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm">
           <div>
             <p className="font-semibold text-zinc-900 mb-2">Shop</p>
             <ul className="space-y-1 text-zinc-600">
               <li>
-                <Link href="/activity-books-for-kids" className="hover:text-orange-600">
-                  All activity books
+                <Link href="/combos" className="hover:text-orange-600">
+                  Combo deals
                 </Link>
               </li>
               <li>
-                <Link href="/combos" className="hover:text-orange-600">
-                  Combo deals
+                <Link href="/products/everything-combo" className="hover:text-orange-600">
+                  Get everything — ₹499
                 </Link>
               </li>
             </ul>

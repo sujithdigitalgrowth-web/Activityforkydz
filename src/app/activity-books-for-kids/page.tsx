@@ -10,7 +10,7 @@ import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd, getBaseUrl } from "@
 
 const PAGE_TITLE = "Activity Books for Kids — Printable PDF from Rs.69";
 const PAGE_DESCRIPTION =
-  "Printable activity books for kids aged 2-8. Colouring, tracing, cutting, matching and counting. Buy once, print forever. From Rs.69 per pack.";
+  "Printable activity books for kids aged 1-9. Colouring, tracing, cutting, matching and counting. Buy once, print forever. From Rs.69 per pack.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -199,7 +199,7 @@ export default function ActivityBooksForKidsPage() {
         </p>
         <p>
           Every pack here is a complete activity book as a PDF. Colouring, tracing, cutting,
-          matching, counting, puzzles. Ages 2 to 8. Delivered by email in about a minute.
+          matching, counting, puzzles. Ages 1 to 9. Delivered by email in about a minute.
         </p>
       </div>
 

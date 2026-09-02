@@ -6,8 +6,8 @@ const combo = getComboByRouteSlug("learning-combo")!;
 const comboProducts = getComboProducts(combo);
 const originalTotal = comboProducts.reduce((sum, p) => sum + p.price, 0);
 
-const comboTitle = "Learning Pack Combo — All 9 Packs for ₹" + combo.price;
-const comboDescription = `Get all 9 printable learning packs — Letters and Words, Numbers and Counting, ABC of Character, My First Alphabet Activity Book, My First Lines, Telling Time Patterns and Shapes, Cut Stick and Make, The Big Book of Comparisons, and Reading Comprehension Worksheets — for a flat ₹${combo.price} instead of ₹${originalTotal}. Instant PDF downloads.`;
+const comboTitle = `Learning Pack Combo — All ${comboProducts.length} Packs for ₹${combo.price}`;
+const comboDescription = `First pencil strokes to real problem-solving — ${comboProducts.length} printable learning packs covering the alphabet, numbers, shapes, cutting, mazes, sudoku and reading, for a flat ₹${combo.price} instead of ₹${originalTotal}. Instant PDF download.`;
 
 export const metadata: Metadata = {
   title: comboTitle,

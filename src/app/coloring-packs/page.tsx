@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, collectionPageJsonLd, faqJsonLd, getBaseUrl } from "@
 
 const PAGE_TITLE = "Printable Colouring Packs for Kids — PDF Download";
 const PAGE_DESCRIPTION =
-  "Themed colouring packs for kids: animals, birds, ocean life, fruits, flowers and plants. Printable PDF, thick clean lines, ages 3-8.";
+  "Themed colouring packs for kids: animals, birds, ocean life, fruits, flowers and plants. Printable PDF, thick clean lines, ages 3-9.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,

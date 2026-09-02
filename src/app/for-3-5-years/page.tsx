@@ -23,9 +23,9 @@ export const metadata: Metadata = {
 // The historical pack lists 9 products for this tier; Matching & Memory
 // has since been removed. The 8 survivors are rendered below — their
 // current age ranges all genuinely overlap 3-5 (Flowers only at the
-// boundary, age 5) — see the implementation report. No current-catalog
-// additions were made here: unlike the 5-8 tier, the pack didn't
-// authorise adding products beyond its own list for this page.
+// boundary, age 5) — see the implementation report. Cut & Paste Alphabet,
+// Daily Practice Bundle and Shapes Activity Book were added later, all
+// three genuinely 3-6 years.
 const AGE_PRODUCT_SLUGS = [
   "alphabet-adventures",
   "letters-and-words",
@@ -35,6 +35,9 @@ const AGE_PRODUCT_SLUGS = [
   "birds-of-the-world",
   "trees-and-plants",
   "flowers-colouring",
+  "cut-and-paste-alphabet",
+  "daily-practice-bundle",
+  "shapes-activity-book",
 ] as const;
 const ageProducts = AGE_PRODUCT_SLUGS.map(getProductBySlug).filter(
   (p): p is NonNullable<typeof p> => Boolean(p)
