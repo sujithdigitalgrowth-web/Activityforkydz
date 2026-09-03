@@ -44,7 +44,7 @@ export default function Home() {
       <section className="max-w-[1400px] mx-auto px-6 pt-8 pb-10">
         <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
           {COMBOS.map((combo) => (
-            <ComboCard key={combo.routeSlug} combo={combo} />
+            <ComboCard key={combo.routeSlug} combo={combo} showBuyNow />
           ))}
         </div>
       </section>

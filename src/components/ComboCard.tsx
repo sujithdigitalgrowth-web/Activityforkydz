@@ -4,8 +4,18 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getComboProducts, getComboDiscountPercent, type ComboDef } from "@/lib/bundles";
+import AddComboButton from "./AddComboButton";
 
-export default function ComboCard({ combo }: { combo: ComboDef }) {
+export default function ComboCard({
+  combo,
+  showBuyNow = false,
+}: {
+  combo: ComboDef;
+  // Homepage-only: a "Buy now" button that skips the combo detail page and
+  // goes straight to checkout, same as the button on that page. Off by
+  // default so /combos and other listings keep the plain browse-then-buy card.
+  showBuyNow?: boolean;
+}) {
   const [imageFailed, setImageFailed] = useState(false);
   const products = getComboProducts(combo);
   const originalTotal = products.reduce((sum, p) => sum + p.price, 0);
@@ -42,6 +52,20 @@ export default function ComboCard({ combo }: { combo: ComboDef }) {
         <p className="text-[10px] sm:text-xs text-emerald-700 font-semibold mt-1">
           Save {discountPercent}%
         </p>
+        {showBuyNow && (
+          <div
+            className="mt-2.5"
+            onClick={(e) => {
+              // The whole card is a Link to the detail page — stop the click
+              // here so "Buy now" goes straight to checkout instead of also
+              // triggering that navigation.
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+          >
+            <AddComboButton combo={combo} className="w-full py-2 text-xs sm:text-sm" />
+          </div>
+        )}
       </div>
     </Link>
   );

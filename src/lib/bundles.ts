@@ -40,7 +40,7 @@ export const COLOURING_COMBO_SLUGS = [
   "flowers-colouring",
 ] as const;
 
-export const COLOURING_COMBO_PRICE = 299;
+export const COLOURING_COMBO_PRICE = 399;
 
 // The learning combo: every learning/activity pack at a flat bundle price.
 // Same mechanics as the colouring combo above — getCartPricing() applies it
@@ -72,7 +72,7 @@ export const LEARNING_COMBO_PRICE = 399;
 // slug set is a superset of both other combos, getCartPricing() has
 // overlap-aware logic (largest combo first, skip any combo whose slugs are
 // already claimed) so a cart with everything in it is priced once at ₹499,
-// not stacked with the ₹299 and ₹399 discounts too.
+// not stacked with the Colouring and Learning combo discounts too.
 export const EVERYTHING_COMBO_SLUGS = [
   ...COLOURING_COMBO_SLUGS,
   ...LEARNING_COMBO_SLUGS,
@@ -87,7 +87,7 @@ export const COMBOS: ComboDef[] = [
     fullLabel: "The Everything Combo — Every Pack We Make",
     slugs: EVERYTHING_COMBO_SLUGS,
     price: EVERYTHING_COMBO_PRICE,
-    image: "/categories/Everything%20Combo.png",
+    image: "/categories/Get%20Everything.png",
     accent: "from-fuchsia-100 to-purple-50",
     emoji: "🎁",
     borderClass: "border-fuchsia-300",
@@ -105,7 +105,7 @@ export const COMBOS: ComboDef[] = [
     fullLabel: "The Complete Colouring Pack Combo",
     slugs: COLOURING_COMBO_SLUGS,
     price: COLOURING_COMBO_PRICE,
-    image: "/categories/Combo%20Offer.png",
+    image: "/categories/Animal%20Colouring%20Combo.png",
     accent: "from-orange-100 to-amber-50",
     emoji: "🎨",
     borderClass: "border-orange-300",
@@ -123,7 +123,7 @@ export const COMBOS: ComboDef[] = [
     fullLabel: "The Complete Learning Pack Combo",
     slugs: LEARNING_COMBO_SLUGS,
     price: LEARNING_COMBO_PRICE,
-    image: "/categories/Learning%20packs%20combo%20offer.png",
+    image: "/categories/Learnign%20Pack%20Combo.png",
     accent: "from-teal-100 to-cyan-50",
     emoji: "🧠",
     borderClass: "border-teal-300",

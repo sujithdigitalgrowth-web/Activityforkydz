@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, products } from "@/lib/products";
-import BuyBox from "@/components/BuyBox";
+import NotSoldIndividually from "@/components/NotSoldIndividually";
 import ProductGallery from "@/components/ProductGallery";
 import SocialProof from "@/components/SocialProof";
 import Faq from "@/components/Faq";
@@ -103,7 +103,7 @@ export default async function ProductPage({
         </div>
         <div className="lg:col-span-1">
           <div className="lg:sticky lg:top-24 h-full">
-            <BuyBox product={product} />
+            <NotSoldIndividually product={product} />
           </div>
         </div>
       </div>
